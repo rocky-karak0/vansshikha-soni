@@ -10,7 +10,7 @@ $$('[data-p]').forEach(i=>i.src=IMG[i.dataset.p]);
 /* story track */
 $('#track').innerHTML=[3,12,19,25,8,31,16,22,34].map(n=>{const it=IT[n];return`<div class="slide"><img src="${src(it.id)}" alt="${it.t}, ${it.c} nail art" loading="lazy"><span>${it.t}</span></div>`}).join('');
 /* services data: edit prices and text here (M and R shown exactly as on the official menu) */
-const CFG={whatsapp:''};/* PENDING: official WhatsApp number, digits with country code, e.g. '91XXXXXXXXXX' */
+const CFG={whatsapp:'917838913373'};
 const CATS=[['APPLICATION','application','#471A2C'],['ADVANCE GEL SET','advance-gel-set','#2b1230'],['NAIL DESIGN','nail-design','#3a1420'],['NAIL EXTENSION','nail-extension','#1d2a2a'],['OVERLAY','overlay','#2a1a3a'],['REFILLS','refills','#381d12'],['MINI MANICURE','mini-manicure','#2c2414'],['REMOVAL','removal','#1f1f26']].map(([name,slug,tint],i)=>({name,slug,tint,i}));
 const RAW=[
 [0,'classic','Classic',350,400,'A clean, classic nail colour application designed for a polished everyday look.','A simple, versatile finish for clients who prefer understated nails.','Finish and wear depend on the product system used. Please confirm with the studio whether this is regular polish or gel.','Polished everyday look|Simple, versatile finish','','p26'],

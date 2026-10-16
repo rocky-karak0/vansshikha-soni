@@ -46,7 +46,7 @@ vercel.json         Vercel headers
 ```
 
 ## Things you will edit most
-- **WhatsApp booking number:** `CFG.whatsapp` in `js/app.js` (digits with country code, e.g. `'91XXXXXXXXXX'`). While it is empty, in-page booking buttons open `wa.me/?text=...` so the visitor picks the contact. The floating WhatsApp icon and footer link use the fixed message link in `index.html`.
+- **WhatsApp booking number:** `CFG.whatsapp` in `js/app.js` (digits with country code, e.g. `'91XXXXXXXXXX'`). All in-page booking buttons open `wa.me/<number>?text=...` with the full appointment details pre-filled.
 - **Social and contact links:** search `dock-ig`, `dock-wa`, `dock-em` in `index.html` (floating dock) and `class="fl"` (footer).
 - **Service names, text and prices:** the `RAW` list in `js/app.js` (columns: category index, slug, name, M, R, about, ideal, before, highlights, care, photo id). M and R are shown exactly as on the menu.
 - **Service photos without a verified match:** the `EXAMPLE` list in `js/app.js` (service slug to photo id).
