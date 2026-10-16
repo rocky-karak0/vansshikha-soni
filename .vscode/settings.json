@@ -1,0 +1,8 @@
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[javascript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "liveServer.settings.root": "/",
+  "liveServer.settings.port": 5500,
+  "files.associations": { "*.html": "html" }
+}

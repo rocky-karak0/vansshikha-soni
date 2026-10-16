@@ -1,0 +1,7 @@
+{
+  "name": "vanshikha-soni-atelier",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Vansshikha Soni Nail Atelier website",
+  "scripts": { "start": "npx --yes serve . -l 5500" }
+}
