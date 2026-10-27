@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /js/
+Disallow: /vendor/
+
+User-agent: GPTBot
+Disallow: /
+
+Sitemap: https://vansshikhasoni.com/sitemap.xml

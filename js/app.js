@@ -5,41 +5,14 @@ if(RM)document.documentElement.classList.add('reduced');
 const NAMES={Gold:['Gilded Line','Aurum Edge','Gold Leaf','Chrome Rim','Liquid Gold'],Florals:['Bloom','Petal Study','Garden Set','Pearl Flower'],'Deep Reds':['Garnet','Wine Cat-Eye','Ruby Gloss','Velvet Red'],Ombré:['Blush Fade','Rose Gradient','Sunset Fade','Berry Tip'],French:['Quiet French','Noir Tip','Minimal Nude','Clean Line'],Playful:['Citrus Stripe','Colour Play','Sea Shell','Little Joys']};
 const cnt={};const IT=ITEMS.map(([id,c,w,h],i)=>{cnt[c]=(cnt[c]||0);const t=NAMES[c][cnt[c]++%NAMES[c].length];return{id,c,w,h,t,i}});
 const src=id=>IMG[id];
-$('#fimg').src=IMG.founder;$('#monoimg').src=IMG.circle;$('#footlogo').src=IMG.circle;$('#yr').textContent=new Date().getFullYear();
+const fi=$('#fimg'),mi=$('#monoimg');if(fi)fi.src=IMG.founder;if(mi)mi.src=IMG.circle;$('#footlogo').src=IMG.circle;$('#yr').textContent=new Date().getFullYear();
 $$('[data-p]').forEach(i=>i.src=IMG[i.dataset.p]);
 /* story track */
-$('#track').innerHTML=[3,12,19,25,8,31,16,22,34].map(n=>{const it=IT[n];return`<div class="slide"><img src="${src(it.id)}" alt="${it.t}, ${it.c} nail art" loading="lazy"><span>${it.t}</span></div>`}).join('');
-/* services data: edit prices and text here (M and R shown exactly as on the official menu) */
+const trackEl=$('#track');if(trackEl)trackEl.innerHTML=[3,12,19,25,8,31,16,22,34].map(n=>{const it=IT[n];return`<div class="slide"><img src="${src(it.id)}" alt="${it.t}, ${it.c} nail art" loading="lazy"><span>${it.t}</span></div>`}).join('');
+/* services data: js/service-data.js (single source of truth, shared with build.js) */
 const CFG={whatsapp:'917838913373'};
-const CATS=[['APPLICATION','application','#471A2C'],['ADVANCE GEL SET','advance-gel-set','#2b1230'],['NAIL DESIGN','nail-design','#3a1420'],['NAIL EXTENSION','nail-extension','#1d2a2a'],['OVERLAY','overlay','#2a1a3a'],['REFILLS','refills','#381d12'],['MINI MANICURE','mini-manicure','#2c2414'],['REMOVAL','removal','#1f1f26']].map(([name,slug,tint],i)=>({name,slug,tint,i}));
-const RAW=[
-[0,'classic','Classic',350,400,'A clean, classic nail colour application designed for a polished everyday look.','A simple, versatile finish for clients who prefer understated nails.','Finish and wear depend on the product system used. Please confirm with the studio whether this is regular polish or gel.','Polished everyday look|Simple, versatile finish','','p26'],
-[0,'french','French',500,600,'A timeless nail finish featuring a defined tip paired with a natural-looking base.','An elegant, neat look suitable for everyday wear and special occasions.','Tip shape, colour and base shade can be customised after consultation.','Defined tip with a natural-looking base|Tip shape, colour and base shade can be customised','','p18'],
-[1,'cat-eye-gel-set','Cat Eye Gel Set',400,500,'A magnetic-effect gel look that creates a luminous, shifting line or reflective pattern.','A dimensional, light-catching manicure with a distinctive finish.','The final effect varies with magnetic gel shade and application technique.','Magnetic-effect gel|Luminous, shifting line or reflective pattern','','p31'],
-[1,'marble-gel-set','Marble Gel Set',400,500,'A gel design inspired by natural marble, with soft swirls and layered colour patterns.','A sophisticated artistic look that can be subtle or high-contrast.','Marble patterns are individually created and may vary between nails.','Soft swirls and layered colour patterns|Can be subtle or high-contrast','','p16'],
-[1,'glitter-gel-set','Glitter Gel Set',400,500,'A gel nail finish incorporating glitter for a sparkling decorative effect.','A festive or statement manicure with adjustable sparkle intensity.','Glitter density and finish depend on the chosen design.','Glitter for a sparkling decorative effect|Adjustable sparkle intensity','','p22'],
-[1,'ombre-gel-art','Ombre Gel Art',400,500,'A blended gel nail design that transitions smoothly between two or more colours.','A soft gradient look, from neutral to colourful combinations.','Colour combinations and blending style can be selected during consultation.','Smooth transition between colours|From neutral to colourful combinations','','p07'],
-[1,'chrome-gel-set','Chrome Gel Set',500,600,'A reflective nail finish created with chrome-style pigment over a suitable gel base.','A sleek metallic, pearlescent or mirror-inspired appearance.','The result depends on the base colour and chrome pigment selected.','Reflective chrome-style pigment|Metallic, pearlescent or mirror-inspired','','p27'],
-[2,'nail-art-per-finger','Nail Art – Per Finger',30,40,'Decorative detailing applied to an individual nail, such as fine lines, florals, patterns or accents.','Customisation without committing to artwork on every nail.','Price is listed per finger; complex artwork may require a separate quote.','Priced per finger|Fine lines, florals, patterns or accents','','p35'],
-[2,'3d-nail-art-per-finger','3D Nail Art – Per Finger',50,70,'Raised or dimensional nail decoration using suitable sculpting materials or embellishments.','A textured statement design for selected accent nails.','Price is per finger; please confirm embellishment complexity and maintenance before booking.','Priced per finger|Raised, dimensional decoration','','p04'],
-[3,'gel-extension','Gel Extension',900,1000,'A nail-length enhancement created with an extension system and gel-based building product.','Added length and a shaped, finished nail appearance.','Length, shape, structure and suitability should be assessed by the nail technician.','Added length with a shaped, finished look|Built with an extension system and gel-based product','',''],
-[3,'acrylic-extension','Acrylic Extension',1100,1200,'A nail enhancement built with an acrylic system to create additional length and structure.','A sculpted look with customisable length and shape.','Maintenance and safe removal are important.','Additional length and structure|Customisable length and shape','Maintenance and safe removal are important; please do not peel extensions off.',''],
-[3,'temporary-extension','Temporary Extension',700,800,'A shorter-term nail-length option for occasions or clients seeking a less permanent look.','A convenient enhanced nail appearance for a specific event or period.','Exact materials, expected wear time and removal method are confirmed by the studio.','Shorter-term nail-length option|Suited to occasions or a less permanent look','',''],
-[3,'soft-gel-extension','Soft Gel Extension',800,900,'A nail-length enhancement using soft-gel extension tips or a related soft-gel system.','A smooth, shaped extension look in various lengths and styles.','The specific application method and removal protocol depend on the products used.','Soft-gel extension tips or a related system|Smooth, shaped look in various lengths and styles','Application method and removal protocol depend on the products used.',''],
-[3,'gum-gel-extension','Gum Gel Extension',1500,1700,'A sculpted nail extension made with a mouldable builder-style gel commonly called gum gel.','Custom-shaped extensions with a structured finish.','Product terminology and exact technique should be confirmed with the studio.','Sculpted with a mouldable builder-style gel|Custom-shaped, structured finish','',''],
-[4,'gel-overlay','Gel Overlay',700,800,'A gel layer applied over natural nails to add a smooth finish and supportive structure without necessarily extending length.','For clients who want their natural nail length with a polished, reinforced look.','A technician should assess natural nail condition and suitable product.','Gel layer over natural nails|Smooth finish with supportive structure','',''],
-[4,'acrylic-overlay','Acrylic Overlay',900,1000,'An acrylic coating applied over natural nails, generally without adding extension length.','A structured nail surface while keeping the existing nail length.','Requires appropriate maintenance and professional removal.','Acrylic coating over natural nails|Keeps the existing nail length','Requires appropriate maintenance and professional removal.',''],
-[5,'gel-refill','Gel Refill',750,800,'Maintenance of an existing gel enhancement by addressing new nail growth and restoring its appearance.','For clients returning to maintain a previously applied gel set.','Suitability depends on lifting, condition and the existing enhancement system.','Maintains an existing gel enhancement|Addresses new nail growth','Suitability depends on lifting, condition and the existing enhancement system.',''],
-[5,'acrylic-refill','Acrylic Refill',900,1050,'Maintenance of existing acrylic enhancements to rebalance the growth area and refresh the set.','For clients who want to maintain an acrylic set rather than replace it completely.','Damaged or lifting enhancements may need repair or removal instead.','Maintains existing acrylic enhancements|Rebalances the growth area and refreshes the set','Damaged or lifting enhancements may need repair or removal instead of a refill.',''],
-[5,'gum-gel-refill','Gum Gel Refill',1100,1200,'Maintenance of a previously applied gum-gel enhancement, focusing on new growth and shape.','For upkeep of a compatible gum-gel set.','Please confirm product compatibility and nail condition before refill.','Maintains a previously applied gum-gel set|Focuses on new growth and shape','',''],
-[6,'nail-cut-file','Nail Cut + File',50,70,'Basic nail length trimming and shaping using a nail file.','A tidy, natural-looking nail shape with minimal treatment time.','Shape and length are adjusted according to the client’s preference and nail condition.','Basic trimming and shaping|Tidy, natural-looking nail shape','',''],
-[6,'nail-cut-polish','Nail Cut + Polish',80,100,'A simple nail grooming service with trimming and a polished colour finish.','A quick refreshed look without an elaborate nail-art design.','Please confirm whether filing, base coat and polish type are included.','Trimming with a polished colour finish|Simple, quick refresh','',''],
-[7,'gel-polish-removal','Gel Polish Removal',150,250,'Removal of existing gel polish using a method appropriate to the applied product.','For changing a gel colour or returning to natural nails.','Methods vary by formula.','Method appropriate to the applied product|For a colour change or a return to natural nails','Avoid peeling or scraping gel polish at home; removal methods vary by formula.',''],
-[7,'extension-removal','Extension Removal',350,300,'Removal of existing nail extensions using a technique suited to the extension material.','For safely transitioning from enhancements or preparing for a new set.','Different systems require different removal methods; price order follows the original menu.','Technique suited to the extension material|For transitioning from enhancements or preparing a new set','Different systems require different removal methods.','']
-];
+const {CATS,RAW,EXAMPLE}=VS_SERVICE_DATA;
 const SERV=RAW.map(([c,slug,name,m,r,about,ideal,before,hl,care,ph],i)=>({id:'svc-'+String(i+1).padStart(2,'0'),c,slug,name,m,r,about,ideal,before,hl:hl.split('|'),care,ph,i}));
-/* services without a verified matching photo use an authentic atelier portfolio photo as a visual example (captioned as an example, technique not claimed) */
-const EXAMPLE={'gel-extension':'p32','acrylic-extension':'p17','temporary-extension':'p09','soft-gel-extension':'p19','gum-gel-extension':'p14','gel-overlay':'p10','acrylic-overlay':'p08','gel-refill':'p33','acrylic-refill':'p05','gum-gel-refill':'p20','nail-cut-file':'p34','nail-cut-polish':'p21','gel-polish-removal':'p12','extension-removal':'p37'};
 SERV.forEach(s=>{if(!s.ph&&EXAMPLE[s.slug]){s.ph=EXAMPLE[s.slug];s.ex=true}});
 CATS.forEach(c=>c.items=SERV.filter(s=>s.c==c.i));
 const BY=Object.fromEntries(SERV.map(s=>[s.slug,s]));
@@ -49,30 +22,30 @@ const waLink=msg=>'https://wa.me/'+(CFG.whatsapp?CFG.whatsapp.replace(/\D/g,''):
 const waMsg=(s,o,d,tm)=>'Hello VANSSHIKHA SONI Nail Atelier!\n\nI would like to enquire about booking:\n\nService: '+s.name+(o?'\nPrice Option: '+o:'')+(d?'\nPreferred Date: '+d:'')+(tm?'\nPreferred Time: '+tm:'')+'\n\nPlease confirm availability and final pricing.';
 const pic=(s,alt,eager)=>s.ph?`<img ${eager?'fetchpriority="high" decoding="async"':''} src="${src(s.ph)}" alt="${alt?esc(s.name)+(s.ex?': example finish from the atelier portfolio':', from the atelier portfolio'):''}" ${eager?'':'loading="lazy"'}>`:`<div class="ph" role="img" aria-label="${esc(s.name)}"><span class="gold-text">VS</span><small>${CATS[s.c].name}</small></div>`;
 const price=s=>`<div class="pp"><span>M<b>${inr(s.m)}</b></span><span>R<b>${inr(s.r)}</b></span></div>`;
-const card=(s,i=0)=>`<article class="sc tilt" style="--i:${i}"><a class="sci" href="#/services/${s.slug}" tabindex="-1" aria-hidden="true">${pic(s,false)}</a><div class="scb"><div class="eyebrow">${CATS[s.c].name}</div><h3><a href="#/services/${s.slug}">${esc(s.name)}</a></h3><p>${esc(s.about)}</p>${price(s)}<div class="acts"><a class="btn ghost" href="#/services/${s.slug}">View Details</a><a class="btn" target="_blank" rel="noopener" href="${waLink(waMsg(s))}">Book on WhatsApp</a></div></div></article>`;
+const card=(s,i=0)=>`<article class="sc tilt" style="--i:${i}"><a class="sci" href="/services/${s.slug}" tabindex="-1" aria-hidden="true">${pic(s,false)}</a><div class="scb"><div class="eyebrow">${CATS[s.c].name}</div><h3><a href="/services/${s.slug}">${esc(s.name)}</a></h3><p>${esc(s.about)}</p>${price(s)}<div class="acts"><a class="btn ghost" href="/services/${s.slug}">View Details</a><a class="btn" target="_blank" rel="noopener" href="${waLink(waMsg(s))}">Book on WhatsApp</a></div></div></article>`;
 /* home: category cards */
 const CPH={0:'p26',1:'p31',2:'p04',3:'p32',4:'p10',5:'p33',6:'p21',7:'p12'};
-$('#svc').innerHTML=CATS.map(c=>`<article class="card tilt"><div class="im">${CPH[c.i]?`<img src="${src(CPH[c.i])}" alt="" loading="lazy">`:''}</div><div class="no">0${c.i+1}</div><h3>${c.name}</h3><p>${c.items.length} ${c.items.length>1?'services':'service'}: ${c.items.map(s=>esc(s.name)).slice(0,3).join(', ')}${c.items.length>3?'…':''}</p><a class="go" href="#/services?c=${c.slug}">Explore →</a></article>`).join('');
-/* portfolio */
+const svcEl=$('#svc');if(svcEl)svcEl.innerHTML=CATS.map(c=>`<article class="card tilt"><div class="im">${CPH[c.i]?`<img src="${src(CPH[c.i])}" alt="" loading="lazy">`:''}</div><div class="no">0${c.i+1}</div><h3>${c.name}</h3><p>${c.items.length} ${c.items.length>1?'services':'service'}: ${c.items.map(s=>esc(s.name)).slice(0,3).join(', ')}${c.items.length>3?'…':''}</p><a class="go" href="/services?c=${c.slug}">Explore →</a></article>`).join('');
+/* portfolio (gallery page can ship the same markup server-rendered; only fill empty containers) */
 const cats=['All',...new Set(IT.map(i=>i.c))];let cur='All',view=IT,li=0,look=null;
-{const w=[...new Set(IT.map(i=>i.c))].map(c=>`<span>${c}</span><span>✦</span>`).join('');$('#mq').innerHTML=w+w+w+w}
-$('#chips').innerHTML=cats.map((c,i)=>`<button class="chip" aria-pressed="${!i}" data-c="${c}">${c}</button>`).join('');
-$('#mason').innerHTML=IT.map(it=>`<button class="tile tilt" data-i="${it.i}" data-c="${it.c}" aria-label="Open ${it.t}"><img src="${src(it.id)}" width="${it.w}" height="${it.h}" alt="${it.t}, ${it.c} nail art" loading="lazy"><span class="no">${String(it.i+1).padStart(2,'0')}</span><span class="cap"><b>${it.t}</b>${it.c}</span></button>`).join('');
-$('#chips').onclick=e=>{const b=e.target.closest('.chip');if(!b)return;cur=b.dataset.c;$$('.chip').forEach(x=>x.setAttribute('aria-pressed',x===b));view=IT.filter(i=>cur=='All'||i.c==cur);const sh=[];$$('.tile').forEach(t=>{const on=cur=='All'||t.dataset.c==cur;t.classList.toggle('hide',!on);if(on)sh.push(t)});sh.forEach((x,k)=>{x.classList.add('snap');x.classList.remove('in');x.style.setProperty('--d',Math.min(k,12)*70+'ms');void x.offsetWidth;x.classList.remove('snap');setTimeout(()=>x.classList.add('in'),40)});window.ScrollTrigger&&ScrollTrigger.refresh()};
+{const mq=$('#mq');if(mq&&!mq.children.length){const w=[...new Set(IT.map(i=>i.c))].map(c=>`<span>${c}</span><span>✦</span>`).join('');mq.innerHTML=w+w+w+w}}
+const chipsEl=$('#chips');if(chipsEl&&!chipsEl.children.length)chipsEl.innerHTML=cats.map((c,i)=>`<button class="chip" aria-pressed="${!i}" data-c="${c}">${c}</button>`).join('');
+const masonEl=$('#mason');if(masonEl&&!masonEl.children.length)masonEl.innerHTML=IT.map(it=>`<button class="tile tilt" data-i="${it.i}" data-c="${it.c}" aria-label="Open ${it.t}"><img src="${src(it.id)}" width="${it.w}" height="${it.h}" alt="${it.t}, ${it.c} nail art" loading="lazy"><span class="no">${String(it.i+1).padStart(2,'0')}</span><span class="cap"><b>${it.t}</b>${it.c}</span></button>`).join('');
+if(chipsEl)chipsEl.onclick=e=>{const b=e.target.closest('.chip');if(!b)return;cur=b.dataset.c;$$('.chip').forEach(x=>x.setAttribute('aria-pressed',x===b));view=IT.filter(i=>cur=='All'||i.c==cur);const sh=[];$$('.tile').forEach(t=>{const on=cur=='All'||t.dataset.c==cur;t.classList.toggle('hide',!on);if(on)sh.push(t)});sh.forEach((x,k)=>{x.classList.add('snap');x.classList.remove('in');x.style.setProperty('--d',Math.min(k,12)*70+'ms');void x.offsetWidth;x.classList.remove('snap');setTimeout(()=>x.classList.add('in'),40)});window.ScrollTrigger&&ScrollTrigger.refresh()};
 /* lightbox */
 const lb=$('#lb');let lastF;
 function show(k,dir=0){li=(k+view.length)%view.length;const it=view[li];const im=$('#li');im.src=src(it.id);im.alt=it.t+', '+it.c+' nail art';$('#lt').textContent=it.t;$('#lc').textContent=it.c+' · '+(li+1)+'/'+view.length;if(!RM)gsap.fromTo(im,{x:dir*60,rotationY:dir*-14,opacity:0},{x:0,rotationY:0,opacity:1,duration:.5,ease:'power3.out'})}
 function open(i){lastF=document.activeElement;view=IT.filter(x=>cur=='All'||x.c==cur);show(view.findIndex(x=>x.i==i));lb.classList.add('on');document.body.style.overflow='hidden';$('#lx').focus()}
 function close(){lb.classList.remove('on');document.body.style.overflow='';lastF&&lastF.focus()}
-$('#mason').onclick=e=>{const t=e.target.closest('.tile');t&&open(+t.dataset.i)};
+if(masonEl)masonEl.onclick=e=>{const t=e.target.closest('.tile');t&&open(+t.dataset.i)};
 $('#lx').onclick=close;$('#lp').onclick=()=>show(li-1,-1);$('#ln').onclick=()=>show(li+1,1);lb.onclick=e=>{if(e.target===lb)close()};
 addEventListener('keydown',e=>{if(!lb.classList.contains('on'))return;if(e.key=='Escape')close();if(e.key=='ArrowLeft')show(li-1,-1);if(e.key=='ArrowRight')show(li+1,1);if(e.key=='Tab'){const f=$$('button',lb);const a=f[0],z=f[f.length-1];if(e.shiftKey&&document.activeElement==a){e.preventDefault();z.focus()}else if(!e.shiftKey&&document.activeElement==z){e.preventDefault();a.focus()}}});
 let sx=0;lb.addEventListener('touchstart',e=>sx=e.touches[0].clientX,{passive:true});lb.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-sx;if(Math.abs(d)>50)show(li+(d<0?1:-1),d<0?1:-1)});
-$('#lbk').onclick=()=>{setLook(view[li]);close();$('#book').scrollIntoView({behavior:RM?'auto':'smooth'})};
-function setLook(it){look=it;const c=$('#lookchip');c.classList.toggle('on',!!it);if(it){$('img',c).src=src(it.id);$('#lookname').textContent=it.t+' · '+it.c}}$('#lookx').onclick=()=>setLook(null);
-/* booking */
+$('#lbk').onclick=()=>{const bk=$('#book');if(bk){setLook(view[li]);close();bk.scrollIntoView({behavior:RM?'auto':'smooth'})}else{close();location.href='/booking'}};
+function setLook(it){const c=$('#lookchip');if(!c)return;look=it;c.classList.toggle('on',!!it);if(it){$('img',c).src=src(it.id);$('#lookname').textContent=it.t+' · '+it.c}}const lookx=$('#lookx');if(lookx)lookx.onclick=()=>setLook(null);
+/* booking (rendered only on pages that ship the booking panel: home and /booking) */
 const S={svc:null,date:null,time:null};let step=0;
-const sel=$('#ssel');sel.innerHTML='<option value="">Choose a service</option>'+CATS.map(c=>`<optgroup label="${c.name}">${c.items.map(s=>`<option value="${esc(s.name)}">${esc(s.name)}</option>`).join('')}</optgroup>`).join('');sel.onchange=()=>{S.svc=sel.value||null;$('#e0').textContent=''};
+const sel=$('#ssel');if(sel){sel.innerHTML='<option value="">Choose a service</option>'+CATS.map(c=>`<optgroup label="${c.name}">${c.items.map(s=>`<option value="${esc(s.name)}">${esc(s.name)}</option>`).join('')}</optgroup>`).join('');sel.onchange=()=>{S.svc=sel.value||null;$('#e0').textContent=''};
 const today=new Date();today.setHours(0,0,0,0);let cm=new Date(today.getFullYear(),today.getMonth(),1);
 function cal(){const y=cm.getFullYear(),m=cm.getMonth(),first=new Date(y,m,1).getDay(),dim=new Date(y,m+1,0).getDate();let h=`<div class="h"><button type="button" id="cp" aria-label="Previous month" ${cm<=new Date(today.getFullYear(),today.getMonth(),1)?'disabled':''}>‹</button><span>${cm.toLocaleString('en',{month:'long',year:'numeric'})}</span><button type="button" id="cn" aria-label="Next month">›</button></div><div class="grid7">`+['S','M','T','W','T','F','S'].map(d=>`<div class="w">${d}</div>`).join('')+'<div></div>'.repeat(first);for(let d=1;d<=dim;d++){const dt=new Date(y,m,d),k=dt.toDateString();h+=`<button type="button" class="day" data-d="${dt.getTime()}" ${dt<today?'disabled':''} aria-pressed="${S.date&&S.date.toDateString()==k}">${d}</button>`}$('#cal').innerHTML=h+'</div>'}
 cal();$('#cal').onclick=e=>{if(e.target.id=='cp'){cm=new Date(cm.getFullYear(),cm.getMonth()-1,1);cal()}else if(e.target.id=='cn'){cm=new Date(cm.getFullYear(),cm.getMonth()+1,1);cal()}else if(e.target.classList.contains('day')){S.date=new Date(+e.target.dataset.d);cal();$('#e1').textContent=''}};
@@ -83,7 +56,17 @@ function go(n){step=n;$$('.stp').forEach(s=>s.classList.toggle('on',+s.dataset.s
 function review(){const nm=$('#nm').value.trim(),nt=$('#nt').value.trim();const rows=[['Service',S.svc],['Date',fmt(S.date)],['Time of day',S.time||'Flexible'],['Name',nm]];if(look)rows.push(['Look',look.t+' ('+look.c+')']);if(nt)rows.push(['Notes',nt]);$('#sum').innerHTML=rows.map(r=>`<li><span>${r[0]}</span><span style="text-align:right">${r[1].replace(/</g,'&lt;')}</span></li>`).join('');
 const msg=`Hello Vansshikha Soni Nail Atelier! I'd like to request an appointment (please confirm availability).\n\nService: ${S.svc}\nPreferred date: ${fmt(S.date)}\nTime of day: ${S.time||'Flexible'}${look?`\nLook of interest: ${look.t} (${look.c})`:''}\nName: ${nm}${nt?`\nNotes: ${nt}`:''}`;$('#wa').href=waLink(msg)}
 $$('[data-next]').forEach(b=>b.onclick=()=>{if(step==0&&!S.svc)return $('#e0').textContent='Please choose a service.';if(step==1&&!S.date)return $('#e1').textContent='Please pick a preferred date.';if(step==2&&!$('#nm').value.trim())return $('#e2').textContent='Please add your name.';go(step+1)});
-$$('[data-prev]').forEach(b=>b.onclick=()=>go(step-1));
+$$('[data-prev]').forEach(b=>b.onclick=()=>go(step-1))}
+/* service-detail WhatsApp booking widget (static /services/<slug> pages and the SPA view) */
+function initServiceBook(root){root=root||document;const sec=root.querySelector&&root.querySelector('#sbk'),bwa=root.querySelector&&root.querySelector('#bwa'),bf=root.querySelector&&root.querySelector('.bf');if(!sec||!bwa||!bf||sec._bk)return;
+ const s=BY[sec.dataset.svc];if(!s)return;sec._bk=1;let o='';
+ const bd=$('#bd',sec),bt=$('#bt',sec);
+ const up=()=>{bwa.href=waLink(waMsg(s,o,bd.value&&new Date(bd.value+'T00:00').toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'}),bt.value&&new Date('1970-01-01T'+bt.value).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})))};
+ bd.min=new Date().toISOString().slice(0,10);
+ bf.addEventListener('click',e=>{const b=e.target.closest('.opt');if(!b)return;o=o==b.dataset.o?'':b.dataset.o;$$('.opt',bf).forEach(x=>x.setAttribute('aria-pressed',x.dataset.o==o));up()});
+ bd.oninput=bt.oninput=up;up()}
+$$('[data-go]').forEach(b=>b.onclick=()=>{const t=document.getElementById(b.dataset.go);t&&t.scrollIntoView({behavior:RM?'auto':'smooth',block:'center'})});
+initServiceBook(document);
 /* nav */
 const nav=$('#nav'),bg=$('#burger'),lk=$('#links');let ly=0,tk=false;addEventListener('scroll',()=>{if(tk)return;tk=true;requestAnimationFrame(()=>{const y=scrollY;nav.classList.toggle('s',y>40);if(y>260&&y>ly+6&&!lk.classList.contains('open')&&!$('#mega').classList.contains('open'))nav.classList.add('nav-hide');else if(y<ly-6||y<=260)nav.classList.remove('nav-hide');if(Math.abs(y-ly)>6)ly=y;tk=false})},{passive:true});nav.addEventListener('focusin',()=>nav.classList.remove('nav-hide'));
 bg.onclick=()=>{const o=bg.getAttribute('aria-expanded')!='true';bg.setAttribute('aria-expanded',o);lk.classList.toggle('open',o)};new MutationObserver(()=>document.documentElement.classList.toggle('menu-open',lk.classList.contains('open'))).observe(lk,{attributes:true,attributeFilter:['class']});
@@ -100,10 +83,10 @@ gsap.from('.float',{opacity:0,y:60,duration:1.2,stagger:.15,delay:1,ease:'power3
 $$('.float').forEach(f=>gsap.to(f,{y:()=>+f.dataset.d*-3,scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:.6}}));
 gsap.to('.plaque',{yPercent:-8,scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:.6}});
 $$('.dv path,.dv2').forEach(p=>{const l=p.getTotalLength();gsap.fromTo(p,{strokeDasharray:l,strokeDashoffset:l},{strokeDashoffset:0,duration:1.6,ease:'power2.inOut',scrollTrigger:{trigger:p,start:'top 90%'}})});
-$$('.rv:not(.hero .rv),.head h2,.head p').forEach(el=>gsap.fromTo(el,{opacity:0,y:40},{opacity:1,y:0,duration:1,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 88%'}}));
-const tr=$('#track');const dist=()=>tr.scrollWidth-innerWidth;
+$$('.rv:not(.hero .rv),.head h2,.head p').forEach(el=>gsap.fromTo(el,{opacity:0,y:36},{opacity:1,y:0,duration:1.15,ease:'expo.out',scrollTrigger:{trigger:el,start:'top 89%'}}));
+const tr=$('#track');if(tr){const dist=()=>tr.scrollWidth-innerWidth;
 gsap.to(tr,{x:()=>-dist(),ease:'none',scrollTrigger:{trigger:'#gallery',start:'top top',end:()=>'+='+dist(),pin:'.story .pin',scrub:.7,invalidateOnRefresh:true,anticipatePin:1}});
-$$('.slide img').forEach(im=>gsap.to(im,{scale:1,ease:'none',scrollTrigger:{trigger:im,containerAnimation:ScrollTrigger.getAll().pop().animation,start:'left 95%',end:'left 35%',scrub:true}}));
+$$('.slide img').forEach(im=>gsap.to(im,{scale:1,ease:'none',scrollTrigger:{trigger:im,containerAnimation:ScrollTrigger.getAll().pop().animation,start:'left 95%',end:'left 35%',scrub:true}}));}
 gsap.from('.arch .in',{clipPath:'inset(100% 0 0 0)',duration:1.5,ease:'expo.inOut',scrollTrigger:{trigger:'.arch',start:'top 80%'}});gsap.fromTo('.arch img',{yPercent:-6},{yPercent:0,ease:'none',scrollTrigger:{trigger:'.arch',start:'top bottom',end:'bottom top',scrub:true}});
 gsap.from('#svc .card',{opacity:0,y:60,rotationX:-12,transformOrigin:'50% 100%',stagger:.12,duration:1,ease:'power3.out',scrollTrigger:{trigger:'#svc',start:'top 80%'}});
 gsap.from('#fbig',{yPercent:60,opacity:0,duration:1.4,ease:'expo.out',scrollTrigger:{trigger:'footer',start:'top 70%'}});
@@ -113,8 +96,8 @@ function bindFx(r=document){if(!FINE)return;$$('.tilt',r).forEach(c=>{if(c._fx)r
 $$('.mag',r).forEach(b=>{if(b._fx)return;b._fx=1;b.addEventListener('pointermove',e=>{const q=b.getBoundingClientRect();gsap.to(b,{x:(e.clientX-q.left-q.width/2)*.3,y:(e.clientY-q.top-q.height/2)*.4,duration:.4,ease:'power3.out'})});b.addEventListener('pointerleave',()=>gsap.to(b,{x:0,y:0,duration:.9,ease:'elastic.out(1,.4)'}))})}
 bindFx();window.bindFx=bindFx;
 /* plaque follow */
-if(FINE)$('#stage').addEventListener('pointermove',e=>{const r=e.currentTarget.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;gsap.to('#plaque',{rotationY:x*18,rotationX:-y*14,transformPerspective:1100,duration:.7})});
-$('#stage').addEventListener('pointerleave',()=>gsap.to('#plaque',{rotationX:0,rotationY:0,duration:1}));
+const stageEl=$('#stage');if(FINE&&stageEl)stageEl.addEventListener('pointermove',e=>{const r=e.currentTarget.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;gsap.to('#plaque',{rotationY:x*18,rotationX:-y*14,transformPerspective:1100,duration:.7})});
+if(stageEl)stageEl.addEventListener('pointerleave',()=>gsap.to('#plaque',{rotationX:0,rotationY:0,duration:1}));
 /* cursor */
 if(FINE){const c=$('#cur');let tx=0,ty=0,x=0,y=0,run=false;const l=()=>{x+=(tx-x)*.2;y+=(ty-y)*.2;c.style.transform=`translate(${x}px,${y}px)`;if(Math.abs(tx-x)+Math.abs(ty-y)>.3)requestAnimationFrame(l);else run=false};addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY;c.classList.add('on');if(!run){run=true;requestAnimationFrame(l)}},{passive:true});document.addEventListener('pointerover',e=>c.classList.toggle('h',!!e.target.closest('a,button,.tile')))}
 }
@@ -122,10 +105,10 @@ if(FINE){const c=$('#cur');let tx=0,ty=0,x=0,y=0,run=false;const l=()=>{x+=(tx-x
 const fx=r=>window.bindFx&&window.bindFx(r);
 /* ===== services: mega menu, mobile accordion, routes ===== */
 const mega=$('#mega'),macc=$('#macc'),sbtn=$('#svcbtn'),isMob=()=>matchMedia('(max-width:860px)').matches;let mcat=0;
-mega.innerHTML=`<div class="mg"><div class="mgl" role="tablist" aria-orientation="vertical" aria-label="Service categories"><div class="eyebrow">Service Menu</div>${CATS.map(c=>`<button type="button" role="tab" id="mt${c.i}" aria-selected="false" aria-controls="mp" tabindex="-1" data-c="${c.i}"><span>${c.name}</span><small>${c.items.length}</small><i aria-hidden="true">\u203A</i></button>`).join('')}<a class="mall" href="#/services">View all services \u2192</a></div><div class="mgr" id="mp" role="tabpanel" aria-live="polite"></div></div>`;
-macc.innerHTML='<div class="mi">'+CATS.map(c=>`<div class="ac"><button type="button" id="ab${c.i}" aria-expanded="false" aria-controls="ap${c.i}"><span>${c.name}</span><i aria-hidden="true">+</i></button><div class="apn" id="ap${c.i}" role="region" aria-labelledby="ab${c.i}"><ul>${c.items.map(s=>`<li><a href="#/services/${s.slug}">${esc(s.name)}<span aria-hidden="true">\u2192</span></a></li>`).join('')}</ul></div></div>`).join('')+'<a class="mall" href="#/services">View all services \u2192</a></div>';
+mega.innerHTML=`<div class="mg"><div class="mgl" role="tablist" aria-orientation="vertical" aria-label="Service categories"><div class="eyebrow">Service Menu</div>${CATS.map(c=>`<button type="button" role="tab" id="mt${c.i}" aria-selected="false" aria-controls="mp" tabindex="-1" data-c="${c.i}"><span>${c.name}</span><small>${c.items.length}</small><i aria-hidden="true">\u203A</i></button>`).join('')}<a class="mall" href="/services">View all services \u2192</a></div><div class="mgr" id="mp" role="tabpanel" aria-live="polite"></div></div>`;
+macc.innerHTML='<div class="mi">'+CATS.map(c=>`<div class="ac"><button type="button" id="ab${c.i}" aria-expanded="false" aria-controls="ap${c.i}"><span>${c.name}</span><i aria-hidden="true">+</i></button><div class="apn" id="ap${c.i}" role="region" aria-labelledby="ab${c.i}"><ul>${c.items.map(s=>`<li><a href="/services/${s.slug}">${esc(s.name)}<span aria-hidden="true">\u2192</span></a></li>`).join('')}</ul></div></div>`).join('')+'<a class="mall" href="/services">View all services \u2192</a></div>';
 function selCat(i,focus){mcat=i;const c=CATS[i];$$('.mgl [role=tab]',mega).forEach(b=>{const on=+b.dataset.c==i;b.setAttribute('aria-selected',on);b.tabIndex=on?0:-1;if(on&&focus)b.focus()});
-$('#mp').setAttribute('aria-labelledby','mt'+i);$('#mp').innerHTML=`<div class="mh"><h3>${c.name}</h3><a href="#/services?c=${c.slug}">View category \u2192</a></div><ul>${c.items.map((s,k)=>`<li style="--i:${k}"><a href="#/services/${s.slug}"><span>${esc(s.name)}</span><em>M ${inr(s.m)} \u00B7 R ${inr(s.r)}</em><b aria-hidden="true">\u2192</b></a></li>`).join('')}</ul>`}
+$('#mp').setAttribute('aria-labelledby','mt'+i);$('#mp').innerHTML=`<div class="mh"><h3>${c.name}</h3><a href="/services?c=${c.slug}">View category \u2192</a></div><ul>${c.items.map((s,k)=>`<li style="--i:${k}"><a href="/services/${s.slug}"><span>${esc(s.name)}</span><em>M ${inr(s.m)} \u00B7 R ${inr(s.r)}</em><b aria-hidden="true">\u2192</b></a></li>`).join('')}</ul>`}
 function openMega(){mega.style.top=($('#nav').getBoundingClientRect().bottom+8)+'px';mega.classList.add('open');sbtn.setAttribute('aria-expanded','true');selCat(mcat)}
 function closeMega(f){if(!mega.classList.contains('open'))return;mega.classList.remove('open');sbtn.setAttribute('aria-expanded','false');if(f)sbtn.focus()}
 function toggleAcc(o){macc.classList.toggle('open',o);sbtn.setAttribute('aria-expanded',o)}
@@ -152,27 +135,30 @@ function pageList(){let f='all',q='';
 function pageDetail(s){const c=CATS[s.c],flip=s.i%2?' flip':'';
  const rel=[...c.items.filter(x=>x!=s),...SERV.slice(s.i+1),...SERV].filter((x,i,a)=>x!=s&&a.indexOf(x)==i).slice(0,3);
  const rings='<svg viewBox="0 0 400 400" aria-hidden="true">'+[40,80,120,160,195].map(r=>`<circle cx="200" cy="200" r="${r}"/>`).join('')+'</svg>';
- V.innerHTML=`<article class="sd" style="--tint:${c.tint}"><section class="sdh"><div class="sbg" aria-hidden="true">${rings}</div><div class="wrap sdg${flip}"><div class="sdt"><div class="crumb" role="navigation" aria-label="Breadcrumb"><a href="#/services">All Services</a> / <a href="#/services?c=${c.slug}">${c.name}</a></div><div class="eyebrow">${c.name}</div><h1>${esc(s.name)}</h1><p class="lead">${esc(s.about)}</p><div class="pr2"><span>M<b>${inr(s.m)}</b></span><span>R<b>${inr(s.r)}</b></span></div><div class="acts" style="max-width:420px"><button type="button" class="btn mag" data-go="sbk">Book Appointment</button><a class="btn ghost mag" href="#/services">\u2190 All Services</a></div></div><figure class="sdi tilt"><span class="no2">${String(s.i+1).padStart(2,'0')} / 23</span><div class="fr">${pic(s,true,true)}</div>${s.ph?`<figcaption>${s.ex?'Example from the atelier portfolio':'From the atelier portfolio'}</figcaption>`:''}</figure></div></section>
+ V.innerHTML=`<article class="sd" style="--tint:${c.tint}"><section class="sdh"><div class="sbg" aria-hidden="true">${rings}</div><div class="wrap sdg${flip}"><div class="sdt"><div class="crumb" role="navigation" aria-label="Breadcrumb"><a href="/services">All Services</a> / <a href="/services?c=${c.slug}">${c.name}</a></div><div class="eyebrow">${c.name}</div><h1>${esc(s.name)}</h1><p class="lead">${esc(s.about)}</p><div class="pr2"><span>M<b>${inr(s.m)}</b></span><span>R<b>${inr(s.r)}</b></span></div><div class="acts" style="max-width:420px"><button type="button" class="btn mag" data-go="sbk">Book Appointment</button><a class="btn ghost mag" href="/services">\u2190 All Services</a></div></div><figure class="sdi tilt"><span class="no2">${String(s.i+1).padStart(2,'0')} / 23</span><div class="fr">${pic(s,true,true)}</div>${s.ph?`<figcaption>${s.ex?'Example from the atelier portfolio':'From the atelier portfolio'}</figcaption>`:''}</figure></div></section>
  <section class="sdc"><div class="wrap sdl${flip}"><div class="sdm"><section class="rvx"><h2>What the service <em>involves</em></h2><p>${esc(s.before)}</p></section><section class="rvx"><h2>Suitable looks</h2><p>${esc(s.ideal)}</p></section><section class="rvx"><h2>Key <em>features</em></h2><ul class="kf">${s.hl.map(x=>`<li>${esc(x)}</li>`).join('')}<li>Listed under ${c.name.toLowerCase().replace(/(^|\s)\S/g,m=>m.toUpperCase())}</li></ul></section><section class="rvx" style="border:0"><h2>Care &amp; <em>maintenance</em></h2><p>${s.care?esc(s.care):'Aftercare guidance for this service: PENDING studio confirmation.'}</p></section></div>
  <aside class="pcard rvx tilt"><div class="eyebrow">Official rates</div><div class="prow"><div><span>M</span><b>${inr(s.m)}</b></div><div><span>R</span><b>${inr(s.r)}</b></div></div><p class="small">${s.slug=='extension-removal'?'Shown in the original menu order. ':''}${/per-finger/.test(s.slug)?'Priced per finger. ':''}M and R are shown exactly as on the official menu; their meaning is being confirmed by the studio. Final pricing is confirmed on WhatsApp.</p><button type="button" class="btn mag" data-go="sbk">Book Appointment</button></aside></div></section>
- <section class="sbk" id="sbk"><div class="wrap"><div class="pnl2 rvx"><div><div class="eyebrow">Book on WhatsApp</div><h2>Enquire about <em>${esc(s.name)}</em></h2><p>This opens WhatsApp with a ready message. It is an enquiry only; your slot and final price are confirmed by the studio.</p></div><div class="bf"><fieldset><legend>Price option (optional)</legend><div class="opts"><button type="button" class="opt" aria-pressed="false" data-o="M">M<small>${inr(s.m)}</small></button><button type="button" class="opt" aria-pressed="false" data-o="R">R<small>${inr(s.r)}</small></button></div></fieldset><div class="two"><div><label class="lb2" for="bd">Preferred date (optional)</label><input type="date" id="bd"></div><div><label class="lb2" for="bt">Preferred time (optional)</label><input type="time" id="bt"></div></div><a class="btn mag" id="bwa" target="_blank" rel="noopener">Book on WhatsApp</a></div></div></div></section>
- <section class="rel"><div class="wrap"><h2 class="rvx">Related <em>services</em></h2><div class="sg">${rel.map((x,i)=>card(x,i)).join('')}</div><div class="back2"><a class="btn ghost mag" href="#/services">\u2190 Back to All Services</a></div></div></section></article>`;
- let o='';const up=()=>{$('#bwa').href=waLink(waMsg(s,o,$('#bd').value&&new Date($('#bd').value+'T00:00').toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'}),$('#bt').value&&new Date('1970-01-01T'+$('#bt').value).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})))};
- $('#bd').min=new Date().toISOString().slice(0,10);$('.bf').addEventListener('click',e=>{const b=e.target.closest('.opt');if(!b)return;o=o==b.dataset.o?'':b.dataset.o;$$('.opt',V).forEach(x=>x.setAttribute('aria-pressed',x.dataset.o==o));up()});$('#bd').oninput=$('#bt').oninput=up;up();
+ <section class="sbk" id="sbk" data-svc="${s.slug}"><div class="wrap"><div class="pnl2 rvx"><div><div class="eyebrow">Book on WhatsApp</div><h2>Enquire about <em>${esc(s.name)}</em></h2><p>This opens WhatsApp with a ready message. It is an enquiry only; your slot and final price are confirmed by the studio.</p></div><div class="bf"><fieldset><legend>Price option (optional)</legend><div class="opts"><button type="button" class="opt" aria-pressed="false" data-o="M">M<small>${inr(s.m)}</small></button><button type="button" class="opt" aria-pressed="false" data-o="R">R<small>${inr(s.r)}</small></button></div></fieldset><div class="two"><div><label class="lb2" for="bd">Preferred date (optional)</label><input type="date" id="bd"></div><div><label class="lb2" for="bt">Preferred time (optional)</label><input type="time" id="bt"></div></div><a class="btn mag" id="bwa" target="_blank" rel="noopener">Book on WhatsApp</a></div></div></div></section>
+ <section class="rel"><div class="wrap"><h2 class="rvx">Related <em>services</em></h2><div class="sg">${rel.map((x,i)=>card(x,i)).join('')}</div><div class="back2"><a class="btn ghost mag" href="/services">\u2190 Back to All Services</a></div></div></section></article>`;
+ initServiceBook(V);
  $$('[data-go]',V).forEach(b=>b.onclick=()=>$('#sbk').scrollIntoView({behavior:RM?'auto':'smooth',block:'center'}));
  meta(s.name+' | Vansshikha Soni Nail Atelier',s.about+' Official rates M '+inr(s.m)+' / R '+inr(s.r)+'.')}
 function render(r){if(window.animIO)$$('.gold-text,.sbg svg',V).forEach(x=>{animIO.unobserve(x);x._w=0});closeMega();toggleAcc(false);bg.setAttribute('aria-expanded',false);lk.classList.remove('open');
- if(r.k=='home'){V.hidden=true;V.innerHTML='';HM.hidden=false;meta('Vansshikha Soni \u00B7 Nail Atelier','Vansshikha Soni Nail Atelier: luxury nail art, gel sets, extensions and more.');if(curKey!='home'){window.ScrollTrigger&&setTimeout(()=>ScrollTrigger.refresh(),60);const el=r.id&&document.getElementById(r.id);scrollTo({top:el?el.getBoundingClientRect().top+scrollY-70:0,behavior:'instant'})}}
+ if(r.k=='home'){V.hidden=true;V.innerHTML='';HM.hidden=false;meta('Vansshikha Soni Nail Atelier | Luxury Nail Art & Gel Extensions','Vansshikha Soni Nail Atelier: luxury nail art, gel extensions, chrome, ombre and French designs. Portfolio, official rates and WhatsApp booking.');if(curKey!='home'){window.ScrollTrigger&&setTimeout(()=>ScrollTrigger.refresh(),60);const el=r.id&&document.getElementById(r.id);scrollTo({top:el?el.getBoundingClientRect().top+scrollY-70:0,behavior:'instant'})}}
  else{HM.hidden=true;V.hidden=false;if(r.k=='svcs'){const p=pageList();p.init(CATS.some(c=>c.slug==r.c)?r.c:'all');meta('All Services | Vansshikha Soni Nail Atelier','All 8 categories and 23 nail services with official rates.')}else pageDetail(r.s);fx(V);reveal(V);window.watchAnim&&watchAnim(V);scrollTo({top:0,behavior:'instant'})}
  curKey=r.k;window.igSetup&&setTimeout(igSetup,60)}
-function route(){const r=parse();if(first||RM||r.k==curKey&&r.k=='home'){first=false;render(r);return}
+/* legacy shared links (#/services/...) resolve to the canonical clean URLs (/services/...) */
+function legacyHash(){const h=location.hash||'';if(h.indexOf('#/services')!==0)return false;location.replace(location.origin+'/'+h.slice(2));return true}
+function route(){if(!HM)return;const r=parse();if(first||RM||r.k==curKey&&r.k=='home'){first=false;render(r);return}
  pt.style.transformOrigin='bottom';pt.classList.add('on');setTimeout(()=>{render(r);pt.style.transformOrigin='top';pt.classList.remove('on')},480)}
-addEventListener('hashchange',route);route();
+/* static pages carry their own prerendered content; only the home page runs the hash router */
+addEventListener('hashchange',()=>{if(legacyHash())return;if(HM)route()});
+if(HM&&!legacyHash())route();
 
 
 /* ===== studio gallery + testimonial carousel (edit these arrays to add or remove photos) ===== */
 const STUDIO=[['shelf','Gel polish wall','Shade shelves'],['chart','Colour chart','Gel polish display'],['swatch','Shade swatch board','Nude and rose tones'],['gloss','Gloss top coat','Finishing range'],['matte','Matte top coat','Finishing range'],['bloom','Blooming gel','Colourful Sky']].map(([k,t,c])=>({k,t,c,src:ST[k][0],w:ST[k][1],h:ST[k][2]}));
-$('#sgal').innerHTML=STUDIO.map((s,i)=>`<button type="button" class="sit s${i+1} rvx" role="listitem" data-i="${i}" style="transition-delay:${i*90}ms" aria-label="Open photo: ${s.t}"><img src="${s.src}" width="${s.w}" height="${s.h}" alt="${s.t} in the studio" loading="lazy"><span class="gcap"><b>${s.t}</b>${s.c}</span></button>`).join('');
+const sgalEl=$('#sgal');if(sgalEl)sgalEl.innerHTML=STUDIO.map((s,i)=>`<button type="button" class="sit s${i+1} rvx" role="listitem" data-i="${i}" style="transition-delay:${i*90}ms" aria-label="Open photo: ${s.t}"><img src="${s.src}" width="${s.w}" height="${s.h}" alt="${s.t} in the studio" loading="lazy"><span class="gcap"><b>${s.t}</b>${s.c}</span></button>`).join('');
 /* testimonials: add items here. name / rating / quote are shown only when provided and approved */
 const TESTI=[['t0'],['t1'],['t2'],['t3']].map(([k],i)=>({k,src:TS[k][0],alt:'Moment at the studio '+(i+1),cap:'In the studio',name:'',rating:null,quote:''}));
 /* generic full-screen viewer */
@@ -184,10 +170,11 @@ $('#l2x').onclick=vclose;$('#l2p').onclick=()=>vshow(vi-1,-1);$('#l2n').onclick=
 addEventListener('keydown',e=>{if(!lb2.classList.contains('on'))return;if(e.key=='Escape')vclose();if(e.key=='ArrowLeft')vshow(vi-1,-1);if(e.key=='ArrowRight')vshow(vi+1,1);if(e.key=='Tab'){const f=$$('button:not([hidden])',lb2),a=f[0],z=f[f.length-1];if(e.shiftKey&&document.activeElement==a){e.preventDefault();z.focus()}else if(!e.shiftKey&&document.activeElement==z){e.preventDefault();a.focus()}}});
 let vx=0;lb2.addEventListener('touchstart',e=>vx=e.touches[0].clientX,{passive:true});lb2.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-vx;if(Math.abs(d)>50)vshow(vi+(d<0?1:-1),d<0?1:-1)});
 const stList=STUDIO.map(s=>({src:s.src,alt:s.t+' in the studio',t:s.t,c:s.c}));
-$('#sgal').onclick=e=>{const b=e.target.closest('.sit');b&&vopen(stList,+b.dataset.i)};
-if(FINE&&!RM){const g=$('#sgal');g.addEventListener('pointermove',e=>{const r=g.getBoundingClientRect();g.style.setProperty('--mx',((e.clientX-r.left)/r.width-.5)*2);g.style.setProperty('--my',((e.clientY-r.top)/r.height-.5)*2)});g.addEventListener('pointerleave',()=>{g.style.setProperty('--mx',0);g.style.setProperty('--my',0)})}
+if(sgalEl)sgalEl.onclick=e=>{const b=e.target.closest('.sit');b&&vopen(stList,+b.dataset.i)};
+if(FINE&&!RM&&sgalEl){const g=sgalEl;g.addEventListener('pointermove',e=>{const r=g.getBoundingClientRect();g.style.setProperty('--mx',((e.clientX-r.left)/r.width-.5)*2);g.style.setProperty('--my',((e.clientY-r.top)/r.height-.5)*2)});g.addEventListener('pointerleave',()=>{g.style.setProperty('--mx',0);g.style.setProperty('--my',0)})}
 /* 3D carousel */
 const cst=$('#cstage'),car=$('#car'),N=TESTI.length;let ci=0,moved=false;
+if(cst&&car){
 cst.innerHTML=TESTI.map((s,i)=>`<div class="cc" data-i="${i}"><div class="tin tilt"><img src="${s.src}" alt="${esc(s.alt)}" loading="lazy" width="1240" height="1646"></div></div>`).join('');
 $('#cdots').innerHTML=TESTI.map((s,i)=>`<button type="button" aria-label="Show testimonial ${i+1} of ${N}" data-i="${i}"></button>`).join('');
 function cset(k){ci=(k+N)%N;$$('.cc',cst).forEach((c,i)=>{let o=i-ci;if(o>N/2)o-=N;if(o<-N/2)o+=N;c.style.setProperty('--o',o);c.style.setProperty('--ab',Math.abs(o));c.classList.toggle('act',o==0);c.classList.toggle('far',Math.abs(o)>2);c.setAttribute('aria-hidden',o!=0)});
@@ -196,12 +183,14 @@ $('#cprev').onclick=()=>cset(ci-1);$('#cnext').onclick=()=>cset(ci+1);$('#cdots'
 car.addEventListener('keydown',e=>{if(e.key=='ArrowLeft'){e.preventDefault();cset(ci-1)}if(e.key=='ArrowRight'){e.preventDefault();cset(ci+1)}if(e.key=='Enter'||e.key==' '){e.preventDefault();vopen(TESTI.map(s=>({src:s.src,alt:s.alt,t:s.name||'',c:s.cap})),ci)}});
 let px=0,pd=false;car.addEventListener('pointerdown',e=>{px=e.clientX;pd=true;moved=false});addEventListener('pointerup',e=>{if(!pd)return;pd=false;const d=e.clientX-px;if(Math.abs(d)>45){moved=true;cset(ci+(d<0?1:-1))}});
 cst.addEventListener('click',e=>{if(moved){moved=false;return}const c=e.target.closest('.cc');if(!c)return;const i=+c.dataset.i;if(i==ci)vopen(TESTI.map(s=>({src:s.src,alt:s.alt,t:s.name||'',c:s.cap})),ci);else cset(i)});
-cset(0);fx($('#testimonials'));if(!RM){reveal(HM)}
+cset(0);fx(car)}
+/* reveal + fx for whichever page is on screen (static pages prerender their content in #views) */
+if(!RM){if(HM)reveal(HM);else if(V){reveal(V);fx(V);window.watchAnim&&watchAnim(V)}}
 
 
 /* ===== cinematic opening intro: 2000 ms, plays on every full page load ===== */
 const root0=document.documentElement,INTRO=$('#intro');let introActive=false,curTl=null,introRaf=0;
-function heroIn(){if(!window.gsap)return;gsap.from('.hero h1 .l>span',{yPercent:110,duration:1.3,stagger:.14,ease:'expo.out'});gsap.from('.hero .eyebrow,.hero .rv',{opacity:0,y:24,duration:1,stagger:.12,delay:.25,ease:'power3.out'});gsap.from('.plaque',{clipPath:'inset(100% 0 0 0)',duration:1.5,ease:'expo.inOut'});gsap.from('.float',{opacity:0,y:60,duration:1.2,stagger:.15,delay:.4,ease:'power3.out'})}
+function heroIn(){if(!window.gsap)return;gsap.from('.hero h1 .l>span',{yPercent:110,duration:1.4,stagger:.16,ease:'expo.out'});gsap.from('.hero .eyebrow,.hero .rv',{opacity:0,y:26,duration:1.1,stagger:.13,delay:.3,ease:'expo.out'});gsap.from('.plaque',{clipPath:'inset(100% 0 0 0)',duration:1.6,ease:'expo.inOut'});gsap.from('.float',{opacity:0,y:64,duration:1.3,stagger:.16,delay:.45,ease:'expo.out'})}
 function introCleanup(){clearTimeout(window.__vsT);if(curTl){curTl.kill();curTl=null}root0.classList.remove('intro-on');document.body.style.overflow='';INTRO.style.clipPath='';cancelAnimationFrame(introRaf);INTRO.style.opacity='';INTRO.innerHTML='';introActive=false;if(window.gsap)gsap.set('.hero',{clearProps:'transform'});window.ScrollTrigger&&setTimeout(()=>ScrollTrigger.refresh(),50)}
 /* back/forward cache restores must never leave a frozen overlay */
 addEventListener('pageshow',e=>{if(e.persisted)introCleanup()});
@@ -209,7 +198,7 @@ addEventListener('pagehide',()=>{if(introActive)introCleanup()});
 function playIntro(){
  if(introActive)return;if(!window.gsap){introCleanup();return}
  introActive=true;clearTimeout(window.__vsT);root0.classList.add('intro-on');
- window.__vsT=setTimeout(introCleanup,6500);/* hard cap: never block the site */
+ window.__vsT=setTimeout(introCleanup,5500);/* hard cap: never block the site */
  const reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
  const W=innerWidth,H=innerHeight,small=Math.min(W,H),port=H>W;
  const logo=`<div class="i-logo"><img src="${IMG.circle}" alt="Vansshikha Soni Nail Atelier"></div><div class="i-tag">WHERE BEAUTY BECOMES ART</div>`;
@@ -277,7 +266,7 @@ function playIntro(){
  drive(tl,4);
 }
 window.playIntro=playIntro;
-$('#replay').onclick=()=>{scrollTo({top:0,behavior:'instant'});playIntro()};
+const replayBtn=$('#replay');if(replayBtn)replayBtn.onclick=()=>{scrollTo({top:0,behavior:'instant'});playIntro()};
 try{if(root0.classList.contains('intro-on'))playIntro()}catch(e){introCleanup()}
 
 if(matchMedia('(pointer:coarse)').matches)addEventListener('focusin',e=>{const f=e.target;if(f.matches&&f.matches('input,textarea,select'))setTimeout(()=>f.scrollIntoView({block:'center',behavior:RM?'auto':'smooth'}),300)});
@@ -300,9 +289,33 @@ addEventListener('focusout',()=>setTimeout(()=>{const a=document.activeElement;i
 
 /* social dock: soft 3D tilt toward the pointer (fine pointers only) */
 if(FINE)$$('.dk').forEach(a=>{a.addEventListener('pointermove',e=>{const r=a.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;a.style.setProperty('--ry',(x*18)+'deg');a.style.setProperty('--rx',(-y*18)+'deg')},{passive:true});a.addEventListener('pointerleave',()=>{a.style.setProperty('--rx','0deg');a.style.setProperty('--ry','0deg')})});
+/* FAQ accordion (SEO) */
+{const list=$('#faq-list');if(list){list.addEventListener('click',e=>{const btn=e.target.closest('.faq-q');if(!btn)return;const item=btn.closest('.faq-item');const open=item.classList.contains('open');
+ $$('.faq-item.open',list).forEach(o=>{if(o!==item){o.classList.remove('open');const b=o.querySelector('.faq-q');b&&b.setAttribute('aria-expanded','false')}});
+ if(open){item.classList.remove('open');btn.setAttribute('aria-expanded','false')}
+ else{item.classList.add('open');btn.setAttribute('aria-expanded','true')}})}}
 addEventListener('load',()=>{window.ScrollTrigger&&ScrollTrigger.refresh()});
+/* /services: category chips + search over the prerendered list (JS only filters, HTML stays crawlable) */
+{const sl=$('#sl'),sch=$('#sch'),sq=$('#sq');
+ if(sl&&sch&&!sch.children.length){
+  let f=new URLSearchParams(location.search).get('c')||'all';if(!CATS.some(c=>c.slug==f))f='all';
+  let q='';
+  sch.innerHTML=['all',...CATS.map(c=>c.slug)].map(s=>`<button type="button" class="chip" aria-pressed="${s==f}" data-c="${s}">${s=='all'?'All':CATS.find(c=>c.slug==s).name}</button>`).join('');
+  const scnt=$('#scnt');
+  const draw=()=>{const n=q.trim().toLowerCase();let tot=0;
+   $$('.sec',sl).forEach(sec=>{const inCat=f=='all'||sec.id=='cat-'+f;let shown=0;
+    $$('.sc',sec).forEach(cd=>{const ok=inCat&&(!n||(cd.textContent||'').toLowerCase().includes(n));cd.hidden=!ok;if(ok)shown++});
+    sec.hidden=!shown;tot+=shown});
+   if(scnt)scnt.textContent=tot+' services shown';
+   const empty=$('#empty');if(empty)empty.hidden=tot>0;
+   window.ScrollTrigger&&ScrollTrigger.refresh()};
+  sch.onclick=e=>{const b=e.target.closest('.chip');if(!b)return;f=b.dataset.c;$$('.chip',sch).forEach(x=>x.setAttribute('aria-pressed',x==b));history.replaceState(null,'',f=='all'?location.pathname:'/services?c='+f);draw()};
+  if(sq)sq.oninput=e=>{q=e.target.value;draw()};
+  draw();
+  if(f!='all'){const el=document.getElementById('cat-'+f);el&&scrollTo({top:el.getBoundingClientRect().top+scrollY-80,behavior:'instant'})}
+ }}
 /* three.js hero: lazy, skipped on reduced motion / tiny screens */
-(function(){const lowEnd=(navigator.hardwareConcurrency||8)<=2||(navigator.deviceMemory||8)<=1||(navigator.connection&&navigator.connection.saveData);if(RM||!window.THREE||lowEnd)return;const cv=$('#gl');const mobile=innerWidth<700;let R;try{R=new THREE.WebGLRenderer({canvas:cv,alpha:true,antialias:!mobile})}catch(e){return}
+(function(){const lowEnd=(navigator.hardwareConcurrency||8)<=2||(navigator.deviceMemory||8)<=1||(navigator.connection&&navigator.connection.saveData);if(RM||!window.THREE||lowEnd)return;const cv=$('#gl');if(!cv)return;const mobile=innerWidth<700;let R;try{R=new THREE.WebGLRenderer({canvas:cv,alpha:true,antialias:!mobile})}catch(e){return}
 R.setPixelRatio(Math.min(devicePixelRatio,mobile?1.25:2));const sc=new THREE.Scene(),cam=new THREE.PerspectiveCamera(45,1,.1,100);cam.position.z=9;
 sc.add(new THREE.AmbientLight(0xffe9c4,.5));const k=new THREE.PointLight(0xffe0a0,2.4,40);k.position.set(5,6,8);sc.add(k);const k2=new THREE.PointLight(0xc4506e,1.4,30);k2.position.set(-7,-3,5);sc.add(k2);
 const mat=new THREE.MeshStandardMaterial({color:0xD7B77A,metalness:.85,roughness:.28,emissive:0x2a1c08});const geo=new THREE.SphereGeometry(.5,24,16);
