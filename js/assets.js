@@ -97,5 +97,10 @@ const TS={
   "/images/testimonials/t3.webp",
   1240,
   1646
+ ],
+ "t4": [
+  "/images/testimonials/t4.webp",
+  960,
+  1280
  ]
 };

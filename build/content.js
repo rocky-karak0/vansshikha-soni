@@ -274,12 +274,143 @@ const CONTENT = {
   }
 };
 
+/* ===== standalone SEO pages (/story, /founder, /studio, /why-us, /faq, /nail-guide) ===== */
+
+const STORY = {
+  title: 'Our Story | Vansshikha Soni Nail Atelier',
+  desc: 'The story of Vansshikha Soni Nail Atelier — a luxury nail studio built on creativity, timeless elegance and the belief that beautiful nails are a reflection of you.',
+  h1: 'A Journey of Beauty, <em>Art &amp; Elegance</em>',
+  lead: 'Where beauty meets artistry — and every nail tells a story.',
+  paras: [
+    'At VANSSHIKHA SONI – NAIL ATELIER, we believe that nail artistry is more than just beauty — it\u2019s a form of self-expression.',
+    'Our atelier is inspired by a passion for creativity, timeless elegance, and the little details that make every design special.',
+    'From delicate, minimalist nails to bold, statement-making creations, we celebrate individuality through thoughtfully crafted nail designs.',
+    'Our vision is to create a space where beauty meets artistry, where every detail matters, and where every client feels confident expressing their unique style.',
+    'Because we believe beautiful nails aren\u2019t just an accessory — they\u2019re a reflection of you.'
+  ],
+  tag: 'Where Every Nail Tells a Story.',
+  today: [
+    'Today that thinking sits behind a menu of 23 services across 8 categories — classic and French application, advance gel sets, custom nail art, gel and acrylic extensions, overlays, refills, mini manicures and safe removal. Every service has its own page with the official menu rate shown exactly as it appears on the studio menu, so you can browse the details before you enquire.',
+    'The portfolio carries real atelier work only — gold linework, chrome, florals, ombr\u00e9, French and playful sets photographed on genuine sets. Every look can be enlarged, studied and sent straight to a booking request.',
+    'Appointments are requested through the website or WhatsApp, and Vansshikha confirms availability personally. The full studio address is shared privately on booking confirmation, so every visit begins with a conversation.'
+  ]
+};
+
+const FOUNDER = {
+  title: 'Meet the Founder, Vansshikha Soni | Vansshikha Soni Nail Atelier',
+  desc: 'Meet Vansshikha Soni, founder of Vansshikha Soni Nail Atelier — the vision behind hand-finished luxury nail art, refined aesthetics and a detail-first approach to every set.',
+  h1: 'Meet <em>the Founder</em>',
+  role: 'Founder | Nail Artistry &amp; Luxury Beauty',
+  paras: [
+    'At VANSSHIKHA SONI – NAIL ATELIER, beauty is celebrated through creativity, elegance, and attention to detail.',
+    'With a vision to make nail artistry a reflection of personal style, Vansshikha Soni brings an appreciation for refined aesthetics and beautiful design to the heart of the brand.',
+    'From timeless elegance to bold, expressive nail designs, the atelier is inspired by the belief that every detail matters and every individual deserves a look that feels uniquely their own.'
+  ],
+  quote: '“Elegance is in the details, and every nail tells a story.”',
+  today: [
+    'Every set is painted by Vansshikha Soni herself — gold linework, chrome, florals, ombr\u00e9 and quiet minimalism, one set at a time, with no rushed factory finishes. Each look is planned around your nail shape, lifestyle and personal aesthetic, starting from a reference photo, a mood board or simply a colour you like.',
+    'The same care shapes the studio standard: single-use files where needed, hospital-grade sanitisation and carefully prepared tools, with nail health placed before any trend. Official rates are published openly on every service page, and nothing is booked until Vansshikha replies to confirm your slot.'
+  ]
+};
+
+const STUDIO_PAGE = {
+  title: 'Our Studio | Vansshikha Soni Nail Atelier',
+  desc: 'Step inside Vansshikha Soni Nail Atelier — a space designed for beauty, comfort and elegance, with shade shelves, swatch boards and a hand-finished approach to every set.',
+  h1: 'Step Inside <em>Our Studio</em>',
+  lead: 'A Space Designed for Beauty, Comfort &amp; Elegance.',
+  paras: [
+    'The atelier is set up around the work itself: shade shelves of gel polish, a colour chart and a shade swatch board for planning a look, plus gloss and matte top coats so the finish can be chosen rather than assumed.',
+    'Bring a reference photo, a mood board or just a colour. The design is discussed and shaped around your nail condition, preferred length and personal style before the appointment begins.',
+    'Hygiene comes first — single-use files where needed, hospital-grade sanitisation and carefully prepared tools. Your nail health comes before any trend.',
+    'Our luxury nail atelier is based in India. The full studio address is shared privately on booking confirmation — message us on WhatsApp for appointments, directions or a studio tour.'
+  ]
+};
+
+const WHY = {
+  title: 'Why Choose Vansshikha Soni Nail Atelier | Luxury Nail Art Studio',
+  desc: 'Hand-finished luxury nail artistry — precision, hygiene, transparent official rates and custom design consultation. Why clients choose Vansshikha Soni Nail Atelier.',
+  h1: 'The <em>Vansshikha Soni</em> Difference',
+  lead: 'Hand-finished luxury nail artistry — where precision, hygiene and personal style meet.',
+  steps: [
+    { t: 'Consultation before the set', p: 'Bring a reference, a mood board or just a colour. Every look is designed around your nail shape, lifestyle and personal aesthetic — from quiet minimalism to bold statement nails.' },
+    { t: 'One set at a time', p: 'Every set is painted by Vansshikha Soni herself — gold linework, chrome, florals and ombr\u00e9, finished without rushed factory work. The appointment is paced so the details that make a design special get the time they need.' },
+    { t: 'Care after you leave', p: 'Apply cuticle oil daily, wear gloves for cleaning and never peel product off at home. Book a refill before lifting starts — extensions and overlays are usually refilled every 2–4 weeks — and use professional removal when you are finished with a set.' }
+  ]
+};
+
+/* nail care guide: items 1–4 are the copy already published on the homepage, 5–8 extend it with
+   aftercare and booking guidance that also exists on the site */
+const GUIDE_ITEMS = [
+  { h: 'How Long Does a Gel Manicure Last?', p: 'A professionally applied gel manicure typically lasts <strong>2–3 weeks</strong> without chipping. Gel extensions and overlays may need a refill every <strong>2–4 weeks</strong> depending on nail growth and aftercare. Book a gel refill at Vansshikha Soni Nail Atelier to maintain your set between full appointments.' },
+  { h: 'Gel vs Acrylic vs Soft Gel Extensions', p: '<strong>Gel extensions</strong> use a gel-based builder for a glossy, flexible finish. <strong>Acrylic extensions</strong> offer strong structure with a classic sculpted look. <strong>Soft gel extensions</strong> are lighter and soak-off friendly. Not sure which suits you? Message us on WhatsApp — we\u2019ll recommend the best system for your natural nail condition.' },
+  { h: 'How to Make Your Nail Art Last Longer', p: 'Apply cuticle oil daily, wear gloves for cleaning, avoid using nails as tools, and never peel gel polish at home. Schedule a refill before lifting begins. These simple habits can add <strong>7–10 extra days</strong> of wear to any gel set or nail extension.' },
+  { h: 'Safe Nail Extension Removal', p: 'Never bite, peel or forcibly remove extensions — this damages the natural nail plate. Professional removal at our atelier uses the correct method for your system (gel, acrylic or soft gel). Gel polish removal starts from ₹150; extension removal from ₹300.' },
+  { h: 'A Simple Daily Nail-Care Routine', p: 'Keep cuticle oil within reach and apply it daily. Wear gloves when cleaning so nails are not soaked or scraped. Treat your nails as jewellery rather than tools, and if anything begins to lift, contact the studio instead of removing it yourself — these four habits protect the natural nail under any set.' },
+  { h: 'When Should You Book a Refill?', p: 'Book a refill <strong>before lifting starts</strong>, as the set grows out — extensions and overlays are usually refilled every <strong>2–4 weeks</strong>. Suitability depends on lifting, condition and the enhancement system used, so send a photo on WhatsApp if your set is already lifting and we will advise whether a refill or a fresh set is the better route.' },
+  { h: 'Preparing for Your Appointment', p: 'Send your reference photo or design idea on WhatsApp before you visit, choose your service and preferred date on the <a href="/booking">booking form</a>, and let us know if you have a specific finish in mind — regular polish or gel, tip shape, glitter intensity or chrome direction. Vansshikha confirms availability personally, and the studio address is shared once your slot is confirmed.' },
+  { h: 'Choosing a Set That Suits Your Nails', p: 'Length, shape, structure and suitability are assessed by the nail technician first, so the result fits your natural nail condition as well as your style. Browse the <a href="/services">full menu</a> for suitable looks and official rates, or open the <a href="/services/category/nail-extension">extension category</a> if you are deciding between length and structure options.' }
+];
+
+/* FAQ hub: grouped questions taken from the homepage, /services, /booking, /contact and service pages */
+const FAQ_GROUPS = [
+  { g: 'Booking &amp; Appointments', items: [
+    { q: 'How do I book an appointment?', a: 'Use the <a href="/booking">booking form</a> to pick a service, preferred date and time — then send the request on WhatsApp. Vansshikha personally confirms availability. Nothing is booked until you receive a confirmation reply. Walk-ins are subject to availability.' },
+    { q: 'Can I walk in without an appointment?', a: 'Appointments are requested through the website or WhatsApp, and walk-ins are subject to availability. Messaging first means the slot and final pricing are confirmed before you travel.' },
+    { q: 'What is your cancellation or rescheduling policy?', a: 'Please message us on WhatsApp at least <strong>24 hours</strong> before your appointment if you need to reschedule. Same-day cancellations may affect future booking priority. We understand life happens — just communicate early so we can offer the slot to another client.' },
+    { q: 'How can I contact the studio?', a: 'WhatsApp is fastest for appointment requests, design references and directions: <a href="https://wa.me/917838913373" target="_blank" rel="noopener">+91 78389 13373</a>. For longer enquiries and collaborations, email <a href="mailto:VANSSHIKHASONI@gmail.com">VANSSHIKHASONI@gmail.com</a>, or see recent work on <a href="https://www.instagram.com/vs_nail_atelier_luxury_artist/" target="_blank" rel="noopener">Instagram</a>.' }
+  ] },
+  { g: 'Services &amp; Pricing', items: [
+    { q: 'What nail services do you offer?', a: 'We offer <strong>23 professional nail services</strong> across 8 categories: classic &amp; French application, advance gel sets (cat-eye, marble, glitter, ombr\u00e9, chrome), custom nail art, gel &amp; acrylic extensions, overlays, refills, mini manicures and safe removal. <a href="/services">View the full menu with official rates →</a>' },
+    { q: 'How much do nail services cost?', a: 'Every service page shows its official menu rate as M and R, exactly as listed on the studio menu. M and R labels are shown as on the official menu; their meaning is being confirmed by the studio. Final pricing is confirmed on WhatsApp before your appointment.' },
+    { q: 'How much do gel extensions cost?', a: 'Gel extensions start from <strong>₹900–₹1,000</strong> on our official menu. Acrylic extensions are ₹1,100–₹1,200, soft gel extensions ₹800–₹900, and gum gel extensions ₹1,500–₹1,700. Final pricing is confirmed on WhatsApp based on length, design and product system. <a href="/services/gel-extension">See extension details →</a>' },
+    { q: 'Do you take custom nail art requests?', a: 'Yes. Bring a reference photo or describe your idea — gold linework, chrome, florals, 3D accents or minimalist designs. Per-finger nail art starts from ₹30. Complex designs may need a separate quote after consultation. Send your inspiration on WhatsApp before your visit. <a href="/services/category/nail-design">Explore nail art services →</a>' },
+    { q: 'How long does a gel manicure last?', a: 'A professional gel manicure typically lasts <strong>2–3 weeks</strong>. With proper aftercare — cuticle oil daily, gloves for chores, no peeling — many clients get even longer wear. Book a <a href="/services/gel-refill">gel refill</a> before lifting starts to extend the life of your set.' },
+    { q: 'How long do extensions last before a refill?', a: 'Gel extensions and overlays may need a refill every <strong>2–4 weeks</strong> depending on nail growth and aftercare. Book a refill before lifting starts to keep the set looking its best. <a href="/services/category/refills">See refill services →</a>' }
+  ] },
+  { g: 'Nail Health &amp; Aftercare', items: [
+    { q: 'Is nail extension removal safe for natural nails?', a: 'When done professionally, yes. We use the correct removal method for your system — never forced peeling. Gel polish removal starts from ₹150; extension removal from ₹300. Never remove gel or extensions at home by biting or scraping — this damages the nail plate permanently. <a href="/services/category/removal">See removal services →</a>' },
+    { q: 'Can I remove gel polish at home?', a: 'Avoid peeling or scraping gel polish at home — removal methods vary by formula and peeling damages the nail surface. Professional gel polish removal starts from ₹150, using a method appropriate to the product applied.' },
+    { q: 'How do I make my nail art last longer?', a: 'Apply cuticle oil daily, wear gloves for cleaning, avoid using nails as tools and never peel gel polish at home. These simple habits can add 7–10 extra days of wear to any gel set. Full guidance is in our <a href="/nail-guide">nail care guide</a>.' }
+  ] },
+  { g: 'Studio &amp; Visiting', items: [
+    { q: 'Where is Vansshikha Soni Nail Atelier located?', a: 'Our luxury nail atelier is based in India. The full studio address is shared privately on booking confirmation. For appointments, directions or a studio tour, message us directly on WhatsApp at <a href="https://wa.me/917838913373" target="_blank" rel="noopener">+91 78389 13373</a>.' },
+    { q: 'What can I expect at the studio?', a: 'A space designed for beauty, comfort and elegance — shade shelves, colour charts and swatch boards for planning your look, with hygiene-first preparation. <a href="/studio">Step inside the studio →</a>' },
+    { q: 'Who will be doing my nails?', a: 'Every set is painted by Vansshikha Soni herself — one set at a time, with a custom design consultation before the appointment. <a href="/founder">Meet the founder →</a>' }
+  ] }
+];
+
+/* short category intros for the 8 /services/category/<slug> landing pages */
+const CAT_INTRO = {
+  'application': 'Classic and French application — clean colour and timeless defined tips for everyday wear. This category holds the two services clients return to most often: a simple polished finish, and the classic French look with a natural-looking base.',
+  'advance-gel-set': 'Advance gel sets add an effect to the colour — magnetic cat-eye, marble swirls, glitter, blended ombr\u00e9 and reflective chrome. Five services, each individually created at the appointment, with looks that can stay subtle or go high-contrast.',
+  'nail-design': 'Custom nail art priced per finger: fine lines, florals, patterns and accents, plus raised 3D detail for selected accent nails. Bring a reference photo or describe your idea so the design can be planned before you sit down.',
+  'nail-extension': 'Length and structure — gel, acrylic, temporary, soft gel and gum gel extensions. Length, shape and suitability are assessed by the nail technician first, and every set needs refills every 2–4 weeks plus professional removal at the end.',
+  'overlay': 'Overlay services add a smooth, supportive layer over your natural nails without necessarily extending length — gel or acrylic, for clients who want to keep their own length with a polished, reinforced look.',
+  'refills': 'Maintenance for an existing set — gel, acrylic and gum gel refills address new nail growth and refresh the shape. Book before lifting starts; damaged or lifting enhancements may need repair or removal instead of a refill.',
+  'mini-manicure': 'Short grooming appointments — nail cut + file for a tidy, natural shape, and nail cut + polish for trimming with a polished colour finish. A quick refresh without an elaborate nail-art design.',
+  'removal': 'Safe, professional removal — gel polish removal and extension removal, each using a method appropriate to the product or material. Never peel or bite product off at home: removal methods vary by formula and forcing product off damages the nail plate.'
+};
+
 /* main (non-service) page copy — again only from copy that already exists on the site */
 const PAGES = {
   about: {
-    title: 'About Vansshikha Soni Nail Atelier | Story, Founder & Approach',
-    desc: 'The story behind Vansshikha Soni Nail Atelier — a luxury nail studio built on creativity, timeless elegance and hand-finished nail artistry by founder Vansshikha Soni.',
-    h1: 'A Journey of Beauty, <em>Art &amp; Elegance</em>'
+    title: 'About Vansshikha Soni Nail Atelier | Story, Founder & Studio',
+    desc: 'About Vansshikha Soni Nail Atelier — explore the story, meet the founder, step inside the studio and see why clients choose this luxury nail art studio in India.',
+    h1: 'About the <em>Atelier</em>'
+  },
+  story: { title: STORY.title, desc: STORY.desc },
+  founder: { title: FOUNDER.title, desc: FOUNDER.desc },
+  studio: { title: STUDIO_PAGE.title, desc: STUDIO_PAGE.desc },
+  whyus: { title: WHY.title, desc: WHY.desc },
+  faq: {
+    title: 'Frequently Asked Questions | Vansshikha Soni Nail Atelier',
+    desc: 'Answers to the most common questions about booking, services, official rates, nail aftercare and visiting Vansshikha Soni Nail Atelier.',
+    h1: 'Frequently <em>Asked</em>'
+  },
+  guide: {
+    title: 'Nail Care Guide | Tips from Vansshikha Soni Nail Atelier',
+    desc: 'Professional nail care tips from Vansshikha Soni Nail Atelier — how long gel lasts, gel vs acrylic vs soft gel, making nail art last longer, refills and safe removal.',
+    h1: 'Nail Care <em>Guide</em>'
   },
   services: {
     title: 'Nail Services &amp; Official Rates | Vansshikha Soni Nail Atelier',
@@ -308,4 +439,7 @@ const PAGES = {
   }
 };
 
-module.exports = { CONTENT, PAGES, GENERAL_AFTERCARE, sharedFaqs };
+module.exports = {
+  CONTENT, PAGES, GENERAL_AFTERCARE, sharedFaqs,
+  STORY, FOUNDER, STUDIO_PAGE, WHY, GUIDE_ITEMS, FAQ_GROUPS, CAT_INTRO
+};

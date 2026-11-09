@@ -19,9 +19,9 @@ h2{font-size:clamp(2.3rem,5.6vw,4.4rem);letter-spacing:-.01em}em{font-style:ital
 .btn:active{transform:translateY(0) scale(.985)}
 .btn.ghost{background:transparent;color:var(--gold)}.btn.ghost::after{display:none}.btn.ghost:hover{background:rgba(215,183,122,.1);box-shadow:0 12px 28px rgba(215,183,122,.12)}
 /* nav */
-nav{position:fixed;top:0;left:0;right:0;z-index:50;padding:calc(14px + env(safe-area-inset-top,0)) 0 14px;transition:background .4s,backdrop-filter .4s}
-nav.s{background:rgba(8,7,9,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(215,183,122,.15)}
-nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px}
+#nav{position:fixed;top:0;left:0;right:0;z-index:50;padding:calc(14px + env(safe-area-inset-top,0)) 0 14px;transition:background .4s,backdrop-filter .4s}
+#nav.s{background:rgba(8,7,9,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(215,183,122,.15)}
+#nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px}
 .mark{font-family:var(--serif);font-size:1.5rem;letter-spacing:.12em}.mark b{font-weight:600}
 .links{display:flex;gap:2.2rem;align-items:center}
 .links a:not(.btn){position:relative;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;font-weight:500;padding:6px 0;transition:color .4s var(--ease-soft)}
@@ -262,7 +262,7 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 [data-off],[data-off]::before,[data-off]::after{animation-play-state:paused!important}
 .float{animation:bob 7s ease-in-out infinite}.f2{animation-duration:8.5s;animation-delay:-2s}.f3{animation-duration:6.5s;animation-delay:-4s}
 @keyframes bob{50%{translate:0 -9px}}
-nav{transition:background .4s,backdrop-filter .4s,transform .45s var(--ease)}nav.nav-hide{transform:translateY(-100%)}
+#nav{transition:background .4s,backdrop-filter .4s,transform .45s var(--ease)}#nav.nav-hide{transform:translateY(-100%)}
 .sc,.card{transition:box-shadow .5s var(--ease),border-color .4s}.card:hover,.sc:hover{box-shadow:0 30px 60px rgba(0,0,0,.45)}
 .prow div{transition:border-color .3s,translate .3s var(--ease)}.prow div:hover{border-color:var(--gold);translate:0 -3px}
 .lb.on{animation:lbIn .35s var(--ease)}.lb.on img{animation:lbPop .5s var(--ease)}@keyframes lbIn{from{opacity:0}}@keyframes lbPop{from{opacity:0;scale:.94}}
@@ -397,3 +397,15 @@ footer .lg:hover{transform:scale(1.04);filter:drop-shadow(0 16px 40px rgba(215,1
 .seo-links a{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;font-weight:500;color:rgba(246,238,230,.55);padding:.45rem 0;transition:color .35s var(--ease-soft)}
 .seo-links a:hover,.seo-links a:focus-visible{color:var(--gold)}
 
+
+/* ===== standalone SEO pages: footer site links, grouped FAQ, linked hub cards ===== */
+.why-card h3 a,.why-card p a{transition:color .35s var(--ease-soft)}
+.why-card p a{color:var(--gold)}
+.why-card h3 a:hover,.why-card h3 a:focus-visible,.why-card p a:hover,.why-card p a:focus-visible{color:#f0d9a2}
+.faq-group{margin-top:3rem}
+.faq-group:first-of-type{margin-top:1rem}
+.faq-group h2{font-size:clamp(1.5rem,3.2vw,2.2rem);margin-bottom:1.2rem;color:var(--ivory)}
+.faq-group .faq-list{margin:0 auto}
+.rel .seo-links{margin-bottom:0}
+footer .seo-links{max-width:960px}
+@media(max-width:640px){.faq-group h2{font-size:1.5rem}.seo-links{gap:8px 14px}}
