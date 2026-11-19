@@ -22,7 +22,7 @@ const waLink=msg=>'https://wa.me/'+(CFG.whatsapp?CFG.whatsapp.replace(/\D/g,''):
 const waMsg=(s,o,d,tm)=>'Hello VANSSHIKHA SONI Nail Atelier!\n\nI would like to enquire about booking:\n\nService: '+s.name+(o?'\nPrice Option: '+o:'')+(d?'\nPreferred Date: '+d:'')+(tm?'\nPreferred Time: '+tm:'')+'\n\nPlease confirm availability and final pricing.';
 const pic=(s,alt,eager)=>s.ph?`<img ${eager?'fetchpriority="high" decoding="async"':''} src="${src(s.ph)}" alt="${alt?esc(s.name)+(s.ex?': example finish from the atelier portfolio':', from the atelier portfolio'):''}" ${eager?'':'loading="lazy"'}>`:`<div class="ph" role="img" aria-label="${esc(s.name)}"><span class="gold-text">VS</span><small>${CATS[s.c].name}</small></div>`;
 const price=s=>`<div class="pp"><span>M<b>${inr(s.m)}</b></span><span>R<b>${inr(s.r)}</b></span></div>`;
-const card=(s,i=0)=>`<article class="sc tilt" style="--i:${i}"><a class="sci" href="/services/${s.slug}" tabindex="-1" aria-hidden="true">${pic(s,false)}</a><div class="scb"><div class="eyebrow">${CATS[s.c].name}</div><h3><a href="/services/${s.slug}">${esc(s.name)}</a></h3><p>${esc(s.about)}</p>${price(s)}<div class="acts"><a class="btn ghost" href="/services/${s.slug}">View Details</a><a class="btn" target="_blank" rel="noopener" href="${waLink(waMsg(s))}">Book on WhatsApp</a></div></div></article>`;
+const card=(s,i=0)=>`<article class="sc tilt" style="--i:${i}"><a class="sci" href="/services/${s.slug}" tabindex="-1" aria-hidden="true">${pic(s,false)}</a><div class="scb"><div class="eyebrow">${CATS[s.c].name}</div><h3><a href="/services/${s.slug}">${esc(s.name)}</a></h3><p>${esc(s.about)}</p>${price(s)}<div class="acts"><a class="btn ghost" href="/services/${s.slug}">View Details</a></div></div></article>`;
 /* home: category cards */
 const CPH={0:'p26',1:'p31',2:'p04',3:'p32',4:'p10',5:'p33',6:'p21',7:'p12'};
 const svcEl=$('#svc');if(svcEl)svcEl.innerHTML=CATS.map(c=>`<article class="card tilt"><div class="im">${CPH[c.i]?`<img src="${src(CPH[c.i])}" alt="" loading="lazy">`:''}</div><div class="no">0${c.i+1}</div><h3>${c.name}</h3><p>${c.items.length} ${c.items.length>1?'services':'service'}: ${c.items.map(s=>esc(s.name)).slice(0,3).join(', ')}${c.items.length>3?'…':''}</p><a class="go" href="/services/category/${c.slug}">Explore →</a></article>`).join('');
@@ -41,7 +41,7 @@ if(masonEl)masonEl.onclick=e=>{const t=e.target.closest('.tile');t&&open(+t.data
 $('#lx').onclick=close;$('#lp').onclick=()=>show(li-1,-1);$('#ln').onclick=()=>show(li+1,1);lb.onclick=e=>{if(e.target===lb)close()};
 addEventListener('keydown',e=>{if(!lb.classList.contains('on'))return;if(e.key=='Escape')close();if(e.key=='ArrowLeft')show(li-1,-1);if(e.key=='ArrowRight')show(li+1,1);if(e.key=='Tab'){const f=$$('button',lb);const a=f[0],z=f[f.length-1];if(e.shiftKey&&document.activeElement==a){e.preventDefault();z.focus()}else if(!e.shiftKey&&document.activeElement==z){e.preventDefault();a.focus()}}});
 let sx=0;lb.addEventListener('touchstart',e=>sx=e.touches[0].clientX,{passive:true});lb.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-sx;if(Math.abs(d)>50)show(li+(d<0?1:-1),d<0?1:-1)});
-$('#lbk').onclick=()=>{const bk=$('#book');if(bk){setLook(view[li]);close();bk.scrollIntoView({behavior:RM?'auto':'smooth'})}else{close();location.href='/booking'}};
+const lbkEl=$('#lbk');if(lbkEl)lbkEl.onclick=()=>{const bk=$('#book');if(bk){setLook(view[li]);close();bk.scrollIntoView({behavior:RM?'auto':'smooth'})}else{close();location.href='/booking'}};
 function setLook(it){const c=$('#lookchip');if(!c)return;look=it;c.classList.toggle('on',!!it);if(it){$('img',c).src=src(it.id);$('#lookname').textContent=it.t+' · '+it.c}}const lookx=$('#lookx');if(lookx)lookx.onclick=()=>setLook(null);
 /* booking (rendered only on pages that ship the booking panel: home and /booking) */
 const S={svc:null,date:null,time:null};let step=0;
@@ -125,7 +125,7 @@ if(e.target.closest('a')){toggleAcc(false);$$('.ac',macc).forEach(x=>x.classList
 const V=$('#views'),HM=$('#home'),pt=$('#pt');let curKey=null,first=true;
 const meta=(t,d)=>{document.title=t;$('meta[name=description]').content=d};
 function parse(){const h=location.hash;if(!h.startsWith('#/services'))return{k:'home',id:h.slice(1)};const[p,qs]=h.slice(2).split('?'),parts=p.split('/'),q=new URLSearchParams(qs||'');if(parts[1]&&BY[parts[1]])return{k:'svc:'+parts[1],s:BY[parts[1]]};return{k:'svcs',c:q.get('c')||'all'}}
-function reveal(root){if(RM)return;const key=root===V?'__rvV':'__rvH';window[key]&&window[key].disconnect();const io=window[key]=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}}),{rootMargin:'0px 0px -6% 0px'});$$('.rvx',root).forEach(x=>io.observe(x));setTimeout(()=>$$('.rvx',root).forEach(x=>x.classList.add('in')),4000)}
+function reveal(root){if(RM)return;const key=root===V?'__rvV':'__rvH';window[key]&&window[key].disconnect();const io=window[key]=new IntersectionObserver(es=>{let k=0;es.forEach(en=>{if(en.isIntersecting){en.target.style.setProperty('--d',(k++)*80+'ms');en.target.classList.add('in');io.unobserve(en.target)}})},{rootMargin:'0px 0px -6% 0px'});$$('.rvx',root).forEach(x=>io.observe(x));setTimeout(()=>$$('.rvx',root).forEach(x=>x.classList.add('in')),4000)}
 function pageList(){let f='all',q='';
   V.innerHTML=`<section class="sph"><div class="wrap"><div class="eyebrow">The Menu</div><h1>All <em>Services</em></h1><p>Eight categories and 23 services with the official rates. M and R labels are shown exactly as on the menu.</p></div></section><div class="wrap" style="padding-top:10px;padding-bottom:90px"><div class="tb"><label class="sr" for="sq">Search services</label><input id="sq" type="search" placeholder="Search all 23 services\u2026" autocomplete="off"><div class="chips" id="sch" role="group" aria-label="Filter by category"></div></div><p class="sr" id="scnt" aria-live="polite"></p><div id="sl"></div><p class="note">M and R labels are shown as on the official menu; their meaning is being confirmed by the studio.</p></div>`;
   return{init(c){f=c;const ch=$('#sch');ch.innerHTML=['all',...CATS.map(c=>c.slug)].map(s=>`<button type="button" class="chip" aria-pressed="${s==f}" data-c="${s}">${s=='all'?'All':CATS.find(c=>c.slug==s).name}</button>`).join('');
@@ -135,9 +135,9 @@ function pageList(){let f='all',q='';
 function pageDetail(s){const c=CATS[s.c],flip=s.i%2?' flip':'';
  const rel=[...c.items.filter(x=>x!=s),...SERV.slice(s.i+1),...SERV].filter((x,i,a)=>x!=s&&a.indexOf(x)==i).slice(0,3);
  const rings='<svg viewBox="0 0 400 400" aria-hidden="true">'+[40,80,120,160,195].map(r=>`<circle cx="200" cy="200" r="${r}"/>`).join('')+'</svg>';
- V.innerHTML=`<article class="sd" style="--tint:${c.tint}"><section class="sdh"><div class="sbg" aria-hidden="true">${rings}</div><div class="wrap sdg${flip}"><div class="sdt"><div class="crumb" role="navigation" aria-label="Breadcrumb"><a href="/services">All Services</a> / <a href="/services/category/${c.slug}">${c.name}</a></div><div class="eyebrow">${c.name}</div><h1>${esc(s.name)}</h1><p class="lead">${esc(s.about)}</p><div class="pr2"><span>M<b>${inr(s.m)}</b></span><span>R<b>${inr(s.r)}</b></span></div><div class="acts" style="max-width:420px"><button type="button" class="btn mag" data-go="sbk">Book Appointment</button><a class="btn ghost mag" href="/services">\u2190 All Services</a></div></div><figure class="sdi tilt"><span class="no2">${String(s.i+1).padStart(2,'0')} / 23</span><div class="fr">${pic(s,true,true)}</div>${s.ph?`<figcaption>${s.ex?'Example from the atelier portfolio':'From the atelier portfolio'}</figcaption>`:''}</figure></div></section>
+ V.innerHTML=`<article class="sd" style="--tint:${c.tint}"><section class="sdh"><div class="sbg" aria-hidden="true">${rings}</div><div class="wrap sdg${flip}"><div class="sdt"><div class="crumb" role="navigation" aria-label="Breadcrumb"><a href="/services">All Services</a> / <a href="/services/category/${c.slug}">${c.name}</a></div><div class="eyebrow">${c.name}</div><h1>${esc(s.name)}</h1><p class="lead">${esc(s.about)}</p><div class="pr2"><span>M<b>${inr(s.m)}</b></span><span>R<b>${inr(s.r)}</b></span></div><div class="acts" style="max-width:420px"><a class="btn ghost mag" href="/services">\u2190 All Services</a></div></div><figure class="sdi tilt"><span class="no2">${String(s.i+1).padStart(2,'0')} / 23</span><div class="fr">${pic(s,true,true)}</div>${s.ph?`<figcaption>${s.ex?'Example from the atelier portfolio':'From the atelier portfolio'}</figcaption>`:''}</figure></div></section>
  <section class="sdc"><div class="wrap sdl${flip}"><div class="sdm"><section class="rvx"><h2>What the service <em>involves</em></h2><p>${esc(s.before)}</p></section><section class="rvx"><h2>Suitable looks</h2><p>${esc(s.ideal)}</p></section><section class="rvx"><h2>Key <em>features</em></h2><ul class="kf">${s.hl.map(x=>`<li>${esc(x)}</li>`).join('')}<li>Listed under ${c.name.toLowerCase().replace(/(^|\s)\S/g,m=>m.toUpperCase())}</li></ul></section><section class="rvx" style="border:0"><h2>Care &amp; <em>maintenance</em></h2><p>${s.care?esc(s.care):'Aftercare guidance for this service: PENDING studio confirmation.'}</p></section></div>
- <aside class="pcard rvx tilt"><div class="eyebrow">Official rates</div><div class="prow"><div><span>M</span><b>${inr(s.m)}</b></div><div><span>R</span><b>${inr(s.r)}</b></div></div><p class="small">${s.slug=='extension-removal'?'Shown in the original menu order. ':''}${/per-finger/.test(s.slug)?'Priced per finger. ':''}M and R are shown exactly as on the official menu; their meaning is being confirmed by the studio. Final pricing is confirmed on WhatsApp.</p><button type="button" class="btn mag" data-go="sbk">Book Appointment</button></aside></div></section>
+ <aside class="pcard rvx tilt"><div class="eyebrow">Official rates</div><div class="prow"><div><span>M</span><b>${inr(s.m)}</b></div><div><span>R</span><b>${inr(s.r)}</b></div></div><p class="small">${s.slug=='extension-removal'?'Shown in the original menu order. ':''}${/per-finger/.test(s.slug)?'Priced per finger. ':''}M and R are shown exactly as on the official menu; their meaning is being confirmed by the studio. Final pricing is confirmed on WhatsApp.</p></aside></div></section>
  <section class="sbk" id="sbk" data-svc="${s.slug}"><div class="wrap"><div class="pnl2 rvx"><div><div class="eyebrow">Book on WhatsApp</div><h2>Enquire about <em>${esc(s.name)}</em></h2><p>This opens WhatsApp with a ready message. It is an enquiry only; your slot and final price are confirmed by the studio.</p></div><div class="bf"><fieldset><legend>Price option (optional)</legend><div class="opts"><button type="button" class="opt" aria-pressed="false" data-o="M">M<small>${inr(s.m)}</small></button><button type="button" class="opt" aria-pressed="false" data-o="R">R<small>${inr(s.r)}</small></button></div></fieldset><div class="two"><div><label class="lb2" for="bd">Preferred date (optional)</label><input type="date" id="bd"></div><div><label class="lb2" for="bt">Preferred time (optional)</label><input type="time" id="bt"></div></div><a class="btn mag" id="bwa" target="_blank" rel="noopener">Book on WhatsApp</a></div></div></div></section>
  <section class="rel"><div class="wrap"><h2 class="rvx">Related <em>services</em></h2><div class="sg">${rel.map((x,i)=>card(x,i)).join('')}</div><div class="back2"><a class="btn ghost mag" href="/services">\u2190 Back to All Services</a></div></div></section></article>`;
  initServiceBook(V);
@@ -150,7 +150,7 @@ function render(r){if(window.animIO)$$('.gold-text,.sbg svg',V).forEach(x=>{anim
 /* legacy shared links (#/services/...) resolve to the canonical clean URLs (/services/...) */
 function legacyHash(){const h=location.hash||'';if(h.indexOf('#/services')!==0)return false;location.replace(location.origin+'/'+h.slice(2));return true}
 function route(){if(!HM)return;const r=parse();if(first||RM||r.k==curKey&&r.k=='home'){first=false;render(r);return}
- pt.style.transformOrigin='bottom';pt.classList.add('on');setTimeout(()=>{render(r);pt.style.transformOrigin='top';pt.classList.remove('on')},480)}
+ pt.style.transformOrigin='bottom';let sw=false;const swap=()=>{if(sw)return;sw=true;render(r);pt.style.transformOrigin='top';pt.classList.remove('on')};pt.classList.add('on');pt.addEventListener('transitionend',swap,{once:true});setTimeout(swap,560)}
 /* static pages carry their own prerendered content; only the home page runs the hash router */
 addEventListener('hashchange',()=>{if(legacyHash())return;if(HM)route()});
 if(HM&&!legacyHash())route();
@@ -188,7 +188,7 @@ cset(0);fx(car)}
 if(!RM){if(HM)reveal(HM);else if(V){reveal(V);fx(V);window.watchAnim&&watchAnim(V)}}
 
 
-/* ===== cinematic opening intro: 2000 ms, plays on every full page load ===== */
+/* ===== editorial triptych intro: exactly 1200 ms, homepage only, skipped if the photo is not ready ===== */
 const root0=document.documentElement,INTRO=$('#intro');let introActive=false,curTl=null,introRaf=0;
 function heroIn(){if(!window.gsap)return;gsap.from('.hero h1 .l>span',{yPercent:110,duration:1.4,stagger:.16,ease:'expo.out'});gsap.from('.hero .eyebrow,.hero .rv',{opacity:0,y:26,duration:1.1,stagger:.13,delay:.3,ease:'expo.out'});gsap.from('.plaque',{clipPath:'inset(100% 0 0 0)',duration:1.6,ease:'expo.inOut'});gsap.from('.float',{opacity:0,y:64,duration:1.3,stagger:.16,delay:.45,ease:'expo.out'})}
 function introCleanup(){clearTimeout(window.__vsT);if(curTl){curTl.kill();curTl=null}root0.classList.remove('intro-on');document.body.style.overflow='';INTRO.style.clipPath='';cancelAnimationFrame(introRaf);INTRO.style.opacity='';INTRO.innerHTML='';introActive=false;if(window.gsap)gsap.set('.hero',{clearProps:'transform'});window.ScrollTrigger&&setTimeout(()=>ScrollTrigger.refresh(),50)}
@@ -198,72 +198,33 @@ addEventListener('pagehide',()=>{if(introActive)introCleanup()});
 function playIntro(){
  if(introActive)return;if(!window.gsap){introCleanup();return}
  introActive=true;clearTimeout(window.__vsT);root0.classList.add('intro-on');
- window.__vsT=setTimeout(introCleanup,5500);/* hard cap: never block the site */
- const reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
- const W=innerWidth,H=innerHeight,small=Math.min(W,H),port=H>W;
- const logo=`<div class="i-logo"><img src="${IMG.circle}" alt="Vansshikha Soni Nail Atelier"></div><div class="i-tag">WHERE BEAUTY BECOMES ART</div>`;
- const skipHtml='<button type="button" class="i-skip" id="iskip">Skip intro</button>';
- let done=false;
+ window.__vsT=setTimeout(introCleanup,2000);/* hard cap: never block the site */
+ let done=false,started=false;
  const finish=()=>{if(done)return;done=true;document.removeEventListener('keydown',kd,true);introCleanup()};
- const skip=()=>{if(done)return;heroIn();cancelAnimationFrame(introRaf);curTl&&curTl.kill();gsap.to(INTRO,{opacity:0,duration:.25,onComplete:finish})};
- const kd=e=>{if(e.key=='Tab'){e.preventDefault();const s=INTRO.querySelector('#iskip');s&&s.focus()}if(e.key=='Escape')skip()};
+ const skip=()=>{if(done)return;heroIn();cancelAnimationFrame(introRaf);curTl&&curTl.kill();gsap.to(INTRO,{opacity:0,duration:.2,onComplete:finish})};
+ const kd=e=>{if(e.key=='Escape')skip()};
  document.addEventListener('keydown',kd,true);
+ INTRO.innerHTML='<div class="i-paper"></div><div class="i-trip">'+[0,1,2].map(k=>'<div class="i-pane"><i class="i-ph" style="--k:'+k+'"></i></div>').join('')+'<i class="i-sheen"></i></div>';
+ const paper=$('.i-paper',INTRO),trip=$('.i-trip',INTRO),sheen=$('.i-sheen',INTRO),ps=$$('.i-pane',INTRO);
  /* wall-clock driver: first painted frame = t0, finishes at exactly dur, even if frames are dropped */
  const drive=(tl,dur)=>{tl.pause();let t0=null;const step=()=>{if(done)return;const now=performance.now();if(t0===null)t0=now;const s=(now-t0)/1000;tl.time(Math.min(s,dur),false);if(s>=dur)finish();else introRaf=requestAnimationFrame(step)};introRaf=requestAnimationFrame(step)};
- if(reduced){/* short accessible transition: soft fade, no motion */
-  INTRO.innerHTML=logo+skipHtml;const q=s=>INTRO.querySelector(s);q('#iskip').onclick=skip;
-  curTl=gsap.timeline({onComplete:finish});curTl.fromTo('.i-logo,.i-tag',{opacity:0},{opacity:1,duration:.25,ease:'none'},0).call(heroIn,null,.35).to(INTRO,{opacity:0,duration:.25,ease:'none'},.35);drive(curTl,.6);return}
-/* geometry */
- const L=Math.min(W*.52,300,H*.44),low=small<520||(navigator.hardwareConcurrency||8)<=4||(navigator.deviceMemory||8)<=2,amp=H*.07;
- const gold='<stop offset="0" stop-color="#8c6a30"/><stop offset=".28" stop-color="#f6e7bd"/><stop offset=".55" stop-color="#D7B77A"/><stop offset=".8" stop-color="#fff3cf"/><stop offset="1" stop-color="#7a5a22"/>';
- const wave=(c1,c2)=>`<svg viewBox="0 0 1600 400" preserveAspectRatio="none" aria-hidden="true"><path d="M0,230C200,120 420,330 640,220S1040,110 1260,220S1520,300 1600,200L1600,400L0,400Z" fill="url(#${c1})"/><path d="M0,230C200,120 420,330 640,220S1040,110 1260,220S1520,300 1600,200" fill="none" stroke="${c2}" stroke-width="1.6" vector-effect="non-scaling-stroke"/></svg>`;
- const nailSvg=(g,s)=>`<svg viewBox="0 0 120 230" aria-hidden="true"><defs><linearGradient id="${g}" x1="0" y1="0" x2="1" y2="1">${s}</linearGradient></defs><path d="M60 4C92 4 112 70 112 140C112 196 92 226 60 226C28 226 8 196 8 140C8 70 28 4 60 4Z" fill="url(#${g})" stroke="#D7B77A" stroke-width="2.5"/><path d="M33 62C40 36 50 22 58 18C50 40 44 82 42 152C34 130 29 92 33 62Z" fill="url(#nH)"/><ellipse cx="82" cy="170" rx="12" ry="26" fill="rgba(255,255,255,.14)" transform="rotate(-12 82 170)"/></svg>`;
- const tints=[['<stop offset="0" stop-color="#f6d6c8"/><stop offset=".55" stop-color="#e2a999"/><stop offset="1" stop-color="#c98577"/>'],['<stop offset="0" stop-color="#fbf0d2"/><stop offset=".5" stop-color="#d7b77a"/><stop offset="1" stop-color="#9a7835"/>'],['<stop offset="0" stop-color="#f4dacd"/><stop offset=".55" stop-color="#e9b9a8"/><stop offset="1" stop-color="#d79a8b"/>']];
- const nw=Math.max(38,Math.min(72,L*.2)),Rx=Math.min(W*.41,L*1.08),Ry=Math.min(H*.4,L*.98);
- const spots=[[-150,-16],[-30,14],[148,-8]].map(([deg,rot],i)=>({x:Math.cos(deg*Math.PI/180)*Rx,y:Math.sin(deg*Math.PI/180)*Ry,rot,w:nw*(i==1?.9:1)}));
- INTRO.innerHTML=`<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
- <linearGradient id="wf1" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="rgba(255,255,255,.55)"/><stop offset=".5" stop-color="rgba(238,200,178,.32)"/><stop offset="1" stop-color="rgba(255,255,255,.5)"/></linearGradient>
- <linearGradient id="wf2" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="rgba(231,190,166,.3)"/><stop offset=".5" stop-color="rgba(255,250,240,.5)"/><stop offset="1" stop-color="rgba(231,190,166,.3)"/></linearGradient>
- <linearGradient id="fG" x1="0" y1="0" x2="1" y2="1">${gold}</linearGradient><linearGradient id="fG2" x1="1" y1="0" x2="0" y2="1">${gold}</linearGradient>
- <linearGradient id="nH" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".85"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
- <clipPath id="iclip"><path id="iclipP" d="M0,0"/></clipPath></defs></svg>
- <div class="i-g2"></div><div class="i-lt"></div>
- <div class="i-wv i-w1">${wave('wf1','rgba(215,183,122,.55)')}</div>${low?'':`<div class="i-wv i-w2">${wave('wf2','rgba(255,255,255,.7)')}</div>`}<div class="i-wv i-w3">${wave('wf1','rgba(215,183,122,.4)')}</div>
- <div class="i-glow"></div><div class="i-lsh"></div>
- ${low?'':`<div class="i-arcs"><div class="sp"><svg viewBox="0 0 200 200" aria-hidden="true" fill="none" stroke-linecap="round"><path d="M12 100A88 88 0 0 1 150 28" stroke="url(#fG)" stroke-width="1.4"/><path d="M188 100A88 88 0 0 1 50 172" stroke="url(#fG2)" stroke-width="1.4"/><path d="M30 60A80 80 0 0 0 40 150" stroke="url(#fG)" stroke-width=".8" opacity=".7"/><path d="M170 140A80 80 0 0 0 160 50" stroke="url(#fG2)" stroke-width=".8" opacity=".7"/></svg></div></div>`}
- <div class="i-frame"><svg viewBox="-10 -10 220 220" aria-hidden="true" fill="none"><circle class="rf1" cx="100" cy="100" r="97" pathLength="1" stroke="url(#fG)" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="1" stroke-dashoffset="1" transform="rotate(-90 100 100)"/><circle class="rf2" cx="100" cy="100" r="104" pathLength="1" stroke="url(#fG2)" stroke-width=".9" stroke-dasharray="1" stroke-dashoffset="1" opacity=".85" transform="rotate(-90 100 100)"/><circle class="rf3" cx="100" cy="100" r="90.5" stroke="rgba(215,183,122,.35)" stroke-width=".7"/><circle class="rhl" cx="100" cy="100" r="97" pathLength="1" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-dasharray=".06 .94" opacity=".9"/></svg></div>
- ${spots.map((s,i)=>`<div class="i-nl" style="width:${s.w}px">${nailSvg('nT'+i,tints[i][0])}</div>`).join('')}
- ${logo}${skipHtml}`;
- const q=s=>INTRO.querySelector(s),qa=s=>[...INTRO.querySelectorAll(s)],skipBtn=q('#iskip');skipBtn.onclick=skip;skipBtn.focus({preventScroll:true});
- const lg=q('.i-logo'),tg=q('.i-tag'),glow=q('.i-glow'),lsh=q('.i-lsh'),fr=q('.i-frame'),arcs=q('.i-arcs'),g2=q('.i-g2'),lt=q('.i-lt'),clipP=q('#iclipP'),waves=qa('.i-wv'),nails=qa('.i-nl'),rf1=q('.rf1'),rf2=q('.rf2'),rhl=q('.rhl');
- gsap.set([lg,fr],{transformPerspective:1000});gsap.set(nails,{xPercent:-50,yPercent:-50,transformPerspective:700});nails.forEach((n,i)=>gsap.set(n,{x:spots[i].x,y:spots[i].y,rotationZ:spots[i].rot}));
- if(arcs)gsap.set(arcs,{transformPerspective:900,rotationX:66});
- const S={Y:H+amp*1.4,ph:0};
- const wv=()=>{const n=24;let s=`M0,0L${W},0`;for(let i=n;i>=0;i--){const x=W*i/n;s+=`L${x},${S.Y+amp*Math.sin(x/W*Math.PI*2.6+S.ph)}`}clipP.setAttribute('d',s+'Z')};
- /* single timeline, exactly 4.0 s: 0-1 silk waves | 1-2 metallic frame + 3D shapes | 2-3.2 logo reveal | 3.2-4 hold, curtain to homepage */
- curTl=gsap.timeline({defaults:{ease:'none'},onComplete:finish});const tl=curTl;
- tl.fromTo(g2,{opacity:0},{opacity:1,duration:1,ease:'sine.inOut'},0)
-  .fromTo(lt,{x:'-25%',y:'-10%'},{x:'25%',y:'10%',duration:4,ease:'sine.inOut'},0)
-  .fromTo(waves,{opacity:0,yPercent:14},{opacity:1,yPercent:0,duration:1,stagger:.14,ease:'power2.out'},0);
- waves.forEach((w,i)=>tl.to(w,{xPercent:i%2?9:-9,duration:4,ease:'sine.inOut'},0));
- tl.fromTo(fr,{opacity:0,scale:.78,rotationX:55,rotationY:-25},{opacity:1,scale:1,rotationX:0,rotationY:0,duration:1,ease:'power3.out'},1)
-  .to(rf1,{attr:{'stroke-dashoffset':0},duration:.9,ease:'power2.inOut'},1)
-  .to(rf2,{attr:{'stroke-dashoffset':0},duration:.9,ease:'power2.inOut'},1.15)
-  .to(rhl,{rotation:360,svgOrigin:'100 100',duration:2.4,ease:'none'},1)
-  .fromTo(glow,{opacity:0},{opacity:1,duration:.9,ease:'power2.out'},1.5)
-  .fromTo(lsh,{opacity:0},{opacity:1,duration:.7},1.5);
- if(arcs){const sp=arcs.querySelector('.sp');tl.fromTo(arcs,{opacity:0,scale:.8},{opacity:1,scale:1,duration:1,ease:'power2.out'},1).to(sp,{rotation:140,duration:2.8,ease:'sine.inOut'},1)}
- tl.fromTo(nails,{opacity:0,scale:.5,rotationY:-60},{opacity:1,scale:1,rotationY:0,duration:.8,stagger:.15,ease:'power3.out'},1.1)
-  .to(nails,{y:'-=9',rotationZ:'+=5',duration:.9,ease:'sine.inOut',yoyo:true,repeat:1,stagger:.1},1.9)
-  .fromTo(lg,{opacity:0,scale:.86,rotationX:14,y:14},{opacity:1,scale:1,rotationX:0,y:0,duration:.9,ease:'power3.out'},2)
-  .fromTo(lg,{'--sx':'-120%'},{'--sx':'120%',duration:.7,ease:'power2.inOut'},2.35)
-  .to(lg,{scale:1.03,duration:1.1,ease:'none'},2.9)
-  .fromTo(tg,{opacity:0,letterSpacing:'.6em',y:8},{opacity:1,letterSpacing:'.32em',y:0,duration:.6,ease:'power2.out'},2.6)
-  .call(()=>{INTRO.style.clipPath='url(#iclip)';wv();heroIn()},null,3.35)
-  .to(S,{Y:-amp*1.4,ph:4,duration:.65,ease:'power2.inOut',onUpdate:wv},3.35)
-  .to([lg,tg,fr,glow,lsh,arcs,...nails].filter(Boolean),{opacity:0,duration:.35,ease:'power1.in'},3.55)
-  .fromTo('.hero',{scale:1.08},{scale:1,duration:.65,ease:'power2.out',immediateRender:false},3.35);
- drive(tl,4);
+ const go=()=>{if(started||done)return;started=true;
+  if(!im.complete||im.naturalWidth<2){heroIn();introCleanup();return}/* photo not ready: homepage opens directly */
+  if(RM){/* accessible path: soft fade, no motion */
+   curTl=gsap.timeline({onComplete:finish});curTl.fromTo([paper,trip],{opacity:0},{opacity:1,duration:.2,ease:'none'},0).call(heroIn,null,.22).to([paper,trip],{opacity:0,duration:.22,ease:'none'},.26);drive(curTl,.5);return}
+  /* editorial triptych: panels settle, light sweeps the photo, panels part — exactly 1.2 s */
+  curTl=gsap.timeline({onComplete:finish});
+  curTl.fromTo(paper,{opacity:0},{opacity:1,duration:.14,ease:'none'},0)
+   .fromTo(ps,{opacity:0,y:i=>i%2?56:-56},{opacity:1,y:0,duration:.46,stagger:.06,ease:'expo.out'},.04)
+   .fromTo(trip,{gap:'16px'},{gap:'4px',duration:.5,ease:'power2.out'},.1)
+   .fromTo(sheen,{opacity:0,xPercent:-55},{opacity:.9,xPercent:55,duration:.4,ease:'power1.inOut'},.16)
+   .to(sheen,{opacity:0,duration:.14,ease:'power1.in'},.5)
+   .call(()=>heroIn(),null,.82)
+   .to(ps,{opacity:0,y:i=>i%2?-64:64,duration:.3,stagger:.04,ease:'power2.in'},.84)
+   .to(paper,{opacity:0,duration:.3,ease:'power1.inOut'},.9);
+  drive(curTl,1.2)};
+ const im=new Image();im.onload=go;im.onerror=go;im.src=src('p31');
+ if(im.complete&&im.naturalWidth)go();else setTimeout(go,420);
 }
 window.playIntro=playIntro;
 const replayBtn=$('#replay');if(replayBtn)replayBtn.onclick=()=>{scrollTo({top:0,behavior:'instant'});playIntro()};

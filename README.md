@@ -1,6 +1,6 @@
 # Vansshikha Soni · Nail Atelier
 
-Luxury nail studio website: 4-second cinematic intro, services mega menu with 23 service pages, portfolio gallery, studio section, testimonials carousel, WhatsApp booking, and a floating social dock (Instagram, WhatsApp, Email).
+Luxury nail studio website: 1.2-second editorial triptych intro, services mega menu with 23 service pages, portfolio gallery, studio section, testimonials carousel, WhatsApp booking, and a floating social dock (Instagram, WhatsApp, Email).
 
 Plain HTML, CSS and JavaScript. **No build step, no npm install needed.**
 
@@ -53,7 +53,7 @@ vercel.json         Vercel headers
 - **Studio photos:** `STUDIO` list in `js/app.js` and `ST` in `js/assets.js`.
 - **Testimonials:** `TESTI` list in `js/app.js`. Add `name`, `rating` or `quote` only when you have approved real reviews.
 - **Studio address:** search `Studio address: PENDING` in `index.html`.
-- **Intro:** `playIntro` in `js/app.js`. It runs for 4 seconds on every full page load; "Replay intro" is in the footer. Reduced-motion visitors get a short fade.
+- **Intro:** `playIntro` in `js/app.js`. A 1.2-second editorial triptych (three slim panels of atelier work, gold light sweep) runs on the homepage only; it is skipped if the photo is not ready. Reduced-motion visitors get a short fade.
 
 ## Routes (hash based)
 `#/services` all services, `#/services/classic` one service page, `#/services?c=nail-extension` filtered by category.

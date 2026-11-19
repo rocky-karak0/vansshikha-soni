@@ -47,7 +47,7 @@ const pic = (s, alt, eager) => s.ph
   ? '<img ' + (eager ? 'fetchpriority="high" decoding="async" ' : '') + 'src="' + IMG[s.ph] + '" alt="' + (alt ? esc(s.name) + (s.ex ? ': example finish from the atelier portfolio' : ', from the atelier portfolio') : '') + '" ' + (eager ? '' : 'loading="lazy"') + '>'
   : '<div class="ph" role="img" aria-label="' + esc(s.name) + '"><span class="gold-text">VS</span><small>' + CATS[s.c].name + '</small></div>';
 const priceTag = s => '<div class="pp"><span>M<b>' + inr(s.m) + '</b></span><span>R<b>' + inr(s.r) + '</b></span></div>';
-const card = (s, i = 0) => `<article class="sc tilt" style="--i:${i}"><a class="sci" href="/services/${s.slug}" tabindex="-1" aria-hidden="true">${pic(s, false)}</a><div class="scb"><div class="eyebrow">${CATS[s.c].name}</div><h3><a href="/services/${s.slug}">${esc(s.name)}</a></h3><p>${esc(s.about)}</p>${priceTag(s)}<div class="acts"><a class="btn ghost" href="/services/${s.slug}">View Details</a><a class="btn" target="_blank" rel="noopener" href="${waLink(waMsg(s))}">Book on WhatsApp</a></div></div></article>`;
+const card = (s, i = 0) => `<article class="sc tilt" style="--i:${i}"><a class="sci" href="/services/${s.slug}" tabindex="-1" aria-hidden="true">${pic(s, false)}</a><div class="scb"><div class="eyebrow">${CATS[s.c].name}</div><h3><a href="/services/${s.slug}">${esc(s.name)}</a></h3><p>${esc(s.about)}</p>${priceTag(s)}<div class="acts"><a class="btn ghost" href="/services/${s.slug}">View Details</a></div></div></article>`;
 
 /* ===== shared building blocks for the standalone SEO pages ===== */
 const tc = s => s.toLowerCase().replace(/(^|\s)\S/g, m => m.toUpperCase());
@@ -150,7 +150,7 @@ function servicePage(s) {
   const faqHtml = faqs.map((f, i) => `<div class="faq-item rvx"><h3><button type="button" class="faq-q" aria-expanded="false" aria-controls="sfa${i + 1}" id="sfq${i + 1}">${esc(f.q)}<span class="faq-ico" aria-hidden="true">+</span></button></h3><div class="faq-a" id="sfa${i + 1}" role="region" aria-labelledby="sfq${i + 1}"><p>${f.a}</p></div></div>`).join('\n');
 
   const main = `<main id="views">
-<article class="sd" style="--tint:${c.tint}"><section class="sdh"><div class="sbg" aria-hidden="true">${rings}</div><div class="wrap sdg${flip}"><div class="sdt"><div class="crumb" role="navigation" aria-label="Breadcrumb"><a href="/services">All Services</a> / <a href="/services/category/${c.slug}">${c.name}</a></div><div class="eyebrow">${c.name}</div><h1>${esc(s.name)}</h1><p class="lead">${esc(s.about)}</p><div class="pr2"><span>M<b>${inr(s.m)}</b></span><span>R<b>${inr(s.r)}</b></span></div><div class="acts" style="max-width:420px"><button type="button" class="btn mag" data-go="sbk">Book Appointment</button><a class="btn ghost mag" href="/services">← All Services</a></div></div><figure class="sdi tilt"><span class="no2">${String(s.i + 1).padStart(2, '0')} / 23</span><div class="fr">${pic(s, true, true)}</div>${s.ph ? `<figcaption>${s.ex ? 'Example from the atelier portfolio' : 'From the atelier portfolio'}</figcaption>` : ''}</figure></div></section>
+<article class="sd" style="--tint:${c.tint}"><section class="sdh"><div class="sbg" aria-hidden="true">${rings}</div><div class="wrap sdg${flip}"><div class="sdt"><div class="crumb" role="navigation" aria-label="Breadcrumb"><a href="/services">All Services</a> / <a href="/services/category/${c.slug}">${c.name}</a></div><div class="eyebrow">${c.name}</div><h1>${esc(s.name)}</h1><p class="lead">${esc(s.about)}</p><div class="pr2"><span>M<b>${inr(s.m)}</b></span><span>R<b>${inr(s.r)}</b></span></div><div class="acts" style="max-width:420px"><a class="btn ghost mag" href="/services">← All Services</a></div></div><figure class="sdi tilt"><span class="no2">${String(s.i + 1).padStart(2, '0')} / 23</span><div class="fr">${pic(s, true, true)}</div>${s.ph ? `<figcaption>${s.ex ? 'Example from the atelier portfolio' : 'From the atelier portfolio'}</figcaption>` : ''}</figure></div></section>
  <section class="sdc"><div class="wrap sdl${flip}"><div class="sdm">
   <section class="rvx"><h2>About this <em>service</em></h2><p>${esc(intro)}</p></section>
   <section class="rvx"><h2>What the service <em>involves</em></h2><p>${esc(s.before)}</p></section>
@@ -159,7 +159,7 @@ function servicePage(s) {
   <section class="rvx"><h2>Key <em>features</em></h2><ul class="kf">${s.hl.map(x => `<li>${esc(x)}</li>`).join('')}<li>Listed under ${c.name.replace(/(^|\s)\S/g, m => m.toUpperCase())}</li></ul></section>
   <section class="rvx" style="border:0"><h2>Care &amp; <em>maintenance</em></h2><p>${care}</p></section>
  </div>
- <aside class="pcard rvx tilt"><div class="eyebrow">Official rates</div><div class="prow"><div><span>M</span><b>${inr(s.m)}</b></div><div><span>R</span><b>${inr(s.r)}</b></div></div><p class="small">${s.slug === 'extension-removal' ? 'Shown in the original menu order. ' : ''}${/per-finger/.test(s.slug) ? 'Priced per finger. ' : ''}M and R are shown exactly as on the official menu; their meaning is being confirmed by the studio. Final pricing is confirmed on WhatsApp.</p><button type="button" class="btn mag" data-go="sbk">Book Appointment</button></aside></div></section>
+ <aside class="pcard rvx tilt"><div class="eyebrow">Official rates</div><div class="prow"><div><span>M</span><b>${inr(s.m)}</b></div><div><span>R</span><b>${inr(s.r)}</b></div></div><p class="small">${s.slug === 'extension-removal' ? 'Shown in the original menu order. ' : ''}${/per-finger/.test(s.slug) ? 'Priced per finger. ' : ''}M and R are shown exactly as on the official menu; their meaning is being confirmed by the studio. Final pricing is confirmed on WhatsApp.</p></aside></div></section>
  <section class="seo-faq" id="faq" aria-labelledby="faq-title"><div class="wrap">
   <div class="head center"><div class="eyebrow">Questions</div><h2 class="rvx" id="faq-title">Frequently <em>Asked</em></h2><p class="rvx">Everything you need to know before booking ${esc(s.name)}.</p></div>
   <div class="faq-list" id="faq-list">${faqHtml}</div>
@@ -199,7 +199,7 @@ ${sections}
 <p class="empty" id="empty" hidden>No services match your search.</p>
 <p class="note">M and R labels are shown as on the official menu; their meaning is being confirmed by the studio. Final pricing is confirmed on WhatsApp.</p>
 <section class="sec" id="browse-categories" style="margin-top:3.4rem"><div class="sh"><h2>Browse by category</h2><span>8 categories</span></div><div class="chips">${CATS.map(c => `<a class="chip" href="/services/category/${c.slug}">${tc(c.name)}</a>`).join('')}<a class="chip" href="/nail-prices">Full Price List</a></div></section>
-<p style="margin-top:2.4rem;text-align:center"><a class="btn mag" href="/booking">Book an Appointment →</a> <a class="btn ghost mag" href="/nail-prices">See the Price List</a></p>
+<p style="margin-top:2.4rem;text-align:center"><a class="btn ghost mag" href="/nail-prices">See the Price List</a></p>
 </div>
 <section class="seo-faq" id="faq" aria-labelledby="faq-title"><div class="wrap">
 <div class="head center"><div class="eyebrow">Questions</div><h2 class="rvx" id="faq-title">Frequently <em>Asked</em></h2><p class="rvx">Everything you need to know before booking your appointment at Vansshikha Soni Nail Atelier.</p></div>
@@ -220,13 +220,12 @@ function galleryPage() {
   const unit = cats.map(c => `<span>${c}</span><span>✦</span>`).join('');
   const tiles = IT.map(it => `<button class="tile tilt" data-i="${it.i}" data-c="${it.c}" aria-label="Open ${it.t}"><img src="${IMG[it.id]}" width="${it.w}" height="${it.h}" alt="${it.t}, ${it.c} nail art" loading="lazy"><span class="no">${String(it.i + 1).padStart(2, '0')}</span><span class="cap"><b>${it.t}</b>${it.c}</span></button>`).join('');
   const main = `<main id="views">
-<section class="sph"><div class="wrap"><div class="eyebrow">Portfolio</div><h1>Real work, <em>real hands</em></h1><p>Every image is genuine atelier work by Vansshikha Soni. Tap a look to enlarge it, or send it straight to the booking request.</p></div></section>
+<section class="sph"><div class="wrap"><div class="eyebrow">Portfolio</div><h1>Real work, <em>real hands</em></h1><p>Every image is genuine atelier work by Vansshikha Soni. Tap a look to enlarge it.</p></div></section>
 <section id="portfolio" style="background:linear-gradient(var(--ink),var(--wine) 120%);padding-bottom:90px"><div class="wrap">
 <div class="mq" aria-hidden="true"><div id="mq">${unit}${unit}${unit}${unit}</div></div>
 <div class="chips" id="chips" role="group" aria-label="Filter portfolio"></div>
 <div class="mason" id="mason">${tiles}</div>
 <p class="note" style="margin-top:2.4rem">All photography is the atelier's own work.</p>
-<p style="margin-top:2.4rem;text-align:center"><a class="btn mag" href="/booking">Book an Appointment →</a></p>
 </div></section>
 </main>`;
   const ld = [{ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: ORIGIN + '/' }, { '@type': 'ListItem', position: 2, name: 'Portfolio', item: ORIGIN + '/gallery' }] }];
@@ -252,7 +251,7 @@ function aboutPage() {
 <section class="seo-why" aria-labelledby="about-title"><div class="wrap">
 <div class="head center"><div class="eyebrow rvx">Explore</div><h2 class="rvx" id="about-title">Get to know <em>the atelier</em></h2><p class="rvx">Four pages that tell you who we are, where we work and why clients come back.</p></div>
 <div class="why-grid">${cards}</div>
-<div class="why-cta rvx"><a href="/booking" class="btn mag">Book Your Appointment →</a><a href="/services" class="btn ghost mag">Explore All Services</a></div>
+<div class="why-cta rvx"><a href="/services" class="btn ghost mag">Explore All Services</a></div>
 </div></section>
 <section class="rel"><div class="wrap"><h2 class="rvx">More from <em>the atelier</em></h2>${seoLinks([{ h: '/faq', t: 'FAQ' }, { h: '/nail-guide', t: 'Nail Care Guide' }, { h: '/gallery', t: 'Portfolio' }, { h: '/services', t: 'Services' }, { h: '/contact', t: 'Contact' }])}</div></section>
 </main>`;
@@ -294,7 +293,6 @@ function founderPage() {
 ${FOUNDER.paras.map(p => `<p class="rvx">${esc(p)}</p>`).join('\n')}
 <blockquote class="quote rvx">${FOUNDER.quote}</blockquote>
 <ul class="fd-facts rvx"><li>One set at a time</li><li>Hand-finished artistry</li><li>Custom design consultation</li></ul>
-<div class="fd-cta rvx"><a href="/story" class="btn ghost mag">Read Our Story →</a><a href="/booking" class="btn mag">Book Appointment</a></div>
 </div></div></section>
 <section class="ourstory"><div class="wrap os">
 ${FOUNDER.today.map(p => `<p class="rvx">${esc(p)}</p>`).join('\n')}
@@ -319,8 +317,7 @@ ${STUDIO_PAGE.paras.map((p, i) => `<p class="rvx${i ? '' : ' big'}">${esc(p)}</p
 </div></section>
 <section class="studio" id="studio"><div class="wrap"><div class="head center"><div class="eyebrow rvx">Inside the Atelier</div><h2 class="rvx">Six corners of <em>the studio</em></h2><p class="rvx">Shade shelves, swatch boards and finishing ranges — the working details behind every appointment.</p></div>
 <div class="sgal" id="sgal" role="list">${tiles}</div>
-<p class="note" style="text-align:center">All studio photography is the atelier's own work.</p>
-<p class="scta rvx"><a class="btn mag" href="/booking">Book Your Studio Experience →</a></p></div></section>
+<p class="note" style="text-align:center">All studio photography is the atelier's own work.</p></div></section>
 ${relSection('See the <em>work</em>', [{ h: '/gallery', t: 'Portfolio' }, { h: '/services', t: 'Services' }, { h: '/about', t: 'About' }, { h: '/contact', t: 'Contact' }, { h: '/booking', t: 'Book' }])}
 </main>`;
   const ld = [
@@ -344,7 +341,7 @@ function whyUsPage() {
 <section class="seo-why" id="why-us" aria-labelledby="why-title"><div class="wrap">
 <div class="head center"><div class="eyebrow rvx">What sets us apart</div><h2 class="rvx" id="why-title">Four reasons clients <em>choose the atelier</em></h2></div>
 <div class="why-grid">${cards}</div>
-<div class="why-cta rvx"><a href="/booking" class="btn mag">Book Your Appointment →</a><a href="/services" class="btn ghost mag">Explore All Services</a></div>
+<div class="why-cta rvx"><a href="/services" class="btn ghost mag">Explore All Services</a></div>
 </div></section>
 <section class="seo-guide" aria-labelledby="how-title"><div class="wrap">
 <div class="head center"><div class="eyebrow rvx">How we work</div><h2 class="rvx" id="how-title">From consultation <em>to aftercare</em></h2><p class="rvx">The same approach behind every appointment at the atelier.</p></div>
@@ -388,7 +385,7 @@ function nailGuidePage() {
 <section class="seo-guide" id="nail-guide" aria-labelledby="guide-title"><div class="wrap">
 <div class="head center"><div class="eyebrow rvx">The Guide</div><h2 class="rvx" id="guide-title">Eight tips for <em>longer-wearing nails</em></h2><p class="rvx">From daily care and refills to choosing a system and safe removal — the guidance our technicians repeat at every appointment.</p></div>
 <div class="guide-grid">${cards}</div>
-<p class="scta rvx" style="margin-top:3rem"><a class="btn mag" href="/booking">Book an Appointment →</a> <a class="btn ghost mag" href="/faq">Read the FAQ</a></p>
+<p class="scta rvx" style="margin-top:3rem"><a class="btn ghost mag" href="/faq">Read the FAQ</a></p>
 </div></section>
 ${relSection('Related <em>services</em>', [{ h: '/services/category/refills', t: 'Refills' }, { h: '/services/category/removal', t: 'Safe Removal' }, { h: '/services/category/nail-extension', t: 'Extensions' }, { h: '/nail-prices', t: 'Price List' }, { h: '/gel-nails', t: 'Gel Nails' }, { h: '/services', t: 'All Services' }, { h: '/faq', t: 'FAQ' }])}
 </main>`;
@@ -420,7 +417,7 @@ function categoryPage(c) {
 ${crumb(crumbs)}
 <div class="eyebrow">Service Category</div><h1>${name} <em>Services</em></h1><p>${CAT_INTRO[c.slug]}</p>
 <p class="note" style="margin-top:1rem">Official menu rates: ${range}.</p>
-<div class="acts" style="max-width:520px"><a class="btn mag" href="/booking">Book Appointment</a><a class="btn ghost mag" href="/services">← All Services</a></div>
+<div class="acts" style="max-width:520px"><a class="btn ghost mag" href="/services">← All Services</a></div>
 </div></section>
 <div class="wrap" style="padding-top:10px;padding-bottom:70px">
 <div class="sh"><h2>${name} at the atelier</h2><span>${items.length} ${items.length > 1 ? 'services' : 'service'}</span></div>
@@ -454,7 +451,6 @@ function contactPage() {
 <article class="why-card rvx"><div class="why-ico" aria-hidden="true">◎</div><h3>Instagram</h3><p>See the latest atelier work and behind-the-scenes moments. <a href="https://www.instagram.com/vs_nail_atelier_luxury_artist/" target="_blank" rel="noopener">@vs_nail_atelier_luxury_artist</a></p></article>
 <article class="why-card rvx"><div class="why-ico" aria-hidden="true">✦</div><h3>Studio Address</h3><p>Our luxury nail atelier is based in India. The full studio address is shared privately on booking confirmation.</p></article>
 </div>
-<div class="why-cta rvx"><a href="/booking" class="btn mag">Book an Appointment →</a><a href="https://wa.me/917838913373" target="_blank" rel="noopener" class="btn ghost mag">Chat on WhatsApp</a></div>
 </div></section>
 <section class="seo-faq" id="faq" aria-labelledby="faq-title"><div class="wrap">
 <div class="head center"><div class="eyebrow rvx">Questions</div><h2 class="rvx" id="faq-title">Before you <em>visit</em></h2></div>
@@ -516,7 +512,7 @@ function guidePage(g) {
 </div></section>` : '';
   const main = `<main id="views">
 <section class="sph"><div class="wrap">${crumb(crumbs)}<div class="eyebrow">${g.eyebrow}</div><h1>${g.h1}</h1><p>${g.lead}</p>
-<div class="acts" style="max-width:520px"><a class="btn mag" href="/booking">Book Appointment</a><a class="btn ghost mag" href="/services">All Services</a></div>
+<div class="acts" style="max-width:520px"><a class="btn ghost mag" href="/services">All Services</a></div>
 </div></section>
 <section class="ourstory" id="story"><div class="wrap os">${paras}</div></section>
 ${cards}
@@ -544,12 +540,11 @@ function pricesPage() {
   ];
   const main = `<main id="views">
 <section class="sph"><div class="wrap"><div class="eyebrow">Price List</div><h1>Official <em>Rates</em></h1><p>All 23 services across 8 categories, with M and R shown exactly as on the official studio menu. Every service has its own page with details, aftercare and booking.</p>
-<div class="acts" style="max-width:520px"><a class="btn mag" href="/booking">Book Appointment</a><a class="btn ghost mag" href="/services">All Services</a></div>
+<div class="acts" style="max-width:520px"><a class="btn ghost mag" href="/services">All Services</a></div>
 </div></section>
 <div class="wrap" style="padding-top:10px;padding-bottom:70px">
 <p class="note" style="margin-top:0">Rates run from M ${inr(min)} to M ${inr(max)}. M and R labels are shown exactly as on the official menu; their meaning is being confirmed by the studio. Final pricing is confirmed on WhatsApp.</p>
 ${groups}
-<p style="margin-top:2.4rem;text-align:center"><a class="btn mag" href="/booking">Book an Appointment →</a></p>
 </div>
 <section class="seo-faq" id="faq" aria-labelledby="faq-title"><div class="wrap">
 <div class="head center"><div class="eyebrow rvx">Questions</div><h2 class="rvx" id="faq-title">Pricing <em>FAQ</em></h2></div>

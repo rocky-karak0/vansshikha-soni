@@ -291,7 +291,7 @@ const STORY = {
   tag: 'Where Every Nail Tells a Story.',
   today: [
     'Today that thinking sits behind a menu of 23 services across 8 categories — classic and French application, advance gel sets, custom nail art, gel and acrylic extensions, overlays, refills, mini manicures and safe removal. Every service has its own page with the official menu rate shown exactly as it appears on the studio menu, so you can browse the details before you enquire.',
-    'The portfolio carries real atelier work only — gold linework, chrome, florals, ombr\u00e9, French and playful sets photographed on genuine sets. Every look can be enlarged, studied and sent straight to a booking request.',
+    'The portfolio carries real atelier work only — gold linework, chrome, florals, ombr\u00e9, French and playful sets photographed on genuine sets. Every look can be enlarged and studied up close.',
     'Appointments are requested through the website or WhatsApp, and Vansshikha confirms availability personally. The full studio address is shared privately on booking confirmation, so every visit begins with a conversation.'
   ]
 };
@@ -419,7 +419,7 @@ const PAGES = {
   },
   gallery: {
     title: 'Nail Art Portfolio &amp; Gallery | Vansshikha Soni Nail Atelier',
-    desc: 'Browse the atelier portfolio — real hand-finished nail art in gold, florals, deep reds, ombré, French and playful sets. Tap any look to enlarge it or send it to booking.',
+    desc: 'Browse the atelier portfolio — real hand-finished nail art in gold, florals, deep reds, ombré, French and playful sets. Tap any look to enlarge it.',
     h1: 'Real work, <em>real hands</em>'
   },
   contact: {
