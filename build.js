@@ -286,11 +286,16 @@ ${relSection('Continue <em>the story</em>', [{ h: '/founder', t: 'Meet the Found
 function founderPage() {
   const main = `<main id="views">
 <section class="sph"><div class="wrap"><div class="eyebrow">Meet the Founder</div><h1>${FOUNDER.h1}</h1><p><strong>VANSSHIKHA SONI</strong> — ${FOUNDER.role}</p></div></section>
-<section class="founder" id="founder"><div class="wrap fd"><div class="arch"><div class="in"><img id="fimg" src="${IMG.founder}" alt="Vansshikha Soni, founder of Vansshikha Soni Nail Atelier" width="732" height="1300" loading="lazy" decoding="async"></div></div>
-<div><div class="eyebrow rvx">The Vision Behind the Art</div><h2 class="rvx">The vision behind <em>the art</em></h2>
+<section class="founder" id="founder"><div class="fd-glow" aria-hidden="true"></div><div class="wrap fd">
+<div class="fd-media rvx"><div class="arch tilt"><div class="in"><img id="fimg" src="${IMG.founder}" alt="Vansshikha Soni, founder of Vansshikha Soni Nail Atelier" width="732" height="1300" loading="eager" fetchpriority="high" decoding="async"></div><span class="fd-mono" aria-hidden="true">VS</span></div>
+<div class="fd-plate"><span class="fd-name">Vansshikha Soni</span><span class="fd-role">Founder &amp; Nail Artist</span></div></div>
+<div class="fd-body">
+<div class="eyebrow rvx">The Vision Behind the Art</div><h2 class="rvx">The vision behind <em>the art</em></h2>
 ${FOUNDER.paras.map(p => `<p class="rvx">${esc(p)}</p>`).join('\n')}
 <blockquote class="quote rvx">${FOUNDER.quote}</blockquote>
-<a href="/story" class="btn ghost mag rvx">Read Our Story →</a></div></div></section>
+<ul class="fd-facts rvx"><li>One set at a time</li><li>Hand-finished artistry</li><li>Custom design consultation</li></ul>
+<div class="fd-cta rvx"><a href="/story" class="btn ghost mag">Read Our Story →</a><a href="/booking" class="btn mag">Book Appointment</a></div>
+</div></div></section>
 <section class="ourstory"><div class="wrap os">
 ${FOUNDER.today.map(p => `<p class="rvx">${esc(p)}</p>`).join('\n')}
 <div class="tag gold-text rvx">One set at a time.</div>

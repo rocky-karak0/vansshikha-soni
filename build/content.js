@@ -306,7 +306,7 @@ const FOUNDER = {
     'With a vision to make nail artistry a reflection of personal style, Vansshikha Soni brings an appreciation for refined aesthetics and beautiful design to the heart of the brand.',
     'From timeless elegance to bold, expressive nail designs, the atelier is inspired by the belief that every detail matters and every individual deserves a look that feels uniquely their own.'
   ],
-  quote: '“Elegance is in the details, and every nail tells a story.”',
+  quote: 'Elegance is in the details, and every nail tells a story.',
   today: [
     'Every set is painted by Vansshikha Soni herself — gold linework, chrome, florals, ombr\u00e9 and quiet minimalism, one set at a time, with no rushed factory finishes. Each look is planned around your nail shape, lifestyle and personal aesthetic, starting from a reference photo, a mood board or simply a colour you like.',
     'The same care shapes the studio standard: single-use files where needed, hospital-grade sanitisation and carefully prepared tools, with nail health placed before any trend. Official rates are published openly on every service page, and nothing is booked until Vansshikha replies to confirm your slot.'
