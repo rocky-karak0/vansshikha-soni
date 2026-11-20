@@ -52,7 +52,7 @@ vercel.json         Vercel headers
 - **Service photos without a verified match:** the `EXAMPLE` list in `js/app.js` (service slug to photo id).
 - **Studio photos:** `STUDIO` list in `js/app.js` and `ST` in `js/assets.js`.
 - **Testimonials:** `TESTI` list in `js/app.js`. Add `name`, `rating` or `quote` only when you have approved real reviews.
-- **Studio address:** search `Studio address: PENDING` in `index.html`.
+- **Studio address:** shared privately after booking confirmation. Edit the footer copy in `index.html` and run `npm run build` to update all pages.
 - **Intro:** `playIntro` in `js/app.js`. A 1.2-second editorial triptych (three slim panels of atelier work, gold light sweep) runs on the homepage only; it is skipped if the photo is not ready. Reduced-motion visitors get a short fade.
 
 ## Routes (hash based)

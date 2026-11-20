@@ -37,6 +37,7 @@ CATS.forEach(c => { c.items = SERV.filter(s => s.c == c.i); });
 const NAMES = { Gold: ['Gilded Line', 'Aurum Edge', 'Gold Leaf', 'Chrome Rim', 'Liquid Gold'], Florals: ['Bloom', 'Petal Study', 'Garden Set', 'Pearl Flower'], 'Deep Reds': ['Garnet', 'Wine Cat-Eye', 'Ruby Gloss', 'Velvet Red'], 'Ombré': ['Blush Fade', 'Rose Gradient', 'Sunset Fade', 'Berry Tip'], French: ['Quiet French', 'Noir Tip', 'Minimal Nude', 'Clean Line'], Playful: ['Citrus Stripe', 'Colour Play', 'Sea Shell', 'Little Joys'] };
 const cnt = {};
 const IT = ITEMS.map(([id, c, w, h], i) => { cnt[c] = (cnt[c] || 0); const t = NAMES[c][cnt[c]++ % NAMES[c].length]; return { id, c, w, h, t, i }; });
+const DIM = Object.fromEntries(ITEMS.map(([id, c, w, h]) => [id, [w, h]]));
 
 /* ===== helpers (mirrors js/app.js) ===== */
 const esc = s => String(s).replace(/[&<>"]/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[m]));
@@ -44,7 +45,7 @@ const inr = n => '₹' + n.toLocaleString('en-IN');
 const waLink = msg => 'https://wa.me/917838913373?text=' + encodeURIComponent(msg);
 const waMsg = (s, o, d, tm) => 'Hello VANSSHIKHA SONI Nail Atelier!\n\nI would like to enquire about booking:\n\nService: ' + s.name + (o ? '\nPrice Option: ' + o : '') + (d ? '\nPreferred Date: ' + d : '') + (tm ? '\nPreferred Time: ' + tm : '') + '\n\nPlease confirm availability and final pricing.';
 const pic = (s, alt, eager) => s.ph
-  ? '<img ' + (eager ? 'fetchpriority="high" decoding="async" ' : '') + 'src="' + IMG[s.ph] + '" alt="' + (alt ? esc(s.name) + (s.ex ? ': example finish from the atelier portfolio' : ', from the atelier portfolio') : '') + '" ' + (eager ? '' : 'loading="lazy"') + '>'
+  ? '<img ' + (eager ? 'fetchpriority="high" decoding="async" ' : '') + 'src="' + IMG[s.ph] + '"' + (DIM[s.ph] ? ' width="' + DIM[s.ph][0] + '" height="' + DIM[s.ph][1] + '"' : '') + ' alt="' + (alt ? esc(s.name) + (s.ex ? ': example finish from the atelier portfolio' : ', from the atelier portfolio') : '') + '" ' + (eager ? '' : 'loading="lazy" fetchpriority="low"') + '>'
   : '<div class="ph" role="img" aria-label="' + esc(s.name) + '"><span class="gold-text">VS</span><small>' + CATS[s.c].name + '</small></div>';
 const priceTag = s => '<div class="pp"><span>M<b>' + inr(s.m) + '</b></span><span>R<b>' + inr(s.r) + '</b></span></div>';
 const card = (s, i = 0) => `<article class="sc tilt" style="--i:${i}"><a class="sci" href="/services/${s.slug}" tabindex="-1" aria-hidden="true">${pic(s, false)}</a><div class="scb"><div class="eyebrow">${CATS[s.c].name}</div><h3><a href="/services/${s.slug}">${esc(s.name)}</a></h3><p>${esc(s.about)}</p>${priceTag(s)}<div class="acts"><a class="btn ghost" href="/services/${s.slug}">View Details</a></div></div></article>`;
@@ -218,7 +219,7 @@ ${relSection('Explore <em>the menu</em>', [{ h: '/nail-prices', t: 'Price List' 
 function galleryPage() {
   const cats = [...new Set(IT.map(i => i.c))];
   const unit = cats.map(c => `<span>${c}</span><span>✦</span>`).join('');
-  const tiles = IT.map(it => `<button class="tile tilt" data-i="${it.i}" data-c="${it.c}" aria-label="Open ${it.t}"><img src="${IMG[it.id]}" width="${it.w}" height="${it.h}" alt="${it.t}, ${it.c} nail art" loading="lazy"><span class="no">${String(it.i + 1).padStart(2, '0')}</span><span class="cap"><b>${it.t}</b>${it.c}</span></button>`).join('');
+  const tiles = IT.map(it => `<button class="tile tilt" data-i="${it.i}" data-c="${it.c}" aria-label="Open ${it.t}"><img src="${IMG[it.id]}" width="${it.w}" height="${it.h}" alt="${it.t}, ${it.c} nail art" loading="lazy" fetchpriority="low"><span class="no">${String(it.i + 1).padStart(2, '0')}</span><span class="cap"><b>${it.t}</b>${it.c}</span></button>`).join('');
   const main = `<main id="views">
 <section class="sph"><div class="wrap"><div class="eyebrow">Portfolio</div><h1>Real work, <em>real hands</em></h1><p>Every image is genuine atelier work by Vansshikha Soni. Tap a look to enlarge it.</p></div></section>
 <section id="portfolio" style="background:linear-gradient(var(--ink),var(--wine) 120%);padding-bottom:90px"><div class="wrap">
@@ -309,7 +310,7 @@ ${relSection('More from <em>the atelier</em>', [{ h: '/story', t: 'Our Story' },
 
 /* ===== /studio ===== */
 function studioPage() {
-  const tiles = STUDIO.map((s, i) => `<button type="button" class="sit s${i + 1} rvx" role="listitem" data-i="${i}" style="transition-delay:${i * 90}ms" aria-label="Open photo: ${s.t}"><img src="${s.src}" width="${s.w}" height="${s.h}" alt="${s.t} in the studio" loading="lazy"><span class="gcap"><b>${s.t}</b>${s.c}</span></button>`).join('');
+  const tiles = STUDIO.map((s, i) => `<button type="button" class="sit s${i + 1} rvx" role="listitem" data-i="${i}" style="transition-delay:${i * 90}ms" aria-label="Open photo: ${s.t}"><img src="${s.src}" width="${s.w}" height="${s.h}" alt="${s.t} in the studio" loading="lazy" fetchpriority="low"><span class="gcap"><b>${s.t}</b>${s.c}</span></button>`).join('');
   const main = `<main id="views">
 <section class="sph"><div class="wrap"><div class="eyebrow">Our Studio</div><h1>${STUDIO_PAGE.h1}</h1><p>${STUDIO_PAGE.lead}</p></div></section>
 <section class="ourstory"><div class="wrap os">

@@ -34,7 +34,6 @@ h2{font-size:clamp(2.3rem,5.6vw,4.4rem);letter-spacing:-.01em}em{font-style:ital
 .links.open{clip-path:circle(150% at calc(100% - 40px) 36px)}.links a:not(.btn){font-family:var(--serif);font-size:2rem;letter-spacing:.04em;text-transform:none;font-weight:500}}
 /* hero */
 .hero{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden;background:radial-gradient(ellipse at 70% 40%,var(--deep) 0,var(--wine) 38%,var(--ink) 75%)}
-#gl{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .hero .wrap{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:3rem;align-items:center;padding-top:110px;padding-bottom:70px;width:100%}
 .hero h1{font-size:clamp(3.1rem,8vw,7rem);margin:1.2rem 0;font-weight:500;letter-spacing:-.015em}.hero h1 .l{display:block;overflow:hidden;padding-bottom:.09em}.hero h1 .l>span{display:inline-block;will-change:transform}
 .hero p.lead{max-width:30rem;color:rgba(246,238,230,.78);margin-bottom:2.2rem;font-size:1.05rem}
@@ -45,6 +44,18 @@ h2{font-size:clamp(2.3rem,5.6vw,4.4rem);letter-spacing:-.01em}em{font-style:ital
 .float{position:absolute;width:34%;border:1px solid var(--gold);box-shadow:0 30px 50px rgba(0,0,0,.55);border-radius:2px;overflow:hidden;will-change:transform}.float img{aspect-ratio:3/4;object-fit:cover;width:100%}
 .f1{left:-8%;top:0}.f2{right:-4%;bottom:0;width:38%}.f3{left:6%;bottom:-4%;width:26%}
 .scroll-cue{position:absolute;left:50%;bottom:22px;font-size:.6rem;letter-spacing:.32em;font-weight:500;color:var(--gold);transform:translateX(-50%);text-transform:uppercase}
+/* hero entrance: pure CSS — starts at first paint (fast LCP), needs no JS */
+@keyframes lineUp{from{transform:translateY(110%)}to{transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;translate:0 26px}to{opacity:1;translate:0 0}}
+@keyframes plaqueIn{from{clip-path:inset(100% 0 0 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes floatIn{from{opacity:0;translate:0 64px}to{opacity:1;translate:0 0}}
+.hero h1 .l>span{animation:lineUp 1.25s cubic-bezier(.16,1,.3,1) both}
+.hero h1 .l:nth-child(2)>span{animation-delay:.13s}.hero h1 .l:nth-child(3)>span{animation-delay:.26s}
+.hero .eyebrow{animation:fadeUp .95s cubic-bezier(.16,1,.3,1) .5s both}
+.hero .rv{animation:fadeUp .95s cubic-bezier(.16,1,.3,1) .64s both}
+.hero .plaque{animation:plaqueIn 1.45s cubic-bezier(.77,0,.18,1) .3s both}
+.hero .float{animation:floatIn 1.2s cubic-bezier(.16,1,.3,1) .85s both}
+.hero .f2{animation-delay:1s}.hero .f3{animation-delay:1.15s}
 @media(max-width:860px){.hero .wrap{grid-template-columns:1fr;padding-top:100px}.stage{max-width:380px;margin:1rem auto 0}.hero p.lead{font-size:1rem}.f1{left:-3%}.scroll-cue{display:none}}
 /* divider */
 .divider{display:block;width:min(560px,80%);margin:0 auto;height:30px;overflow:visible}.divider path{stroke:var(--gold);fill:none;stroke-width:1}
@@ -57,6 +68,8 @@ section{position:relative;padding:clamp(80px,12vw,150px) 0}
 .slide{width:clamp(200px,24vw,330px);flex:none;position:relative;overflow:hidden;border:1px solid rgba(215,183,122,.35)}.slide img{width:100%;aspect-ratio:3/4;object-fit:cover;transform:scale(1.15)}
 .slide:nth-child(even){margin-top:3rem}.slide span{position:absolute;left:12px;bottom:10px;font-family:var(--serif);font-style:italic;font-size:1.2rem;text-shadow:0 2px 12px #000}
 .reduced .story .pin{height:auto;padding:80px 0}.reduced .track{overflow-x:auto;width:100%;scroll-snap-type:x mandatory}.reduced .slide{scroll-snap-align:start}
+/* mobile/tablet: native swipe rail instead of a pinned horizontal scroll */
+@media(max-width:860px){.story .pin{height:auto;padding:80px 0}.story .track{overflow-x:auto;width:100%;max-width:100vw;scroll-snap-type:x mandatory;scroll-padding-left:clamp(18px,4vw,48px);will-change:auto}.story .slide{scroll-snap-align:start}.story .slide img{transform:none}}
 .svc{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
 .card{position:relative;padding:1.8rem 1.5rem 1.6rem;min-height:370px;display:flex;flex-direction:column;background:linear-gradient(160deg,rgba(71,26,44,.55),rgba(8,7,9,.8));border:1px solid rgba(215,183,122,.18);transform-style:preserve-3d;will-change:transform;overflow:hidden;border-radius:3px;transition:transform .65s var(--ease-out),box-shadow .55s var(--ease-out),border-color .4s}
 .card::before{content:"";position:absolute;inset:0;padding:1px;background:conic-gradient(from var(--a,0deg),transparent 0 70%,var(--gold) 85%,transparent);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .5s;animation:spin 4s linear infinite;pointer-events:none}
@@ -315,7 +328,7 @@ html.menu-open .dock{transition:opacity .15s,visibility 0s .15s}
 .cur{position:fixed;left:0;top:0;width:38px;height:38px;margin:-19px 0 0 -19px;border:1px solid var(--gold);border-radius:50%;pointer-events:none;z-index:200;opacity:0;transition:width .3s,height .3s,margin .3s,background .3s,opacity .3s;mix-blend-mode:difference}
 .cur.on{opacity:1}.cur.h{width:70px;height:70px;margin:-35px 0 0 -35px;background:rgba(215,183,122,.25)}
 .reveal{opacity:0;transform:translateY(40px)}.reduced .reveal{opacity:1;transform:none}
-@media(prefers-reduced-motion:reduce){*{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important;scroll-behavior:auto!important}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.001s!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.001s!important;transition-delay:0s!important;scroll-behavior:auto!important}}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 
 /* ===== premium type + motion polish (Playfair Display / Montserrat) ===== */

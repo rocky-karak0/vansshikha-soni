@@ -38,7 +38,7 @@ http.createServer((req, res) => {
   const ext = path.extname(file).toLowerCase();
   fs.readFile(file, (err, buf) => {
     if (err) { res.writeHead(500); res.end('Server error'); return; }
-    res.writeHead(code, { 'Content-Type': TYPES[ext] || 'application/octet-stream', 'Cache-Control': 'no-store' });
+    res.writeHead(code, { 'Content-Type': TYPES[ext] || 'application/octet-stream', 'Cache-Control': ext === '.html' ? 'no-cache' : 'public, max-age=3600' });
     res.end(buf);
   });
 }).listen(PORT, () => console.log('Local preview: http://localhost:' + PORT + '/'));

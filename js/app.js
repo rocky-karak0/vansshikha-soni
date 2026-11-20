@@ -5,10 +5,10 @@ if(RM)document.documentElement.classList.add('reduced');
 const NAMES={Gold:['Gilded Line','Aurum Edge','Gold Leaf','Chrome Rim','Liquid Gold'],Florals:['Bloom','Petal Study','Garden Set','Pearl Flower'],'Deep Reds':['Garnet','Wine Cat-Eye','Ruby Gloss','Velvet Red'],Ombré:['Blush Fade','Rose Gradient','Sunset Fade','Berry Tip'],French:['Quiet French','Noir Tip','Minimal Nude','Clean Line'],Playful:['Citrus Stripe','Colour Play','Sea Shell','Little Joys']};
 const cnt={};const IT=ITEMS.map(([id,c,w,h],i)=>{cnt[c]=(cnt[c]||0);const t=NAMES[c][cnt[c]++%NAMES[c].length];return{id,c,w,h,t,i}});
 const src=id=>IMG[id];
-const fi=$('#fimg'),mi=$('#monoimg');if(fi)fi.src=IMG.founder;if(mi)mi.src=IMG.circle;$('#footlogo').src=IMG.circle;$('#yr').textContent=new Date().getFullYear();
-$$('[data-p]').forEach(i=>i.src=IMG[i.dataset.p]);
+const fi=$('#fimg'),mi=$('#monoimg');if(fi&&!fi.hasAttribute('src'))fi.src=IMG.founder;if(mi&&!mi.hasAttribute('src'))mi.src=IMG.circle;const fl=$('#footlogo');if(fl&&!fl.hasAttribute('src'))fl.src=IMG.circle;$('#yr').textContent=new Date().getFullYear();
+$$('[data-p]').forEach(i=>{if(!i.hasAttribute('src'))i.src=IMG[i.dataset.p]});
 /* story track */
-const trackEl=$('#track');if(trackEl)trackEl.innerHTML=[3,12,19,25,8,31,16,22,34].map(n=>{const it=IT[n];return`<div class="slide"><img src="${src(it.id)}" alt="${it.t}, ${it.c} nail art" loading="lazy"><span>${it.t}</span></div>`}).join('');
+const trackEl=$('#track');if(trackEl)trackEl.innerHTML=[3,12,19,25,8,31,16,22,34].map(n=>{const it=IT[n];return`<div class="slide"><img src="${src(it.id)}" width="${it.w}" height="${it.h}" alt="${it.t}, ${it.c} nail art" loading="lazy" fetchpriority="low"><span>${it.t}</span></div>`}).join('');
 /* services data: js/service-data.js (single source of truth, shared with build.js) */
 const CFG={whatsapp:'917838913373'};
 const {CATS,RAW,EXAMPLE}=VS_SERVICE_DATA;
@@ -25,13 +25,14 @@ const price=s=>`<div class="pp"><span>M<b>${inr(s.m)}</b></span><span>R<b>${inr(
 const card=(s,i=0)=>`<article class="sc tilt" style="--i:${i}"><a class="sci" href="/services/${s.slug}" tabindex="-1" aria-hidden="true">${pic(s,false)}</a><div class="scb"><div class="eyebrow">${CATS[s.c].name}</div><h3><a href="/services/${s.slug}">${esc(s.name)}</a></h3><p>${esc(s.about)}</p>${price(s)}<div class="acts"><a class="btn ghost" href="/services/${s.slug}">View Details</a></div></div></article>`;
 /* home: category cards */
 const CPH={0:'p26',1:'p31',2:'p04',3:'p32',4:'p10',5:'p33',6:'p21',7:'p12'};
-const svcEl=$('#svc');if(svcEl)svcEl.innerHTML=CATS.map(c=>`<article class="card tilt"><div class="im">${CPH[c.i]?`<img src="${src(CPH[c.i])}" alt="" loading="lazy">`:''}</div><div class="no">0${c.i+1}</div><h3>${c.name}</h3><p>${c.items.length} ${c.items.length>1?'services':'service'}: ${c.items.map(s=>esc(s.name)).slice(0,3).join(', ')}${c.items.length>3?'…':''}</p><a class="go" href="/services/category/${c.slug}">Explore →</a></article>`).join('');
+const DIM=id=>{const x=IT.find(v=>v.id===id);return x?` width="${x.w}" height="${x.h}"`:''};
+const svcEl=$('#svc');if(svcEl)svcEl.innerHTML=CATS.map(c=>`<article class="card tilt"><div class="im">${CPH[c.i]?`<img src="${src(CPH[c.i])}"${DIM(CPH[c.i])} alt="" loading="lazy">`:''}</div><div class="no">0${c.i+1}</div><h3>${c.name}</h3><p>${c.items.length} ${c.items.length>1?'services':'service'}: ${c.items.map(s=>esc(s.name)).slice(0,3).join(', ')}${c.items.length>3?'…':''}</p><a class="go" href="/services/category/${c.slug}">Explore →</a></article>`).join('');
 /* portfolio (gallery page can ship the same markup server-rendered; only fill empty containers) */
 const cats=['All',...new Set(IT.map(i=>i.c))];let cur='All',view=IT,li=0,look=null;
 {const mq=$('#mq');if(mq&&!mq.children.length){const w=[...new Set(IT.map(i=>i.c))].map(c=>`<span>${c}</span><span>✦</span>`).join('');mq.innerHTML=w+w+w+w}}
 const chipsEl=$('#chips');if(chipsEl&&!chipsEl.children.length)chipsEl.innerHTML=cats.map((c,i)=>`<button class="chip" aria-pressed="${!i}" data-c="${c}">${c}</button>`).join('');
 const masonEl=$('#mason');if(masonEl&&!masonEl.children.length)masonEl.innerHTML=IT.map(it=>`<button class="tile tilt" data-i="${it.i}" data-c="${it.c}" aria-label="Open ${it.t}"><img src="${src(it.id)}" width="${it.w}" height="${it.h}" alt="${it.t}, ${it.c} nail art" loading="lazy"><span class="no">${String(it.i+1).padStart(2,'0')}</span><span class="cap"><b>${it.t}</b>${it.c}</span></button>`).join('');
-if(chipsEl)chipsEl.onclick=e=>{const b=e.target.closest('.chip');if(!b)return;cur=b.dataset.c;$$('.chip').forEach(x=>x.setAttribute('aria-pressed',x===b));view=IT.filter(i=>cur=='All'||i.c==cur);const sh=[];$$('.tile').forEach(t=>{const on=cur=='All'||t.dataset.c==cur;t.classList.toggle('hide',!on);if(on)sh.push(t)});sh.forEach((x,k)=>{x.classList.add('snap');x.classList.remove('in');x.style.setProperty('--d',Math.min(k,12)*70+'ms');void x.offsetWidth;x.classList.remove('snap');setTimeout(()=>x.classList.add('in'),40)});window.ScrollTrigger&&ScrollTrigger.refresh()};
+if(chipsEl)chipsEl.onclick=e=>{const b=e.target.closest('.chip');if(!b)return;cur=b.dataset.c;$$('.chip').forEach(x=>x.setAttribute('aria-pressed',x===b));view=IT.filter(i=>cur=='All'||i.c==cur);$$('.tile').forEach(t=>t.classList.toggle('hide',!(cur=='All'||t.dataset.c==cur)));window.ScrollTrigger&&ScrollTrigger.refresh()};
 /* lightbox */
 const lb=$('#lb');let lastF;
 function show(k,dir=0){li=(k+view.length)%view.length;const it=view[li];const im=$('#li');im.src=src(it.id);im.alt=it.t+', '+it.c+' nail art';$('#lt').textContent=it.t;$('#lc').textContent=it.c+' · '+(li+1)+'/'+view.length;if(!RM)gsap.fromTo(im,{x:dir*60,rotationY:dir*-14,opacity:0},{x:0,rotationY:0,opacity:1,duration:.5,ease:'power3.out'})}
@@ -76,15 +77,12 @@ if(!RM){document.documentElement.classList.add('rv-on');const io=new Intersectio
 /* motion */
 if(!RM){
 gsap.registerPlugin(ScrollTrigger);
-gsap.from('.hero h1 .l>span',{yPercent:110,duration:1.3,stagger:.14,ease:'expo.out',delay:.2});
-gsap.from('.hero .eyebrow,.hero .rv',{opacity:0,y:24,duration:1,stagger:.12,delay:.8,ease:'power3.out'});
-gsap.from('.plaque',{clipPath:'inset(100% 0 0 0)',duration:1.5,ease:'expo.inOut',delay:.3});
-gsap.from('.float',{opacity:0,y:60,duration:1.2,stagger:.15,delay:1,ease:'power3.out'});
+/* hero entrance is pure CSS now (lineUp/fadeUp/plaqueIn/floatIn): it starts at first paint, no JS needed */
 $$('.float').forEach(f=>gsap.to(f,{y:()=>+f.dataset.d*-3,scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:.6}}));
 gsap.to('.plaque',{yPercent:-8,scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:.6}});
 $$('.dv path,.dv2').forEach(p=>{const l=p.getTotalLength();gsap.fromTo(p,{strokeDasharray:l,strokeDashoffset:l},{strokeDashoffset:0,duration:1.6,ease:'power2.inOut',scrollTrigger:{trigger:p,start:'top 90%'}})});
 $$('.rv:not(.hero .rv),.head h2,.head p').forEach(el=>gsap.fromTo(el,{opacity:0,y:36},{opacity:1,y:0,duration:1.15,ease:'expo.out',scrollTrigger:{trigger:el,start:'top 89%'}}));
-const tr=$('#track');if(tr){const dist=()=>tr.scrollWidth-innerWidth;
+const tr=$('#track');if(tr&&innerWidth>860){const dist=()=>tr.scrollWidth-innerWidth;
 gsap.to(tr,{x:()=>-dist(),ease:'none',scrollTrigger:{trigger:'#gallery',start:'top top',end:()=>'+='+dist(),pin:'.story .pin',scrub:.7,invalidateOnRefresh:true,anticipatePin:1}});
 $$('.slide img').forEach(im=>gsap.to(im,{scale:1,ease:'none',scrollTrigger:{trigger:im,containerAnimation:ScrollTrigger.getAll().pop().animation,start:'left 95%',end:'left 35%',scrub:true}}));}
 gsap.from('.arch .in',{clipPath:'inset(100% 0 0 0)',duration:1.5,ease:'expo.inOut',scrollTrigger:{trigger:'.arch',start:'top 80%'}});gsap.fromTo('.arch img',{yPercent:-6},{yPercent:0,ease:'none',scrollTrigger:{trigger:'.arch',start:'top bottom',end:'bottom top',scrub:true}});
@@ -185,12 +183,12 @@ let px=0,pd=false;car.addEventListener('pointerdown',e=>{px=e.clientX;pd=true;mo
 cst.addEventListener('click',e=>{if(moved){moved=false;return}const c=e.target.closest('.cc');if(!c)return;const i=+c.dataset.i;if(i==ci)vopen(TESTI.map(s=>({src:s.src,alt:s.alt,t:s.name||'',c:s.cap})),ci);else cset(i)});
 cset(0);fx(car)}
 /* reveal + fx for whichever page is on screen (static pages prerender their content in #views) */
-if(!RM){if(HM)reveal(HM);else if(V){reveal(V);fx(V);window.watchAnim&&watchAnim(V)}}
+if(!RM){if(HM)reveal(HM);else if(V){reveal(V);fx(V)}}
 
 
 /* ===== editorial triptych intro: exactly 1200 ms, homepage only, skipped if the photo is not ready ===== */
 const root0=document.documentElement,INTRO=$('#intro');let introActive=false,curTl=null,introRaf=0;
-function heroIn(){if(!window.gsap)return;gsap.from('.hero h1 .l>span',{yPercent:110,duration:1.4,stagger:.16,ease:'expo.out'});gsap.from('.hero .eyebrow,.hero .rv',{opacity:0,y:26,duration:1.1,stagger:.13,delay:.3,ease:'expo.out'});gsap.from('.plaque',{clipPath:'inset(100% 0 0 0)',duration:1.6,ease:'expo.inOut'});gsap.from('.float',{opacity:0,y:64,duration:1.3,stagger:.16,delay:.45,ease:'expo.out'})}
+function heroIn(){/* hero entrance is pure CSS now: it plays from first paint and needs no JS */}
 function introCleanup(){clearTimeout(window.__vsT);if(curTl){curTl.kill();curTl=null}root0.classList.remove('intro-on');document.body.style.overflow='';INTRO.style.clipPath='';cancelAnimationFrame(introRaf);INTRO.style.opacity='';INTRO.innerHTML='';introActive=false;if(window.gsap)gsap.set('.hero',{clearProps:'transform'});window.ScrollTrigger&&setTimeout(()=>ScrollTrigger.refresh(),50)}
 /* back/forward cache restores must never leave a frozen overlay */
 addEventListener('pageshow',e=>{if(e.persisted)introCleanup()});
@@ -275,13 +273,4 @@ addEventListener('load',()=>{window.ScrollTrigger&&ScrollTrigger.refresh()});
   draw();
   if(f!='all'){const el=document.getElementById('cat-'+f);el&&scrollTo({top:el.getBoundingClientRect().top+scrollY-80,behavior:'instant'})}
  }}
-/* three.js hero: lazy, skipped on reduced motion / tiny screens */
-(function(){const lowEnd=(navigator.hardwareConcurrency||8)<=2||(navigator.deviceMemory||8)<=1||(navigator.connection&&navigator.connection.saveData);if(RM||!window.THREE||lowEnd)return;const cv=$('#gl');if(!cv)return;const mobile=innerWidth<700;let R;try{R=new THREE.WebGLRenderer({canvas:cv,alpha:true,antialias:!mobile})}catch(e){return}
-R.setPixelRatio(Math.min(devicePixelRatio,mobile?1.25:2));const sc=new THREE.Scene(),cam=new THREE.PerspectiveCamera(45,1,.1,100);cam.position.z=9;
-sc.add(new THREE.AmbientLight(0xffe9c4,.5));const k=new THREE.PointLight(0xffe0a0,2.4,40);k.position.set(5,6,8);sc.add(k);const k2=new THREE.PointLight(0xc4506e,1.4,30);k2.position.set(-7,-3,5);sc.add(k2);
-const mat=new THREE.MeshStandardMaterial({color:0xD7B77A,metalness:.85,roughness:.28,emissive:0x2a1c08});const geo=new THREE.SphereGeometry(.5,24,16);
-const N=mobile?14:30,ms=[];for(let i=0;i<N;i++){const m=new THREE.Mesh(geo,mat);m.scale.set(.22+Math.random()*.18,.6+Math.random()*.5,.07);m.position.set((Math.random()-.5)*20,(Math.random()-.5)*11,-3+Math.random()*6);m.rotation.set(Math.random()*6,Math.random()*6,Math.random()*6);m.userData={s:.1+Math.random()*.25,o:Math.random()*6};sc.add(m);ms.push(m)}
-const pg=new THREE.BufferGeometry(),pn=mobile?120:300,pa=new Float32Array(pn*3);for(let i=0;i<pn*3;i++)pa[i]=(Math.random()-.5)*(i%3==2?10:24);pg.setAttribute('position',new THREE.BufferAttribute(pa,3));const pts=new THREE.Points(pg,new THREE.PointsMaterial({color:0xf0d9a2,size:.035,transparent:true,opacity:.7}));sc.add(pts);
-function rs(){const w=cv.clientWidth,h=cv.clientHeight;R.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix()}rs();addEventListener('resize',rs);
-let mx=0,my=0,vis=true;addEventListener('pointermove',e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5});new IntersectionObserver(e=>vis=e[0].isIntersecting).observe($('.hero'));
-const t0=performance.now();let fk=0;(function f(){requestAnimationFrame(f);if(!vis||document.hidden||root0.classList.contains('intro-on')||(mobile&&(fk++&1)))return;const t=(performance.now()-t0)/1000;ms.forEach(m=>{m.rotation.x+=m.userData.s*.01;m.rotation.y+=m.userData.s*.012;m.position.y+=Math.sin(t*m.userData.s+m.userData.o)*.003});pts.rotation.y=t*.02;cam.position.x+=(mx*1.4-cam.position.x)*.03;cam.position.y+=(-my*.9-cam.position.y)*.03;cam.lookAt(0,0,0);R.render(sc,cam)})()})();
+/* three.js hero background removed for performance: the hero keeps its CSS radial-gradient look with no per-frame rendering */
