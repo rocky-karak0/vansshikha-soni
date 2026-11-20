@@ -1,6 +1,6 @@
 # Vansshikha Soni · Nail Atelier
 
-Luxury nail studio website: 1.2-second editorial triptych intro, services mega menu with 23 service pages, portfolio gallery, studio section, testimonials carousel, WhatsApp booking, and a floating social dock (Instagram, WhatsApp, Email).
+Luxury nail studio website: editorial homepage, services mega menu with 23 service pages, portfolio gallery, studio section, testimonials carousel, WhatsApp booking, and a floating social dock (Instagram, WhatsApp, Email).
 
 Plain HTML, CSS and JavaScript. **No build step, no npm install needed.**
 
@@ -37,7 +37,7 @@ git push -u origin main
 ```
 index.html          page markup (all sections)
 css/style.css       all styles (design tokens are the :root variables at the top)
-js/app.js           site logic: services data, portfolio, booking, intro, animations, social dock
+js/app.js           site logic: services data, portfolio, booking, animations, social dock
 js/assets.js        image paths + portfolio list (ITEMS, IMG, ST, TS)
 vendor/             GSAP, ScrollTrigger, Three.js r128 (local copies, work offline)
 images/             portfolio, studio, testimonials, brand (logo, founder photo)
@@ -53,7 +53,7 @@ vercel.json         Vercel headers
 - **Studio photos:** `STUDIO` list in `js/app.js` and `ST` in `js/assets.js`.
 - **Testimonials:** `TESTI` list in `js/app.js`. Add `name`, `rating` or `quote` only when you have approved real reviews.
 - **Studio address:** shared privately after booking confirmation. Edit the footer copy in `index.html` and run `npm run build` to update all pages.
-- **Intro:** `playIntro` in `js/app.js`. A 1.2-second editorial triptych (three slim panels of atelier work, gold light sweep) runs on the homepage only; it is skipped if the photo is not ready. Reduced-motion visitors get a short fade.
+- **Homepage graphic:** the floating nail swatch is drawn in `images/brand/floating-swatch.svg`. Its motion and placement are defined by the `hero-edit` styles in `css/style.css`.
 
 ## Routes (hash based)
 `#/services` all services, `#/services/classic` one service page, `#/services?c=nail-extension` filtered by category.

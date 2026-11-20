@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="620" height="570" viewBox="0 0 620 570">
+  <title>Burgundy and champagne-gold almond nail swatch</title>
+  <defs>
+    <path id="shape" d="M310 84C332 84 390 180 407 269C421 340 413 411 385 452C363 485 258 485 235 452C207 411 199 340 213 269C230 180 288 84 310 84Z"/>
+    <clipPath id="face"><use href="#shape"/></clipPath>
+    <linearGradient id="enamel" x1=".04" y1=".4" x2=".96" y2=".56">
+      <stop stop-color="#230914"/><stop offset=".12" stop-color="#6d2037"/><stop offset=".26" stop-color="#a74261"/><stop offset=".44" stop-color="#751e39"/><stop offset=".69" stop-color="#3d0b1d"/><stop offset=".89" stop-color="#1d0711"/><stop offset="1" stop-color="#873c55"/>
+    </linearGradient>
+    <linearGradient id="bevel" x2=".9" y2="1">
+      <stop stop-color="#efc990"/><stop offset=".31" stop-color="#6f2e37"/><stop offset=".59" stop-color="#2e101b"/><stop offset=".86" stop-color="#c87982"/><stop offset="1" stop-color="#3c111f"/>
+    </linearGradient>
+    <radialGradient id="bodyLight" cx=".28" cy=".31" r=".68">
+      <stop stop-color="#ee8b9a" stop-opacity=".46"/><stop offset=".6" stop-color="#ae3558" stop-opacity=".16"/><stop offset="1" stop-color="#ae3558" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="gold" x1=".03" y1=".45" x2="1" y2=".66">
+      <stop stop-color="#694221"/><stop offset=".22" stop-color="#ba8750"/><stop offset=".43" stop-color="#fff0c7"/><stop offset=".52" stop-color="#f2ca83"/><stop offset=".74" stop-color="#98613d"/><stop offset=".91" stop-color="#e6bb76"/><stop offset="1" stop-color="#85522e"/>
+    </linearGradient>
+    <linearGradient id="reflection" x1="0" y1="0" x2="1" y2=".96">
+      <stop stop-color="#fff1e2" stop-opacity="0"/><stop offset=".29" stop-color="#ffe3de" stop-opacity=".8"/><stop offset=".68" stop-color="#f89eaa" stop-opacity=".2"/><stop offset="1" stop-color="#f89eaa" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="rimLight" x1="1" y1=".32" x2="0" y2=".82">
+      <stop stop-color="#fec1cc" stop-opacity="0"/><stop offset=".54" stop-color="#fec1cc" stop-opacity=".75"/><stop offset="1" stop-color="#fec1cc" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="soft" x="-.4" y="-.3" width="1.8" height="1.6"><feGaussianBlur stdDeviation="7"/></filter>
+  </defs>
+  <g transform="rotate(31 310 280)">
+    <use href="#shape" transform="translate(7 8)" fill="#160810" stroke="#5e2739" stroke-width="3"/>
+    <use href="#shape" fill="url(#enamel)" stroke="url(#bevel)" stroke-width="3"/>
+    <g clip-path="url(#face)">
+      <use href="#shape" fill="url(#bodyLight)"/>
+      <path d="M193 202Q310 270 427 202L434 68H183Z" fill="url(#gold)"/>
+      <path d="M193 202Q310 270 427 202" fill="none" stroke="#3c1421" stroke-width="6" opacity=".65"/>
+      <path d="M193 200Q310 268 427 200" fill="none" stroke="#ffeac2" stroke-width="1.5" opacity=".76"/>
+      <path d="M232 426C206 377 215 231 288 137C239 231 237 353 253 428Z" fill="url(#reflection)" filter="url(#soft)" opacity=".72"/>
+      <path d="M220 371C211 281 236 206 279 151C242 223 225 298 229 379Z" fill="url(#reflection)" opacity=".65"/>
+      <path d="M403 275C416 348 401 419 371 454C387 417 398 349 397 281Z" fill="url(#rimLight)"/>
+      <path d="M260 467Q310 486 360 465" fill="none" stroke="#f7c0ba" stroke-opacity=".44" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M247 419C278 379 320 358 363 359" fill="none" stroke="#f5bec6" stroke-opacity=".09" stroke-width="27" filter="url(#soft)"/>
+    </g>
+    <use href="#shape" fill="none" stroke="#f7bfab" stroke-opacity=".27" stroke-width="1.2"/>
+  </g>
+</svg>

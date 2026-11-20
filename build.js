@@ -71,9 +71,7 @@ const TAIL = slice('<!-- @shell:tail:start -->', '<!-- @shell:tail:end -->');
 
 /* the shared nav links to real URLs everywhere, so every link has its own crawlable page */
 const NAV_SUB = NAV_HOME;
-const FOOT_SUB = FOOT_HOME
-  .replace('href="#book"', 'href="/booking"')
-  .replace('<div><button type="button" class="rp" id="replay">↻ Replay intro</button></div>', '');
+const FOOT_SUB = FOOT_HOME.replace('href="#book"', 'href="/booking"');
 
 /* ===== page shell ===== */
 const IMG_ABS = ORIGIN + '/images/brand/circle.webp';
@@ -113,7 +111,6 @@ ${ASSETS}
 ${ld}
 </head>
 <body data-page="${o.page}">
-<div id="intro" role="dialog" aria-modal="true" aria-label="Opening animation"></div>
 ${o.nav}
 ${o.main}
 ${o.footer}
@@ -124,7 +121,7 @@ ${TAIL}
 <script src="/vendor/ScrollTrigger.min.js"></script>
 <script src="/js/service-data.js"></script>
 <script src="/js/assets.js"></script>
-<script src="/js/app.js"></script>
+<script src="/js/app.js?v=floating-swatch"></script>
 </body></html>
 `;
 }

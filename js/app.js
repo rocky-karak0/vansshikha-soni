@@ -1,12 +1,11 @@
-/* Main site script: services data (SERV/RAW), CFG.whatsapp, portfolio, booking, intro (playIntro) and animations. */
+/* Main site script: services data (SERV/RAW), CFG.whatsapp, portfolio, booking and animations. */
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
 const RM=matchMedia('(prefers-reduced-motion:reduce)').matches||!window.gsap,FINE=matchMedia('(pointer:fine)').matches;
 if(RM)document.documentElement.classList.add('reduced');
 const NAMES={Gold:['Gilded Line','Aurum Edge','Gold Leaf','Chrome Rim','Liquid Gold'],Florals:['Bloom','Petal Study','Garden Set','Pearl Flower'],'Deep Reds':['Garnet','Wine Cat-Eye','Ruby Gloss','Velvet Red'],Ombré:['Blush Fade','Rose Gradient','Sunset Fade','Berry Tip'],French:['Quiet French','Noir Tip','Minimal Nude','Clean Line'],Playful:['Citrus Stripe','Colour Play','Sea Shell','Little Joys']};
 const cnt={};const IT=ITEMS.map(([id,c,w,h],i)=>{cnt[c]=(cnt[c]||0);const t=NAMES[c][cnt[c]++%NAMES[c].length];return{id,c,w,h,t,i}});
 const src=id=>IMG[id];
-const fi=$('#fimg'),mi=$('#monoimg');if(fi&&!fi.hasAttribute('src'))fi.src=IMG.founder;if(mi&&!mi.hasAttribute('src'))mi.src=IMG.circle;const fl=$('#footlogo');if(fl&&!fl.hasAttribute('src'))fl.src=IMG.circle;$('#yr').textContent=new Date().getFullYear();
-$$('[data-p]').forEach(i=>{if(!i.hasAttribute('src'))i.src=IMG[i.dataset.p]});
+const fi=$('#fimg');if(fi&&!fi.hasAttribute('src'))fi.src=IMG.founder;const fl=$('#footlogo');if(fl&&!fl.hasAttribute('src'))fl.src=IMG.circle;$('#yr').textContent=new Date().getFullYear();
 /* story track */
 const trackEl=$('#track');if(trackEl)trackEl.innerHTML=[3,12,19,25,8,31,16,22,34].map(n=>{const it=IT[n];return`<div class="slide"><img src="${src(it.id)}" width="${it.w}" height="${it.h}" alt="${it.t}, ${it.c} nail art" loading="lazy" fetchpriority="low"><span>${it.t}</span></div>`}).join('');
 /* services data: js/service-data.js (single source of truth, shared with build.js) */
@@ -77,9 +76,6 @@ if(!RM){document.documentElement.classList.add('rv-on');const io=new Intersectio
 /* motion */
 if(!RM){
 gsap.registerPlugin(ScrollTrigger);
-/* hero entrance is pure CSS now (lineUp/fadeUp/plaqueIn/floatIn): it starts at first paint, no JS needed */
-$$('.float').forEach(f=>gsap.to(f,{y:()=>+f.dataset.d*-3,scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:.6}}));
-gsap.to('.plaque',{yPercent:-8,scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:.6}});
 $$('.dv path,.dv2').forEach(p=>{const l=p.getTotalLength();gsap.fromTo(p,{strokeDasharray:l,strokeDashoffset:l},{strokeDashoffset:0,duration:1.6,ease:'power2.inOut',scrollTrigger:{trigger:p,start:'top 90%'}})});
 $$('.rv:not(.hero .rv),.head h2,.head p').forEach(el=>gsap.fromTo(el,{opacity:0,y:36},{opacity:1,y:0,duration:1.15,ease:'expo.out',scrollTrigger:{trigger:el,start:'top 89%'}}));
 const tr=$('#track');if(tr&&innerWidth>860){const dist=()=>tr.scrollWidth-innerWidth;
@@ -93,9 +89,6 @@ gsap.from('footer .bg path',{strokeDashoffset:2000,strokeDasharray:2000,duration
 function bindFx(r=document){if(!FINE)return;$$('.tilt',r).forEach(c=>{if(c._fx)return;c._fx=1;c.addEventListener('pointermove',e=>{const q=c.getBoundingClientRect(),x=(e.clientX-q.left)/q.width-.5,y=(e.clientY-q.top)/q.height-.5;gsap.to(c,{rotationY:x*12,rotationX:-y*12,transformPerspective:900,duration:.5,ease:'power2.out'})});c.addEventListener('pointerleave',()=>gsap.to(c,{rotationX:0,rotationY:0,duration:.8,ease:'power3.out'}))});
 $$('.mag',r).forEach(b=>{if(b._fx)return;b._fx=1;b.addEventListener('pointermove',e=>{const q=b.getBoundingClientRect();gsap.to(b,{x:(e.clientX-q.left-q.width/2)*.3,y:(e.clientY-q.top-q.height/2)*.4,duration:.4,ease:'power3.out'})});b.addEventListener('pointerleave',()=>gsap.to(b,{x:0,y:0,duration:.9,ease:'elastic.out(1,.4)'}))})}
 bindFx();window.bindFx=bindFx;
-/* plaque follow */
-const stageEl=$('#stage');if(FINE&&stageEl)stageEl.addEventListener('pointermove',e=>{const r=e.currentTarget.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;gsap.to('#plaque',{rotationY:x*18,rotationX:-y*14,transformPerspective:1100,duration:.7})});
-if(stageEl)stageEl.addEventListener('pointerleave',()=>gsap.to('#plaque',{rotationX:0,rotationY:0,duration:1}));
 /* cursor */
 if(FINE){const c=$('#cur');let tx=0,ty=0,x=0,y=0,run=false;const l=()=>{x+=(tx-x)*.2;y+=(ty-y)*.2;c.style.transform=`translate(${x}px,${y}px)`;if(Math.abs(tx-x)+Math.abs(ty-y)>.3)requestAnimationFrame(l);else run=false};addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY;c.classList.add('on');if(!run){run=true;requestAnimationFrame(l)}},{passive:true});document.addEventListener('pointerover',e=>c.classList.toggle('h',!!e.target.closest('a,button,.tile')))}
 }
@@ -186,64 +179,22 @@ cset(0);fx(car)}
 if(!RM){if(HM)reveal(HM);else if(V){reveal(V);fx(V)}}
 
 
-/* ===== editorial triptych intro: exactly 1200 ms, homepage only, skipped if the photo is not ready ===== */
-const root0=document.documentElement,INTRO=$('#intro');let introActive=false,curTl=null,introRaf=0;
-function heroIn(){/* hero entrance is pure CSS now: it plays from first paint and needs no JS */}
-function introCleanup(){clearTimeout(window.__vsT);if(curTl){curTl.kill();curTl=null}root0.classList.remove('intro-on');document.body.style.overflow='';INTRO.style.clipPath='';cancelAnimationFrame(introRaf);INTRO.style.opacity='';INTRO.innerHTML='';introActive=false;if(window.gsap)gsap.set('.hero',{clearProps:'transform'});window.ScrollTrigger&&setTimeout(()=>ScrollTrigger.refresh(),50)}
-/* back/forward cache restores must never leave a frozen overlay */
-addEventListener('pageshow',e=>{if(e.persisted)introCleanup()});
-addEventListener('pagehide',()=>{if(introActive)introCleanup()});
-function playIntro(){
- if(introActive)return;if(!window.gsap){introCleanup();return}
- introActive=true;clearTimeout(window.__vsT);root0.classList.add('intro-on');
- window.__vsT=setTimeout(introCleanup,2000);/* hard cap: never block the site */
- let done=false,started=false;
- const finish=()=>{if(done)return;done=true;document.removeEventListener('keydown',kd,true);introCleanup()};
- const skip=()=>{if(done)return;heroIn();cancelAnimationFrame(introRaf);curTl&&curTl.kill();gsap.to(INTRO,{opacity:0,duration:.2,onComplete:finish})};
- const kd=e=>{if(e.key=='Escape')skip()};
- document.addEventListener('keydown',kd,true);
- INTRO.innerHTML='<div class="i-paper"></div><div class="i-trip">'+[0,1,2].map(k=>'<div class="i-pane"><i class="i-ph" style="--k:'+k+'"></i></div>').join('')+'<i class="i-sheen"></i></div>';
- const paper=$('.i-paper',INTRO),trip=$('.i-trip',INTRO),sheen=$('.i-sheen',INTRO),ps=$$('.i-pane',INTRO);
- /* wall-clock driver: first painted frame = t0, finishes at exactly dur, even if frames are dropped */
- const drive=(tl,dur)=>{tl.pause();let t0=null;const step=()=>{if(done)return;const now=performance.now();if(t0===null)t0=now;const s=(now-t0)/1000;tl.time(Math.min(s,dur),false);if(s>=dur)finish();else introRaf=requestAnimationFrame(step)};introRaf=requestAnimationFrame(step)};
- const go=()=>{if(started||done)return;started=true;
-  if(!im.complete||im.naturalWidth<2){heroIn();introCleanup();return}/* photo not ready: homepage opens directly */
-  if(RM){/* accessible path: soft fade, no motion */
-   curTl=gsap.timeline({onComplete:finish});curTl.fromTo([paper,trip],{opacity:0},{opacity:1,duration:.2,ease:'none'},0).call(heroIn,null,.22).to([paper,trip],{opacity:0,duration:.22,ease:'none'},.26);drive(curTl,.5);return}
-  /* editorial triptych: panels settle, light sweeps the photo, panels part — exactly 1.2 s */
-  curTl=gsap.timeline({onComplete:finish});
-  curTl.fromTo(paper,{opacity:0},{opacity:1,duration:.14,ease:'none'},0)
-   .fromTo(ps,{opacity:0,y:i=>i%2?56:-56},{opacity:1,y:0,duration:.46,stagger:.06,ease:'expo.out'},.04)
-   .fromTo(trip,{gap:'16px'},{gap:'4px',duration:.5,ease:'power2.out'},.1)
-   .fromTo(sheen,{opacity:0,xPercent:-55},{opacity:.9,xPercent:55,duration:.4,ease:'power1.inOut'},.16)
-   .to(sheen,{opacity:0,duration:.14,ease:'power1.in'},.5)
-   .call(()=>heroIn(),null,.82)
-   .to(ps,{opacity:0,y:i=>i%2?-64:64,duration:.3,stagger:.04,ease:'power2.in'},.84)
-   .to(paper,{opacity:0,duration:.3,ease:'power1.inOut'},.9);
-  drive(curTl,1.2)};
- const im=new Image();im.onload=go;im.onerror=go;im.src=src('p31');
- if(im.complete&&im.naturalWidth)go();else setTimeout(go,420);
-}
-window.playIntro=playIntro;
-const replayBtn=$('#replay');if(replayBtn)replayBtn.onclick=()=>{scrollTo({top:0,behavior:'instant'});playIntro()};
-try{if(root0.classList.contains('intro-on'))playIntro()}catch(e){introCleanup()}
-
 if(matchMedia('(pointer:coarse)').matches)addEventListener('focusin',e=>{const f=e.target;if(f.matches&&f.matches('input,textarea,select'))setTimeout(()=>f.scrollIntoView({block:'center',behavior:RM?'auto':'smooth'}),300)});
 
 /* pause infinite animations that are offscreen; fade images in when loaded (content stays visible if JS fails) */
 const animIO=new IntersectionObserver(es=>es.forEach(e=>e.target.toggleAttribute('data-off',!e.isIntersecting)),{rootMargin:'80px'});window.animIO=animIO;
-function watchAnim(root=document){$$('.gold-text,.mq div,.float,.plaque,.sbg svg',root).forEach(x=>{if(!x._w){x._w=1;animIO.observe(x)}})}window.watchAnim=watchAnim;watchAnim();
+function watchAnim(root=document){$$('.gold-text,.mq div,.sbg svg,.hero-edit__stage,.hero-edit__swatch',root).forEach(x=>{if(!x._w){x._w=1;animIO.observe(x)}})}window.watchAnim=watchAnim;watchAnim();
 {const ld=i=>i&&i.classList&&i.classList.add('ld');addEventListener('load',e=>{if(e.target.tagName=='IMG')ld(e.target)},true);addEventListener('error',e=>{if(e.target.tagName=='IMG')ld(e.target)},true);$$('img').forEach(i=>{if(i.complete)ld(i)});document.documentElement.classList.add('ld-on');setTimeout(()=>$$('img').forEach(ld),5000)}
 
 
-/* Instagram button: yields (fades) while it would sit on a WhatsApp booking button, and while a form field is focused */
-const igEl=$('#dock');let igIO=null;const igHits=new Set();
+/* Keep the floating dock clear of booking buttons and the homepage artwork. */
+const igEl=$('#dock'),dockRoot=document.documentElement;let igIO=null;const igHits=new Set();
 function igSetup(){if(!igEl||!window.IntersectionObserver)return;igIO&&igIO.disconnect();igHits.clear();igEl.classList.remove('yield');const r=igEl.getBoundingClientRect(),vw=innerWidth,vh=innerHeight;if(!r.width)return;
  igIO=new IntersectionObserver(es=>{es.forEach(e=>e.isIntersecting?igHits.add(e.target):igHits.delete(e.target));igEl.classList.toggle('yield',igHits.size>0)},{rootMargin:`${-Math.floor(r.top)}px ${-Math.floor(vw-r.right)}px ${-Math.floor(vh-r.bottom)}px ${-Math.floor(r.left)}px`});
- $$('a[href^="https://wa.me"]:not(.dk)').forEach(a=>igIO.observe(a))}
+ $$('a[href^="https://wa.me"]:not(.dk),.hero-edit').forEach(el=>igIO.observe(el))}
 window.igSetup=igSetup;igSetup();let igT;addEventListener('resize',()=>{clearTimeout(igT);igT=setTimeout(igSetup,200)});addEventListener('orientationchange',()=>setTimeout(igSetup,300));
-addEventListener('focusin',e=>{if(e.target.matches&&e.target.matches('input,textarea,select'))root0.classList.add('typing')});
-addEventListener('focusout',()=>setTimeout(()=>{const a=document.activeElement;if(!(a&&a.matches&&a.matches('input,textarea,select')))root0.classList.remove('typing')},150));
+addEventListener('focusin',e=>{if(e.target.matches&&e.target.matches('input,textarea,select'))dockRoot.classList.add('typing')});
+addEventListener('focusout',()=>setTimeout(()=>{const a=document.activeElement;if(!(a&&a.matches&&a.matches('input,textarea,select')))dockRoot.classList.remove('typing')},150));
 
 
 /* social dock: soft 3D tilt toward the pointer (fine pointers only) */
