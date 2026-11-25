@@ -33,11 +33,19 @@
   times.innerHTML = periods.map(period => `<button type="button" class="opt" data-v="${period}" aria-pressed="${period === time}">${period}</button>`).join('');
 
   function updateTicket() {
-    $('#ticket-service', desk).textContent = service?.name || 'Not selected';
-    $('#ticket-date', desk).textContent = date ? formatDate.format(date) : 'Not selected';
-    $('#ticket-time', desk).textContent = time;
+    const values = {
+      'ticket-service': service?.name || 'Not selected',
+      'ticket-date': date ? formatDate.format(date) : 'Not selected',
+      'ticket-time': time,
+      'ticket-rates': service ? (rate ? `${rate} ${inr(service[rate.toLowerCase()])} preferred` : `M ${inr(service.m)} · R ${inr(service.r)}`) : ''
+    };
     $('#ticket-rates-row', desk).hidden = !service;
-    $('#ticket-rates', desk).textContent = service ? (rate ? `${rate} ${inr(service[rate.toLowerCase()])} preferred` : `M ${inr(service.m)} · R ${inr(service.r)}`) : '';
+    for (const [id, value] of Object.entries(values)) {
+      const field = $(`#${id}`, desk);
+      if (field.textContent === value) continue;
+      field.textContent = value;
+      if (!desk.hidden && value) window.AtelierMotion?.highlight(field);
+    }
   }
 
   function updateRates() {

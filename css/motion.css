@@ -1,16 +1,34 @@
 /* Motion follows the burgundy and champagne palette of the atelier. */
+.kinetic-foil { display: none; }
 @media (prefers-reduced-motion: no-preference) {
   :root { --motion-out: cubic-bezier(.2,.72,.22,1); }
 
   @keyframes atelier-entrance { from { opacity: .38; translate: 0 14px; } }
+  @keyframes atelier-title-cut {
+    from { opacity: .08; clip-path: inset(100% -8% -12%); translate: 0 .32em; }
+    to { opacity: 1; clip-path: inset(-12% -8% -18%); translate: 0 0; }
+  }
+  @keyframes atelier-stage-in {
+    from { opacity: 0; scale: .88; translate: 0 22px; }
+    to { opacity: 1; scale: 1; translate: 0 0; }
+  }
+  @keyframes atelier-ornament-in {
+    from { opacity: 0; scale: .82; rotate: -14deg; }
+    to { opacity: 1; scale: 1; rotate: 0deg; }
+  }
   html:not(.home-intro-pending,.home-intro-on) .hero-copy > *,
   html:not(.home-intro-pending,.home-intro-on) .hero-edit,
   :is(.sph > .wrap,.sdt) > :is(.crumb,.eyebrow,h1,p,.pr2,.acts) {
     animation: atelier-entrance .66s var(--motion-out) var(--entrance-delay, 0ms) backwards;
   }
-  .hero-copy h1, :is(.sph,.sdt) h1 { --entrance-delay: 55ms; }
-  .hero-copy > .lead, .sph > .wrap > p, .sdt > :is(.lead,.pr2) { --entrance-delay: 110ms; }
-  .hero-copy > .hero-actions, .hero-edit, :is(.sph,.sdt) .acts { --entrance-delay: 160ms; }
+  html:not(.home-intro-pending,.home-intro-on) .hero-copy > h1 { animation: atelier-title-cut .94s var(--motion-out) 100ms backwards; }
+  html:not(.home-intro-pending,.home-intro-on) .hero-edit { animation: atelier-stage-in 1.05s var(--motion-out) 65ms backwards; }
+  html:not(.home-intro-pending,.home-intro-on) .hero-edit__ornament { animation: atelier-ornament-in 1.2s var(--motion-out) 230ms backwards; }
+  :is(.sph,.sdt) h1 { --entrance-delay: 55ms; }
+  .hero-copy > .lead { --entrance-delay: 270ms; }
+  .hero-copy > .hero-actions { --entrance-delay: 370ms; }
+  .sph > .wrap > p, .sdt > :is(.lead,.pr2) { --entrance-delay: 110ms; }
+  :is(.sph,.sdt) .acts { --entrance-delay: 160ms; }
 
   :is(.sc,.card,.why-card,.guide-card,.pcard,.appointment__ticket,.appointment__panel,.faq-item) {
     transition: transform .35s var(--motion-out), scale .22s var(--motion-out), box-shadow .35s var(--motion-out), border-color .28s ease;
@@ -65,16 +83,47 @@
   @media (hover: none) {
     :is(.signature__card,.sc,.sit,.tile):active { scale: .98; }
   }
+  @media (hover: hover) and (pointer: fine) {
+    .hero-edit__stage { transform: perspective(980px) rotateX(var(--kin-rx,0deg)) rotateY(var(--kin-ry,0deg)); transition: transform .38s var(--motion-out); }
+    .hero-edit__swatch { translate: var(--kin-x,0px) var(--kin-y,0px); transition: translate .38s var(--motion-out); }
+    :is(.sc,.signature__card,.sit,.tile,.why-card,.guide-card)[data-kinetic] { position: relative; }
+    :is(.sc,.signature__card,.sit,.tile,.why-card,.guide-card)[data-kinetic]:hover {
+      transform: perspective(880px) translateY(-5px) rotateX(var(--kin-rx,0deg)) rotateY(var(--kin-ry,0deg));
+    }
+    :is(.sc,.signature__card,.sit,.tile)[data-kinetic]:hover img {
+      scale: 1.055; transform: translate(var(--kin-x,0px),var(--kin-y,0px));
+    }
+    :is(.signature__image img,.sci img,.sit img,.tile img) { transition-property: transform, scale, border-color, box-shadow; }
+    .kinetic-foil {
+      display: block; position: absolute; inset: 0; z-index: 2; border-radius: inherit; pointer-events: none;
+      opacity: 0; transition: opacity .32s ease;
+      background: radial-gradient(ellipse at var(--kin-at-x,50%) var(--kin-at-y,50%), #ffe4b34a, #e9b67821 28%, transparent 65%);
+      box-shadow: inset 0 0 0 1px #edc78c78;
+    }
+    [data-kinetic=tracking]:hover > .kinetic-foil { opacity: 1; }
+  }
+
+  #mason { overflow-anchor: none; }
+  .atelier-photo-flight { position: fixed; z-index: 110; pointer-events: none; object-fit: cover; }
+  .lb[data-morphing] figure { scale: 1; translate: none; transition: none; }
+  .lb[data-morphing] figure > img { opacity: 0; }
 
   .faq-a { opacity: 0; transition: grid-template-rows .38s var(--motion-out), opacity .22s ease, visibility 0s .38s; }
   .faq-item.open .faq-a { opacity: 1; }
   .appointment__steps li { transition: border-color .32s ease, color .32s ease; }
+  .appointment__steps li { position: relative; }
+  .appointment__steps li::after {
+    content: ""; position: absolute; inset: auto 0 -2px; height: 2px; pointer-events: none;
+    background: linear-gradient(90deg,#a87343,#f3d8a5); transform: scaleX(0); transform-origin: left;
+    transition: transform .48s var(--motion-out); box-shadow: 0 0 9px #e6be7770;
+  }
+  .appointment__steps :is([aria-current=step],.is-complete)::after { transform: scaleX(1); }
   .appointment__field :is(input,textarea,#ssel) { transition: border-color .24s, box-shadow .24s; }
   .appointment__field :is(input,textarea,#ssel):focus { box-shadow: 0 0 0 3px #d7b77a22; }
-  @keyframes atelier-step { from { opacity: .45; translate: var(--step-offset, 12px) 0; } }
+  @keyframes atelier-step { from { opacity: .25; translate: var(--step-offset, 22px) 0; } }
   .appointment .stp.on { animation: none; }
   .appointment [data-step-direction] .stp.on { animation: atelier-step .32s var(--motion-out) backwards; }
-  .appointment [data-step-direction=back] { --step-offset: -12px; }
+  .appointment [data-step-direction=back] { --step-offset: -22px; }
   .appointment [data-month-direction] .grid7 { animation: atelier-step .26s var(--motion-out) backwards; }
   .appointment [data-month-direction=back] .grid7 { --step-offset: -12px; }
 
