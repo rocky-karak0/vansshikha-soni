@@ -1,0 +1,84 @@
+/* Motion follows the burgundy and champagne palette of the atelier. */
+@media (prefers-reduced-motion: no-preference) {
+  :root { --motion-out: cubic-bezier(.2,.72,.22,1); }
+
+  @keyframes atelier-entrance { from { opacity: .38; translate: 0 14px; } }
+  html:not(.home-intro-pending,.home-intro-on) .hero-copy > *,
+  html:not(.home-intro-pending,.home-intro-on) .hero-edit,
+  :is(.sph > .wrap,.sdt) > :is(.crumb,.eyebrow,h1,p,.pr2,.acts) {
+    animation: atelier-entrance .66s var(--motion-out) var(--entrance-delay, 0ms) backwards;
+  }
+  .hero-copy h1, :is(.sph,.sdt) h1 { --entrance-delay: 55ms; }
+  .hero-copy > .lead, .sph > .wrap > p, .sdt > :is(.lead,.pr2) { --entrance-delay: 110ms; }
+  .hero-copy > .hero-actions, .hero-edit, :is(.sph,.sdt) .acts { --entrance-delay: 160ms; }
+
+  :is(.sc,.card,.why-card,.guide-card,.pcard,.appointment__ticket,.appointment__panel,.faq-item) {
+    transition: transform .35s var(--motion-out), scale .22s var(--motion-out), box-shadow .35s var(--motion-out), border-color .28s ease;
+  }
+  :is(.signature__card,.sit,.tile) { transition: transform .38s var(--motion-out), scale .22s var(--motion-out); }
+  :is(.signature__image,.sit img,.tile img) { transition: border-color .3s ease, box-shadow .35s var(--motion-out); }
+  :is(.signature__image img,.sci img,.sit img,.tile img) {
+    transition: scale .55s var(--motion-out), border-color .3s ease, box-shadow .35s var(--motion-out);
+  }
+  :is(.signature__image,.sci)::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(115deg,transparent 32%,#ffe5b631 50%,transparent 68%);
+    translate: -110% 0;
+    transition: translate .65s var(--motion-out);
+  }
+  :is(.signature__caption > span,.home-menu__list a > span,.editorial-link > span,.signature__link > span,.hero-link > span,.btn > span) {
+    display: inline-block;
+    transition: translate .3s var(--motion-out);
+  }
+  :is(.signature__card,.home-menu__list a,.editorial-link,.signature__link,.hero-link,.btn):focus-visible > span,
+  .signature__card:focus-visible .signature__caption > span { translate: 4px 0; }
+  :is(.signature__card:focus-visible .signature__image,.sc:focus-within .sci)::after { translate: 110% 0; }
+  .sc:focus-within .sci img { scale: 1.05; }
+
+  .btn,.btn.ghost { transition: translate .26s var(--motion-out), scale .18s var(--motion-out), background .18s, color .18s, border-color .18s, box-shadow .26s; }
+  :is(.chip,.appointment .opt,.appointment .day,.appointment .cal .h button,.lb .x,.lb .nv) {
+    transition: scale .18s var(--motion-out), background .22s, color .22s, border-color .22s, box-shadow .22s;
+  }
+  :is(.btn,.chip,.opt,.day,.cal .h button,.lb .x,.lb .nv):not(:disabled):active { scale: .96; }
+  :is(.home-menu__list a,.atelier-index a,.seo-links a,.footer-links a) { transition: background-color .24s, color .24s, border-color .24s; }
+
+  @media (hover: hover) {
+    :is(.sc,.why-card,.guide-card):hover, .sc:focus-within {
+      transform: translateY(-6px);
+      border-color: #d7b77a91;
+      box-shadow: 0 17px 34px #0006, 0 0 22px #d7b77a12;
+    }
+    :is(.signature__card,.sit,.tile):is(:hover,:focus-visible) { transform: translateY(-4px); }
+    :is(.signature__card:is(:hover,:focus-visible) .signature__image,.sit:is(:hover,:focus-visible) img,.tile:is(:hover,:focus-visible) img) {
+      border-color: #d7b77a99;
+      box-shadow: 0 10px 24px #0005;
+    }
+    :is(.signature__card:hover .signature__image,.sc:hover .sci)::after { translate: 110% 0; }
+    :is(.signature__card:is(:hover,:focus-visible) img,.sc:hover .sci img,.sit:is(:hover,:focus-visible) img,.tile:is(:hover,:focus-visible) img) {
+      transform: none; scale: 1.045;
+    }
+    :is(.pcard,.appointment__ticket,.appointment__panel,.faq-item):is(:hover,:focus-within) { border-color: #d7b77a75; }
+    .btn:is(:hover,:focus-visible) { translate: 0 -2px; }
+    :is(.home-menu__list a,.editorial-link,.signature__link,.hero-link,.btn):hover > span,
+    .signature__card:hover .signature__caption > span { translate: 4px 0; }
+  }
+  @media (hover: none) {
+    :is(.signature__card,.sc,.sit,.tile):active { scale: .98; }
+  }
+
+  .faq-a { opacity: 0; transition: grid-template-rows .38s var(--motion-out), opacity .22s ease, visibility 0s .38s; }
+  .faq-item.open .faq-a { opacity: 1; }
+  .appointment__steps li { transition: border-color .32s ease, color .32s ease; }
+  .appointment__field :is(input,textarea,#ssel) { transition: border-color .24s, box-shadow .24s; }
+  .appointment__field :is(input,textarea,#ssel):focus { box-shadow: 0 0 0 3px #d7b77a22; }
+  @keyframes atelier-step { from { opacity: .45; translate: var(--step-offset, 12px) 0; } }
+  .appointment .stp.on { animation: none; }
+  .appointment [data-step-direction] .stp.on { animation: atelier-step .32s var(--motion-out) backwards; }
+  .appointment [data-step-direction=back] { --step-offset: -12px; }
+  .appointment [data-month-direction] .grid7 { animation: atelier-step .26s var(--motion-out) backwards; }
+  .appointment [data-month-direction=back] .grid7 { --step-offset: -12px; }
+
+  .lb figure { scale: .975; translate: 0 8px; transition: scale .3s var(--motion-out), translate .3s var(--motion-out); }
+  .lb.on figure { scale: 1; translate: 0 0; }
+  .lb:not(.on) { pointer-events: none; }
+}

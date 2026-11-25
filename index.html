@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#080709" media="(prefers-color-scheme: dark)">
-<meta name="theme-color" content="#260B16">
+<meta name="theme-color" content="#190d13">
 <meta name="color-scheme" content="dark">
 <title>Vansshikha Soni Nail Atelier | Luxury Nail Art, Gel Extensions &amp; Manicure Studio</title>
 <meta name="description" content="Vansshikha Soni Nail Atelier — luxury nail art studio for gel extensions, chrome, ombre, French tips, florals and custom designs. Browse the portfolio, official rates and book on WhatsApp.">
@@ -27,98 +26,137 @@
 <meta name="twitter:image" content="https://vansshikhasoni.com/images/brand/circle.webp">
 <link rel="icon" href="/images/brand/circle.webp" type="image/webp">
 <link rel="apple-touch-icon" href="/images/brand/logo.jpg">
+<style>
+@media (prefers-reduced-motion: no-preference) {
+  html.home-intro-pending { background: radial-gradient(ellipse at 50% 40%, #fbf6ef, #f3ead9 62%, #e7d9c4); }
+  html.home-intro-pending body { visibility: hidden; opacity: 0; }
+}
+</style>
+<script>
+(() => {
+  try {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches || location.hash || navigator.connection?.saveData || sessionStorage.getItem('vsI')) return;
+    const root = document.documentElement;
+    let paintedDeadline;
+    const reveal = () => {
+      clearTimeout(hardDeadline);
+      clearTimeout(paintedDeadline);
+      cancelAnimationFrame(firstFrame);
+      root.classList.remove('home-intro-pending');
+    };
+    const hardDeadline = setTimeout(reveal, 1000);
+    const firstFrame = requestAnimationFrame(() => { paintedDeadline = setTimeout(reveal, 350); });
+    window.__clearHomeIntroCover = reveal;
+    root.classList.add('home-intro-pending');
+  } catch { /* If the intro cannot start, show the homepage normally. */ }
+})();
+</script>
 <!-- @shell:assets:start -->
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap&text=%20!%22%23%24%25%26'()*%2B%2C-.%2F0123456789%3A%3B%3C%3D%3E%3F%40ABCDEFGHIJKLMNOPQRSTUVWXYZ%5B%5C%5D%5E_%60abcdefghijklmnopqrstuvwxyz%7B%7C%7D~%C2%A3%C2%A9%C2%B0%C2%B1%C2%B5%C2%B7%C3%97%C3%A9%C3%B7%E2%80%93%E2%80%94%E2%80%98%E2%80%99%E2%80%9C%E2%80%9D%E2%80%A2%E2%80%A6%E2%80%B0%E2%80%B2%E2%80%B3%E2%80%B9%E2%80%BA%E2%82%AC%E2%82%B9%E2%86%90%E2%86%92%E2%86%BB%E2%88%92%E2%96%BE%E2%97%86%E2%97%8E%E2%9C%86%E2%9C%89%E2%9C%A6%E2%9C%A7%E2%9D%96" rel="stylesheet" media="print" onload="this.media='all'"><noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet"></noscript>
-<link rel="stylesheet" href="/css/style.css?v=floating-swatch">
+<link rel="stylesheet" href="/css/style.css?v=atelier-responsive">
+<link rel="stylesheet" href="/css/editorial.css?v=atelier-responsive">
+<link rel="stylesheet" href="/css/booking.css?v=atelier-responsive">
+<link rel="stylesheet" href="/css/motion.css?v=atelier-motion">
 <!-- @shell:assets:end -->
 <link rel="preload" href="/images/brand/floating-swatch.svg" as="image" fetchpriority="high">
+<link rel="preload" href="/images/portfolio/p31.webp" as="image" media="(prefers-reduced-motion: no-preference)" fetchpriority="low">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BeautySalon","@id":"https://vansshikhasoni.com/#salon","name":"Vansshikha Soni Nail Atelier","alternateName":"VS Nail Atelier","description":"Luxury nail art studio offering gel extensions, chrome, ombre, French tips, florals and custom hand-finished nail designs by Vansshikha Soni.","url":"https://vansshikhasoni.com/","image":"https://vansshikhasoni.com/images/brand/circle.webp","logo":"https://vansshikhasoni.com/images/brand/circle.webp","telephone":"+917838913373","email":"VANSSHIKHASONI@gmail.com","currenciesAccepted":"INR","address":{"@type":"PostalAddress","addressCountry":"IN","addressRegion":"India"},"founder":{"@type":"Person","name":"Vansshikha Soni","jobTitle":"Founder & Nail Artist"},"sameAs":["https://www.instagram.com/vs_nail_atelier_luxury_artist/","https://wa.me/917838913373"],"areaServed":{"@type":"Country","name":"India"},"hasOfferCatalog":{"@type":"OfferCatalog","name":"Nail Services","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Classic","serviceType":"APPLICATION"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"French","serviceType":"APPLICATION"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Cat Eye Gel Set","serviceType":"ADVANCE GEL SET"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Marble Gel Set","serviceType":"ADVANCE GEL SET"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Glitter Gel Set","serviceType":"ADVANCE GEL SET"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Ombre Gel Art","serviceType":"ADVANCE GEL SET"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Chrome Gel Set","serviceType":"ADVANCE GEL SET"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Nail Art – Per Finger","serviceType":"NAIL DESIGN"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"3D Nail Art – Per Finger","serviceType":"NAIL DESIGN"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Gel Extension","serviceType":"NAIL EXTENSION"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Acrylic Extension","serviceType":"NAIL EXTENSION"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Temporary Extension","serviceType":"NAIL EXTENSION"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Soft Gel Extension","serviceType":"NAIL EXTENSION"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Gum Gel Extension","serviceType":"NAIL EXTENSION"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Gel Overlay","serviceType":"OVERLAY"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Acrylic Overlay","serviceType":"OVERLAY"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Gel Refill","serviceType":"REFILLS"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Acrylic Refill","serviceType":"REFILLS"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Gum Gel Refill","serviceType":"REFILLS"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Nail Cut + File","serviceType":"MINI MANICURE"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Nail Cut + Polish","serviceType":"MINI MANICURE"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Gel Polish Removal","serviceType":"REMOVAL"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Extension Removal","serviceType":"REMOVAL"}}]}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Vansshikha Soni Nail Atelier","url":"https://vansshikhasoni.com/","inLanguage":"en","publisher":{"@id":"https://vansshikhasoni.com/#salon"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Where is Vansshikha Soni Nail Atelier located?","acceptedAnswer":{"@type":"Answer","text":"Our luxury nail atelier is based in India. The full studio address is shared privately on booking confirmation. For appointments, directions or a studio tour, message us directly on WhatsApp at +91 78389 13373."}},{"@type":"Question","name":"How do I book an appointment?","acceptedAnswer":{"@type":"Answer","text":"Use the booking form on our website to pick a service, preferred date and time — then send the request on WhatsApp. Vansshikha personally confirms availability. Nothing is booked until you receive a confirmation reply."}},{"@type":"Question","name":"What nail services do you offer?","acceptedAnswer":{"@type":"Answer","text":"We offer 23 professional nail services across 8 categories: classic and French application, advance gel sets (cat-eye, marble, glitter, ombre, chrome), custom nail art, gel and acrylic extensions, overlays, refills, mini manicures and safe removal."}},{"@type":"Question","name":"How much do gel extensions cost?","acceptedAnswer":{"@type":"Answer","text":"Gel extensions start from ₹900–₹1,000 on our official menu. Acrylic extensions are ₹1,100–₹1,200, soft gel extensions ₹800–₹900, and gum gel extensions ₹1,500–₹1,700. Final pricing is confirmed on WhatsApp based on length, design and product system."}},{"@type":"Question","name":"How long does a gel manicure last?","acceptedAnswer":{"@type":"Answer","text":"A professional gel manicure typically lasts 2–3 weeks. With proper aftercare — cuticle oil daily, gloves for chores, no peeling — many clients get even longer wear. Book a gel refill before lifting starts to extend the life of your set."}},{"@type":"Question","name":"Do you take custom nail art requests?","acceptedAnswer":{"@type":"Answer","text":"Yes. Bring a reference photo or describe your idea — gold linework, chrome, florals, 3D accents or minimalist designs. Per-finger nail art starts from ₹30. Complex designs may need a separate quote after consultation."}},{"@type":"Question","name":"What is your cancellation or rescheduling policy?","acceptedAnswer":{"@type":"Answer","text":"Please message us on WhatsApp at least 24 hours before your appointment if you need to reschedule. Same-day cancellations may affect future booking priority."}},{"@type":"Question","name":"Is nail extension removal safe for natural nails?","acceptedAnswer":{"@type":"Answer","text":"When done professionally, yes. We use the correct removal method for your system — never forced peeling. Gel polish removal starts from ₹150; extension removal from ₹300. Never remove gel or extensions at home by biting or scraping."}}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to Book a Nail Appointment at Vansshikha Soni Nail Atelier","description":"Simple steps to book luxury nail art, gel extensions or a manicure appointment online via WhatsApp.","totalTime":"PT5M","step":[{"@type":"HowToStep","name":"Choose a service","text":"Browse 23 nail services across 8 categories and select the service that matches your desired look — gel extensions, nail art, ombre, chrome or classic manicure."},{"@type":"HowToStep","name":"Pick a preferred date","text":"Open the booking form on the website, choose your preferred date and time slot from the calendar."},{"@type":"HowToStep","name":"Share your details","text":"Enter your name and any design notes or inspiration so Vansshikha can prepare for your visit."},{"@type":"HowToStep","name":"Send the request on WhatsApp","text":"Review your summary and send the appointment request on WhatsApp. Vansshikha personally confirms availability — nothing is booked until you receive a confirmation reply."}]}</script>
 </head>
 <body>
+<dialog id="home-intro" class="home-intro" aria-label="Opening animation">
+  <div class="home-intro__triptych" aria-hidden="true">
+    <div class="home-intro__panel"><i></i></div>
+    <div class="home-intro__panel"><i></i></div>
+    <div class="home-intro__panel"><i></i></div>
+    <i class="home-intro__sheen"></i>
+  </div>
+  <button type="button">Skip intro</button>
+</dialog>
+<script async src="/js/home-intro.js?v=atelier-intro-first"></script>
 <!-- @shell:nav:start -->
-<nav id="nav"><div class="wrap"><a class="mark" href="/" aria-label="Vansshikha Soni Nail Atelier, home"><span class="gold-text"><b>V</b>S</span> &nbsp;<span style="font-size:.68rem;letter-spacing:.3em;font-weight:500">NAIL ATELIER</span></a>
-<button class="burger" id="burger" aria-expanded="false" aria-controls="links" aria-label="Menu"><i></i><i></i></button>
-<div class="links" id="links"><a href="/story">Story</a><a href="/founder">Founder</a><button type="button" class="lnk" id="svcbtn" aria-expanded="false" aria-controls="mega">Services <span aria-hidden="true">▾</span></button><div class="macc" id="macc" aria-label="Services"></div><a href="/gallery">Portfolio</a><a href="/faq">FAQ</a><a href="/booking" class="btn mag">Book Appointment</a></div></div></nav>
+<nav id="nav" aria-label="Main navigation"><div class="wrap"><a class="mark" href="/" aria-label="Vansshikha Soni Nail Atelier, home"><span class="mark__seal" aria-hidden="true">VS</span><span class="mark__name">Vansshikha Soni<small>Nail Atelier</small></span></a>
+<div class="nav-tools"><a class="mobile-reserve" href="/booking">Book <span aria-hidden="true">↗</span></a><button type="button" class="burger" id="burger" aria-expanded="false" aria-controls="links" aria-label="Menu"><i></i><i></i></button></div>
+<div class="links" id="links"><button type="button" class="lnk" id="svcbtn" aria-expanded="false" aria-controls="mega">Services <svg viewBox="0 0 12 12" width="12" height="12" fill="none" aria-hidden="true"><path d="m3 4.5 3 3 3-3" stroke="currentColor" stroke-linecap="round"/></svg></button><div class="macc" id="macc" aria-label="Services"></div><a href="/gallery">Portfolio</a><a href="/about">About</a><a href="/contact">Contact</a><a href="/booking" class="btn">Book an appointment <span aria-hidden="true">↗</span></a></div></div></nav>
 <div class="mega" id="mega" aria-label="Services menu"></div>
 <!-- @shell:nav:end -->
 
-<div id="home"><header class="hero" id="top">
-<div class="wrap"><div><div class="eyebrow">Luxury Artist · Nail Atelier</div>
-<h1 aria-label="Art worn at your fingertips"><span class="l"><span>Art worn</span></span><span class="l"><span class="gold-text"><em style="background:none;color:inherit">at your</em></span></span><span class="l"><span>fingertips</span></span></h1>
-<p class="lead rv">Hand-finished nail art by Vansshikha Soni: gold linework, chrome, florals and quiet minimalism, made one set at a time.</p>
-<div class="rv"><a href="#portfolio" class="btn ghost mag">View Portfolio</a></div></div>
+<main id="home"><header class="hero" id="top">
+<div class="wrap"><div class="hero-copy"><div class="eyebrow">Vansshikha Soni · Nail Atelier</div>
+<h1>Art worn at <em>your fingertips.</em></h1>
+<p class="lead">Hand-finished manicures and custom nail art. Bring a reference, a colour you love, or let Vansshikha help you find your finish.</p>
+<div class="hero-actions"><a href="/booking" class="btn">Book an appointment <span aria-hidden="true">↗</span></a><a href="/gallery" class="hero-link">View portfolio <span aria-hidden="true">↗</span></a></div></div>
 <figure class="hero-edit">
   <div class="hero-edit__stage">
-    <img class="hero-edit__swatch" src="/images/brand/floating-swatch.svg" width="620" height="570" alt="Floating burgundy almond nail swatch with a champagne-gold French tip" fetchpriority="high" decoding="async">
+    <svg class="hero-edit__ornament" viewBox="0 0 620 570" fill="none" aria-hidden="true" focusable="false">
+      <path d="M115 214v-92h92m206 0h92v92m0 142v92h-92m-206 0h-92v-92" stroke="currentColor" opacity=".52"/>
+      <circle cx="310" cy="285" r="172" stroke="currentColor" opacity=".25" stroke-dasharray="1 6"/>
+      <ellipse cx="310" cy="285" rx="229" ry="100" transform="rotate(-28 310 285)" stroke="currentColor" opacity=".38"/>
+      <ellipse cx="310" cy="285" rx="199" ry="86" transform="rotate(-28 310 285)" stroke="currentColor" opacity=".14"/>
+      <path d="M190 176q0 21 21 21-21 0-21 21 0-21-21-21 21 0 21-21Zm264 162q0 13 13 13-13 0-13 13 0-13-13-13 13 0 13-13Z" stroke="currentColor"/>
+      <g fill="currentColor"><circle cx="190" cy="197" r="2"/><circle cx="520" cy="187" r="2"/><circle cx="145" cy="383" r="2"/><circle cx="379" cy="440" r="1.5"/></g>
+    </svg>
+    <img class="hero-edit__swatch" src="/images/brand/floating-swatch.svg" width="620" height="570" alt="Sculpted burgundy almond nail swatch with a champagne-gold French tip" fetchpriority="high" decoding="async">
+    <span class="hero-edit__index" aria-hidden="true">FIG. 01</span>
   </div>
-  <figcaption class="hero-edit__caption"><span class="hero-edit__label">The Atelier Edit</span><span class="hero-edit__title">Burgundy &amp; Champagne</span></figcaption>
-</figure></div>
-<div class="scroll-cue">Scroll</div></header>
+  <figcaption class="hero-edit__caption"><span>The lacquer edit</span><span>Burgundy &amp; Champagne</span></figcaption>
+</figure></div></header>
 
-<svg class="divider dv" viewBox="0 0 560 30" aria-hidden="true"><path d="M0 15H230M330 15H560"/><path d="M280 3c10 8 10 16 0 24-10-8-10-16 0-24z"/></svg>
+<div class="atelier-index"><div class="wrap"><a href="#gallery"><span>01</span> Signature looks <span aria-hidden="true">↓</span></a><a href="#services"><span>02</span> Service menu <span aria-hidden="true">↓</span></a><a href="#studio"><span>03</span> Inside the studio <span aria-hidden="true">↓</span></a></div></div>
 
-<section class="ourstory" id="story"><div class="wrap os"><div class="eyebrow rv">Our Story</div><h2 class="rv">A Journey of Beauty, <em>Art &amp; Elegance</em></h2>
-<p class="big rv">At VANSSHIKHA SONI – NAIL ATELIER, we believe that nail artistry is more than just beauty — it's a form of self-expression.</p>
-<p class="rv">Our atelier is inspired by a passion for creativity, timeless elegance, and the little details that make every design special.</p>
-<p class="rv">From delicate, minimalist nails to bold, statement-making creations, we celebrate individuality through thoughtfully crafted nail designs.</p>
-<p class="rv">Our vision is to create a space where beauty meets artistry, where every detail matters, and where every client feels confident expressing their unique style.</p>
-<p class="rv">Because we believe beautiful nails aren't just an accessory — they're a reflection of you.</p>
-<svg class="dv" viewBox="0 0 300 30" aria-hidden="true"><path d="M0 15H120M180 15H300"/><path d="M150 3c10 8 10 16 0 24-10-8-10-16 0-24z"/></svg>
-<div class="tag gold-text rv">Where Every Nail Tells a Story.</div></div></section>
-
-<section class="story" id="gallery"><div class="pin"><div class="t"><div><div class="eyebrow">The Atelier Story</div><h2>Each set, <em>a small<br>work of art</em></h2></div><p style="max-width:20rem;color:rgba(246,238,230,.7)">Scroll to move through selected work.</p></div><div class="track" id="track"></div></div></section>
-
-<section class="founder" id="founder"><div class="fd-glow" aria-hidden="true"></div><div class="wrap fd">
-<div class="fd-media rv"><div class="arch tilt"><div class="in"><img id="fimg" src="/images/brand/founder.jpg" alt="Vansshikha Soni, founder of Vansshikha Soni Nail Atelier" width="732" height="1300" loading="lazy" fetchpriority="low" decoding="async"></div><span class="fd-mono" aria-hidden="true">VS</span></div>
-<div class="fd-plate"><span class="fd-name">Vansshikha Soni</span><span class="fd-role">Founder &amp; Nail Artist</span></div></div>
-<div class="fd-body">
-<div class="eyebrow rv">Meet the Founder</div>
-<h2 class="rv">The Vision Behind <em>the Art</em></h2>
-<p class="rv">At VANSSHIKHA SONI – NAIL ATELIER, beauty is celebrated through creativity, elegance, and attention to detail.</p>
-<p class="rv">With a vision to make nail artistry a reflection of personal style, Vansshikha Soni brings an appreciation for refined aesthetics and beautiful design to the heart of the brand.</p>
-<p class="rv">From timeless elegance to bold, expressive nail designs, the atelier is inspired by the belief that every detail matters and every individual deserves a look that feels uniquely their own.</p>
-<blockquote class="quote rv">Elegance is in the details, and every nail tells a story.</blockquote>
-<ul class="fd-facts rv"><li>One set at a time</li><li>Hand-finished artistry</li><li>Custom design consultation</li></ul>
-</div></div></section>
-
-<section id="services"><div class="wrap"><div class="head"><div class="eyebrow">Services</div><h2 class="rv">Crafted <em>for you</em></h2><p class="rv">Eight categories, 23 services, with the official rates for each. Choose a category to explore.</p></div>
-<div class="svc" id="svc"></div><p style="margin-top:2.4rem;text-align:center"><a class="btn mag" href="/services">View All 23 Services →</a></p></div></section>
-
-<section class="studio" id="studio"><div class="wrap"><div class="head center"><div class="eyebrow">Our Studio</div><h2 class="rvx">STEP INSIDE <em>OUR STUDIO</em></h2><p class="rvx">A Space Designed for Beauty, Comfort &amp; Elegance.</p></div><div class="sgal" id="sgal" role="list"></div><div class="swipe" aria-hidden="true">Swipe →</div></div></section>
-
-<section id="portfolio" style="background:linear-gradient(var(--ink),var(--wine) 120%)"><div class="wrap"><div class="head"><div class="eyebrow">Portfolio</div><h2 class="rv">Real work, <em>real hands</em></h2><p class="rv">Every image is genuine atelier work. Tap a look to enlarge it.</p></div>
-<div class="mq" aria-hidden="true"><div id="mq"></div></div><div class="chips" id="chips" role="group" aria-label="Filter portfolio"></div><div class="mason" id="mason"></div></div></section>
-
-<section class="testi" id="testimonials"><div class="wrap"><div class="head center"><div class="eyebrow">Client Testimonials</div><h2 class="rvx">LOVE NOTES <em>FROM OUR CLIENTS</em></h2><p class="rvx">Beautiful Experiences. Cherished Moments.</p></div>
-<div class="car" id="car" tabindex="0" role="region" aria-roledescription="carousel" aria-label="Client testimonials"><div class="cstage" id="cstage"></div><button type="button" class="cb prev" id="cprev" aria-label="Previous testimonial">‹</button><button type="button" class="cb next" id="cnext" aria-label="Next testimonial">›</button></div><div class="cdots" id="cdots"></div><p class="ccap" id="ccap" aria-live="polite"></p></div></section>
-
-<section class="seo-why" id="why-us" aria-labelledby="why-title"><div class="wrap">
-<div class="head center"><div class="eyebrow rv">Why Choose Us</div><h2 class="rvx" id="why-title">The <em>Vansshikha Soni</em> Difference</h2><p class="rvx">Hand-finished luxury nail artistry — where precision, hygiene and personal style meet.</p></div>
-<div class="why-grid">
-<article class="why-card rvx"><div class="why-ico" aria-hidden="true">✦</div><h3>Hand-Finished Art</h3><p>Every set is painted by Vansshikha Soni herself — gold linework, chrome, florals, ombre and quiet minimalism, one set at a time. No rushed factory finishes.</p></article>
-<article class="why-card rvx"><div class="why-ico" aria-hidden="true">✧</div><h3>Hygiene-First Studio</h3><p>Single-use files where needed, hospital-grade sanitisation and carefully prepared tools. Your nail health comes before any trend.</p></article>
-<article class="why-card rvx"><div class="why-ico" aria-hidden="true">◆</div><h3>Official Transparent Rates</h3><p>All 23 services list official menu rates clearly — from ₹30 nail art per finger to full gel extensions. No hidden charges after you sit down.</p></article>
-<article class="why-card rvx"><div class="why-ico" aria-hidden="true">❖</div><h3>Custom Design Consultation</h3><p>Bring a reference, a mood board or just a colour. Every look is designed around your nail shape, lifestyle and personal aesthetic.</p></article>
-</div>
-<div class="why-cta rvx"><a href="/services" class="btn ghost mag">Explore All Services</a></div>
+<section class="signature" id="gallery" aria-labelledby="signature-title"><div class="wrap">
+  <div class="signature__heading"><div><div class="eyebrow">From the portfolio</div><h2 id="signature-title">Signature <em>Looks</em></h2></div><p>Three ways to wear the atelier’s work, from a magnetic burgundy finish to hand-painted florals.</p></div>
+  <div class="signature__grid" id="portfolio">
+    <a class="signature__card signature__card--feature" href="/services/cat-eye-gel-set">
+      <div class="signature__image"><img src="/images/portfolio/p31.webp" width="750" height="1000" alt="Deep red nails with a luminous diagonal highlight" loading="lazy" decoding="async"><span class="signature__ribbon">Featured finish</span></div>
+      <div class="signature__caption"><div><span>01 / Magnetic gel</span><h3>Burgundy Cat-Eye</h3></div><span aria-hidden="true">↗</span></div>
+    </a>
+    <a class="signature__card signature__card--french" href="/services/french">
+      <div class="signature__image"><img src="/images/portfolio/p24.webp" width="750" height="1000" alt="Glossy black tips over a sheer pink base" loading="lazy" decoding="async"></div>
+      <div class="signature__caption"><div><span>02 / A classic finish</span><h3>French Tips</h3></div><span aria-hidden="true">↗</span></div>
+    </a>
+    <a class="signature__card signature__card--floral" href="/nail-art">
+      <div class="signature__image"><img src="/images/portfolio/p02.webp" width="750" height="1000" alt="Tiny red flowers and black dots over pale yellow tips" loading="lazy" decoding="async"></div>
+      <div class="signature__caption"><div><span>03 / Painted by hand</span><h3>Floral Details</h3></div><span aria-hidden="true">↗</span></div>
+    </a>
+  </div>
+  <a class="signature__link" href="/gallery">See the full portfolio <span aria-hidden="true">→</span></a>
 </div></section>
 
-<section class="seo-guide" id="nail-guide" aria-labelledby="guide-title"><div class="wrap">
-<div class="head center"><div class="eyebrow rv">Expert Advice</div><h2 class="rvx" id="guide-title">Nail Care <em>Guide</em></h2><p class="rvx">Professional tips from our luxury nail atelier to keep your manicure flawless for longer.</p></div>
-<div class="guide-grid">
-<article class="guide-card rvx"><span class="guide-no">01</span><h3>How Long Does a Gel Manicure Last?</h3><p>A professionally applied gel manicure typically lasts <strong>2–3 weeks</strong> without chipping. Gel extensions and overlays may need a refill every <strong>2–4 weeks</strong> depending on nail growth and aftercare. Book a gel refill at Vansshikha Soni Nail Atelier to maintain your set between full appointments.</p></article>
-<article class="guide-card rvx"><span class="guide-no">02</span><h3>Gel vs Acrylic vs Soft Gel Extensions</h3><p><strong>Gel extensions</strong> use a gel-based builder for a glossy, flexible finish. <strong>Acrylic extensions</strong> offer strong structure with a classic sculpted look. <strong>Soft gel extensions</strong> are lighter and soak-off friendly. Not sure which suits you? Message us on WhatsApp — we'll recommend the best system for your natural nail condition.</p></article>
-<article class="guide-card rvx"><span class="guide-no">03</span><h3>How to Make Your Nail Art Last Longer</h3><p>Apply cuticle oil daily, wear gloves for cleaning, avoid using nails as tools, and never peel gel polish at home. Schedule a refill before lifting begins. These simple habits can add <strong>7–10 extra days</strong> of wear to any gel set or nail extension.</p></article>
-<article class="guide-card rvx"><span class="guide-no">04</span><h3>Safe Nail Extension Removal</h3><p>Never bite, peel or forcibly remove extensions — this damages the natural nail plate. Professional removal at our atelier uses the correct method for your system (gel, acrylic or soft gel). Gel polish removal starts from ₹150; extension removal from ₹300.</p></article>
+<section class="founder" id="founder"><div class="wrap fd" id="story">
+<figure class="fd-media"><img class="portrait" src="/images/brand/founder.jpg" alt="Vansshikha Soni, founder and nail artist" width="732" height="1300" loading="lazy" decoding="async"></figure>
+<div class="fd-body">
+<div class="eyebrow">Founder &amp; nail artist</div>
+<h2>Meet Vansshikha</h2>
+<p>Vansshikha works one set at a time. She’ll talk through shape, length and finish with you before starting, whether you have a reference photo or just a colour in mind.</p>
+<a class="editorial-link" href="/founder">About the artist <span aria-hidden="true">→</span></a>
+</div></div></section>
+
+<section id="services" aria-labelledby="home-menu-title"><div class="wrap home-menu"><div class="head"><div class="eyebrow">The menu</div><h2 id="home-menu-title">Nail <em>services</em></h2><p>Browse by finish or treatment. Every service lists the atelier’s menu rates.</p><a class="editorial-link" href="/nail-prices">View price list <span aria-hidden="true">→</span></a></div>
+<ul class="home-menu__list">
+  <li><a href="/services/category/application"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M9 13a7 7 0 1 1 14 0v10a3 3 0 0 1-3 3h-8a3 3 0 0 1-3-3V13Z"/><path d="M9 13c4 3 10 3 14 0"/></svg>Classic &amp; French <span aria-hidden="true">→</span></a></li>
+  <li><a href="/services/category/advance-gel-set"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M16 5c1.7 6 5 9.3 11 11-6 1.7-9.3 5-11 11-1.7-6-5-9.3-11-11 6-1.7 9.3-5 11-11Z"/><path d="M25 5v6m-3-3h6"/></svg>Gel finishes <span aria-hidden="true">→</span></a></li>
+  <li><a href="/services/category/nail-design"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M16 12c-7-8-12 3-4 5-4 7 7 9 7 2 9 0 5-11-1-7l-2 2Z"/><path d="M18 20c2 4 5 6 9 7"/><circle cx="16" cy="16.5" r="1.5"/></svg>Custom nail art <span aria-hidden="true">→</span></a></li>
+  <li><a href="/services/category/nail-extension"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M6 20c0-4 3-9 6-12 3 3 6 8 6 12v3a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-3ZM20 10a4 4 0 0 1 8 0v11a2 2 0 0 1-2 2h-4"/></svg>Extensions <span aria-hidden="true">→</span></a></li>
+  <li><a href="/services"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect x="7" y="7" width="18" height="18" rx="2"/><path d="M12 13h8m-8 6h8"/></svg>All 23 services <span aria-hidden="true">→</span></a></li>
+</ul></div></section>
+
+<section class="studio" id="studio"><div class="wrap"><div class="signature__heading"><div><div class="eyebrow">Behind the appointment</div><h2>Inside the studio</h2></div><p>A look at the gel colours, swatch boards and finishes you can browse at your appointment.</p></div><div class="sgal" id="sgal" role="group" aria-label="Studio photos"></div><a class="editorial-link" href="/studio">More about the studio <span aria-hidden="true">→</span></a></div></section>
+
+<section class="seo-why" id="why-us" aria-labelledby="why-title"><div class="wrap">
+<div class="head"><h2 id="why-title">What to expect</h2></div>
+<div class="why-grid">
+<article class="why-card"><h3>Plan the design</h3><p>Share a photo or a colour you like. Talk through shape, length and finish before the set begins.</p></article>
+<article class="why-card"><h3>See the rates</h3><p>Check the <a href="/nail-prices">price list</a> for each treatment. For detailed nail art, ask for a quote when you share your reference.</p></article>
+<article class="why-card"><h3>Care for your set</h3><p>Ask when to return for a refill and how to remove your set safely. See the <a href="/nail-guide">nail care guide</a> for everyday care.</p></article>
 </div>
 </div></section>
 
 <section class="seo-faq" id="faq" aria-labelledby="faq-title"><div class="wrap">
-<div class="head center"><div class="eyebrow rv">Questions</div><h2 class="rvx" id="faq-title">Frequently <em>Asked</em></h2><p class="rvx">Everything you need to know before booking your appointment at Vansshikha Soni Nail Atelier.</p></div>
+<div class="head center"><h2 id="faq-title">Before you book</h2></div>
 <div class="faq-list" id="faq-list">
 <div class="faq-item rvx"><h3><button type="button" class="faq-q" aria-expanded="false" aria-controls="fa1" id="fq1">Where is Vansshikha Soni Nail Atelier located?<span class="faq-ico" aria-hidden="true">+</span></button></h3><div class="faq-a" id="fa1" role="region" aria-labelledby="fq1"><p>Our luxury nail atelier is based in India. The full studio address is shared privately on booking confirmation. For appointments, directions or a studio tour, message us directly on WhatsApp at <a href="https://wa.me/917838913373" target="_blank" rel="noopener">+91 78389 13373</a>.</p></div></div>
 <div class="faq-item rvx"><h3><button type="button" class="faq-q" aria-expanded="false" aria-controls="fa2" id="fq2">How do I book an appointment?<span class="faq-ico" aria-hidden="true">+</span></button></h3><div class="faq-a" id="fa2" role="region" aria-labelledby="fq2"><p>Use the <a href="#book">booking form</a> on our website to pick a service, preferred date and time — then send the request on WhatsApp. Vansshikha personally confirms availability. Nothing is booked until you receive a confirmation reply. Walk-ins are subject to availability.</p></div></div>
@@ -131,30 +169,51 @@
 </div>
 </div></section>
 
-<section class="book" id="book"><div class="wrap bk"><div><div class="eyebrow">Appointment Request</div><h2 class="rv">Reserve <em>your hour</em></h2><p class="rv" style="margin:1.2rem 0;color:rgba(246,238,230,.75)">Choose a service and a preferred date, then send the request on WhatsApp. It is a request only; Vansshikha confirms availability personally.</p><svg viewBox="0 0 300 120" width="100%" style="max-width:300px;opacity:.7" aria-hidden="true"><path d="M0 100C60 100 60 20 120 20S180 100 240 100 300 40 300 40" fill="none" stroke="#D7B77A" stroke-width="1" class="dv2"/></svg></div>
-<div class="panel"><div class="steps" id="steps"><i></i><i></i><i></i><i></i></div><div class="lookchip" id="lookchip"><img alt=""><div><div class="eyebrow" style="font-size:.6rem">Selected look</div><span id="lookname"></span></div><button type="button" id="lookx" aria-label="Remove selected look">REMOVE</button></div>
-<div class="stp on" data-s="0"><h3>Choose a service</h3><div class="fld" style="margin-top:1.4rem"><select id="ssel" aria-label="Service" style="width:100%;background:#120a0e;color:var(--ivory);border:0;border-bottom:1px solid rgba(215,183,122,.5);padding:.9rem 0;font:inherit;font-size:1.1rem;outline:0"></select></div><p class="err" id="e0" role="alert"></p><div class="nav2"><span></span><button class="btn" data-next>Next →</button></div></div>
-<div class="stp" data-s="1"><h3>Preferred date</h3><div class="cal" id="cal"></div><div class="times" id="times"></div><p class="err" id="e1" role="alert"></p><div class="nav2"><button class="btn ghost" data-prev>← Back</button><button class="btn" data-next>Next →</button></div></div>
-<div class="stp" data-s="2"><h3>Your details</h3><div class="fld"><input id="nm" placeholder=" " autocomplete="name"><label for="nm">Your name</label></div><div class="fld"><textarea id="nt" rows="3" placeholder=" "></textarea><label for="nt">Notes or design inspiration (optional)</label></div><p class="err" id="e2" role="alert"></p><div class="nav2"><button class="btn ghost" data-prev>← Back</button><button class="btn" data-next>Review →</button></div></div>
-<div class="stp" data-s="3"><h3>Request ready</h3><ul class="sum" id="sum"></ul><p class="warn">Not confirmed yet. Nothing is booked until Vansshikha replies to confirm a slot.</p><div class="nav2"><button class="btn ghost" data-prev>← Edit</button><a class="btn mag" id="wa" target="_blank" rel="noopener">Send on WhatsApp</a></div></div></div></div></section>
+<!-- @component:appointment:start -->
+<section class="book appointment" id="book" aria-labelledby="appointment-title">
+  <div class="wrap">
+    <div class="appointment__intro"><div class="eyebrow">The reservation desk</div><h2 id="appointment-title">Request an <em>appointment</em></h2><p>Choose what you’d like done and when you’d prefer to visit. Vansshikha will confirm availability and pricing on WhatsApp.</p></div>
+    <noscript><p><a class="btn" href="https://wa.me/917838913373">Request an appointment on WhatsApp ↗</a></p></noscript>
+    <div class="appointment__grid" data-appointment hidden>
+      <div class="appointment__panel">
+        <ol class="appointment__steps" id="steps" aria-label="Booking progress"><li aria-current="step"><span>01</span> Service</li><li><span>02</span> Schedule</li><li><span>03</span> Details</li><li><span>04</span> Review</li></ol>
+        <div class="stp on" data-s="0"><h3 tabindex="-1">Choose a service</h3><p class="appointment__help">Not sure what to pick? <a href="/services">Explore the service menu</a>.</p><div class="appointment__field"><label for="ssel">Service</label><select id="ssel" aria-describedby="e0"><option value="">Select a treatment</option></select></div><fieldset class="appointment__rates" id="menu-options" hidden><legend>Menu rate preference <span>(optional)</span></legend><div class="opts"><button type="button" class="opt" data-rate="M" aria-pressed="false"></button><button type="button" class="opt" data-rate="R" aria-pressed="false"></button></div></fieldset><p class="err" id="e0" role="alert"></p><div class="appointment__actions"><button type="button" class="btn" data-next>Choose a date <span aria-hidden="true">→</span></button></div></div>
+        <div class="stp" data-s="1"><h3 tabindex="-1">Pick your preferred date</h3><p class="appointment__help">Dates and times are preferences, not live availability.</p><div class="cal" id="cal" aria-label="Preferred date calendar"></div><div class="appointment__time"><p id="time-label">Preferred time of day</p><div class="times" id="times" role="group" aria-labelledby="time-label"></div></div><p class="err" id="e1" role="alert"></p><div class="appointment__actions"><button type="button" class="btn ghost" data-prev>← Back</button><button type="button" class="btn" data-next>Your details →</button></div></div>
+        <div class="stp" data-s="2"><h3 tabindex="-1">Tell us a little about you</h3><p class="appointment__help">Add a name for the request and any design details you’d like to share.</p><div class="appointment__field"><label for="nm">Your name</label><input id="nm" autocomplete="name" maxlength="100" aria-describedby="e2" required></div><div class="appointment__field"><label for="nt">Design notes <span>(optional)</span></label><textarea id="nt" rows="3" maxlength="500" placeholder="Colour, shape, occasion, or a reference you’ll share on WhatsApp"></textarea></div><p class="err" id="e2" role="alert"></p><div class="appointment__actions"><button type="button" class="btn ghost" data-prev>← Back</button><button type="button" class="btn" data-next>Review request →</button></div></div>
+        <div class="stp" data-s="3"><h3 tabindex="-1">Review your request</h3><p class="appointment__help">Check your details, then open WhatsApp to send the pre-filled message.</p><ul class="sum" id="sum"></ul><p class="warn">Your appointment is confirmed only when the studio replies with a slot.</p><div class="appointment__actions"><button type="button" class="btn ghost" data-prev>← Edit</button><a class="btn" id="wa" target="_blank" rel="noopener">Send on WhatsApp <span aria-hidden="true">↗</span></a></div></div>
+      </div>
+      <aside class="appointment__ticket" aria-labelledby="ticket-title">
+        <div class="ticket__top"><div><div class="eyebrow">Vansshikha Soni Nail Atelier</div><h3 id="ticket-title">Your visit</h3></div><span class="ticket__seal" aria-hidden="true">VS</span></div>
+        <dl class="ticket__rows" aria-live="polite" aria-atomic="true"><div><dt>Service</dt><dd id="ticket-service">Not selected</dd></div><div><dt>Preferred date</dt><dd id="ticket-date">Not selected</dd></div><div><dt>Time of day</dt><dd id="ticket-time">Flexible</dd></div><div id="ticket-rates-row" hidden><dt>Menu rates</dt><dd id="ticket-rates"></dd></div></dl>
+        <div class="lookchip" id="lookchip" hidden><img alt="" width="46" height="58"><div><span class="eyebrow">Inspiration</span><span id="lookname"></span></div><button type="button" id="lookx" aria-label="Remove inspiration photo">×</button></div>
+        <div class="ticket__status"><span aria-hidden="true"></span> Appointment request</div>
+      </aside>
+    </div>
+    <p class="appointment__support"><a class="editorial-link" href="https://wa.me/917838913373">Need help? Message the studio <span aria-hidden="true">↗</span></a></p>
+  </div>
+</section>
+<!-- @component:appointment:end -->
 
-</div><main id="views" hidden></main>
+</main>
 <!-- @shell:footer:start -->
-<footer><svg class="bg" viewBox="0 0 1200 300" preserveAspectRatio="none" aria-hidden="true"><path d="M0 220C200 120 300 300 500 200S800 80 1200 190"/><path d="M0 250C250 160 350 320 600 230S900 120 1200 220"/><path d="M0 190C150 90 380 260 560 170S900 40 1200 150"/></svg>
-<div class="wrap" style="position:relative"><img class="lg" id="footlogo" src="/images/brand/circle.webp" width="760" height="760" alt="Vansshikha Soni Nail Atelier official logo" loading="lazy" decoding="async"><div class="eyebrow">Luxury Artist</div><div class="big gold-text" id="fbig">Vansshikha</div>
-<a href="https://wa.me/917838913373" target="_blank" rel="noopener" class="btn mag">Chat On WhatsApp</a>
-<div class="fl"><a href="https://wa.me/917838913373" target="_blank" rel="noopener noreferrer" aria-label="Chat with VANSSHIKHA SONI on WhatsApp">WhatsApp</a><a href="https://www.instagram.com/vs_nail_atelier_luxury_artist/" target="_blank" rel="noopener noreferrer" aria-label="Visit VANSSHIKHA SONI on Instagram">Instagram</a><a href="mailto:VANSSHIKHASONI@gmail.com" aria-label="Email VANSSHIKHA SONI">Email</a><span>Studio address shared after booking confirmation</span></div><nav class="seo-links" aria-label="Explore the site"><a href="/about">About</a><a href="/story">Our Story</a><a href="/founder">Founder</a><a href="/studio">Studio</a><a href="/why-us">Why Us</a><a href="/services">Services</a><a href="/nail-prices">Price List</a><a href="/gel-nails">Gel Nails</a><a href="/nail-extensions">Extensions</a><a href="/nail-art">Nail Art</a><a href="/gallery">Portfolio</a><a href="/nail-guide">Nail Care Guide</a><a href="/faq">FAQ</a><a href="/contact">Contact</a></nav><p class="copy">© <span id="yr"></span> Vansshikha Soni Nail Atelier. All photography is the atelier's own work.</p></div></footer>
+<footer class="atelier-footer">
+<div class="wrap"><div class="footer-grid">
+<div class="footer-brand"><span class="footer-crest"><img class="lg" src="/images/brand/circle.webp" width="46" height="46" alt="" loading="lazy" decoding="async"></span><div><p>Vansshikha Soni</p><span>Nail Atelier</span></div></div>
+<nav class="footer-links" aria-label="Explore the site"><p>Explore</p><a href="/services">Services</a><a href="/nail-prices">Price list</a><a href="/gallery">Portfolio</a><a href="/about">About the atelier</a><a href="/studio">Studio</a><a href="/nail-guide">Nail care</a><a href="/faq">FAQ</a></nav>
+<div class="footer-links"><p>Appointments</p><a href="/booking">Request an appointment</a><a href="https://wa.me/917838913373">WhatsApp</a><a href="https://www.instagram.com/vs_nail_atelier_luxury_artist/">Instagram</a><a href="mailto:VANSSHIKHASONI@gmail.com">Email</a><span>Studio address shared after booking confirmation.</span></div>
+</div><div class="footer-bottom"><p class="copy">© <span id="yr"></span> Vansshikha Soni Nail Atelier</p><div><a href="/terms">Terms</a><a href="/privacy">Privacy</a></div></div></div></footer>
 <!-- @shell:footer:end -->
 
 <!-- @shell:tail:start -->
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Portfolio viewer"><button class="x" id="lx" aria-label="Close">×</button><button class="nv p" id="lp" aria-label="Previous">‹</button><button class="nv n" id="ln" aria-label="Next">›</button>
-<figure><img id="li" width="900" height="1200" alt=""><figcaption><b id="lt"></b><span class="eyebrow" id="lc"></span></figcaption></figure></div>
+<figure><img id="li" width="900" height="1200" alt=""><figcaption><b id="lt"></b><span class="eyebrow" id="lc"></span><a href="/booking" class="editorial-link" id="lbk">Use as booking inspiration <span aria-hidden="true">↗</span></a></figcaption></figure></div>
 <div class="lb" id="lb2" role="dialog" aria-modal="true" aria-label="Image viewer"><button class="x" id="l2x" aria-label="Close">×</button><button class="nv p" id="l2p" aria-label="Previous">‹</button><button class="nv n" id="l2n" aria-label="Next">›</button><figure><img id="l2i" width="900" height="1200" alt=""><figcaption><b id="l2t"></b><span class="eyebrow" id="l2c"></span></figcaption></figure></div><div class="dock" id="dock" role="navigation" aria-label="Social and contact links"><a class="dk" id="dock-ig" href="https://www.instagram.com/vs_nail_atelier_luxury_artist/" target="_blank" rel="noopener noreferrer" aria-label="Visit VANSSHIKHA SONI on Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="2.8" y="2.8" width="18.4" height="18.4" rx="5.4"/><circle cx="12" cy="12" r="4.3"/><circle cx="17.5" cy="6.5" r="1.15" fill="currentColor" stroke="none"/></svg><span class="dk-tip" aria-hidden="true">Follow Us on Instagram</span></a><a class="dk" id="dock-wa" href="https://wa.me/917838913373" target="_blank" rel="noopener noreferrer" aria-label="Chat with VANSSHIKHA SONI on WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/><path transform="translate(6.9 6.9) scale(.42)" stroke-width="3.4" d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span class="dk-tip" aria-hidden="true">Chat on WhatsApp</span></a><a class="dk" id="dock-em" href="mailto:VANSSHIKHASONI@gmail.com" aria-label="Email VANSSHIKHA SONI"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span class="dk-tip" aria-hidden="true">Send Us an Email</span></a></div><div class="cur" id="cur"></div><div class="pt" id="pt" aria-hidden="true"></div>
 <!-- @shell:tail:end -->
 
-<script src="/vendor/gsap.min.js"></script>
-<script src="/vendor/ScrollTrigger.min.js"></script>
-<script src="/js/service-data.js"></script>
-<script src="/js/assets.js"></script>
-<script src="/js/app.js?v=floating-swatch"></script>
+<!-- @shell:scripts:start -->
+<script defer src="/js/service-data.js"></script>
+<script defer src="/js/assets.js?v=atelier-finish"></script>
+<script defer src="/js/app.js?v=atelier-motion"></script>
+<script defer src="/js/experience.js?v=atelier-motion"></script>
+<!-- @shell:scripts:end -->
 </body></html>

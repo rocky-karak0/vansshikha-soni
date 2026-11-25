@@ -1,5 +1,17 @@
 /* Image paths and portfolio data. Add a photo: drop the file in /images and add an entry here. */
 const ITEMS=[["p01", "Florals", 750, 1000], ["p02", "Florals", 750, 1000], ["p03", "Deep Reds", 750, 1000], ["p04", "Florals", 760, 787], ["p05", "Deep Reds", 760, 582], ["p06", "Gold", 750, 1000], ["p07", "Ombr\u00e9", 563, 1000], ["p08", "Ombr\u00e9", 760, 760], ["p09", "Gold", 750, 1000], ["p10", "Playful", 750, 1000], ["p11", "Playful", 750, 1000], ["p12", "French", 750, 1000], ["p13", "Playful", 747, 1000], ["p14", "Ombr\u00e9", 760, 570], ["p15", "Gold", 562, 1000], ["p16", "Deep Reds", 750, 1000], ["p17", "Gold", 524, 992], ["p18", "French", 489, 996], ["p19", "Gold", 712, 990], ["p20", "Gold", 744, 990], ["p21", "French", 750, 1000], ["p22", "Ombr\u00e9", 750, 1000], ["p23", "Florals", 750, 1000], ["p24", "French", 750, 1000], ["p25", "Gold", 450, 940], ["p26", "French", 753, 1000], ["p27", "Gold", 450, 938], ["p28", "Gold", 448, 802], ["p29", "Ombr\u00e9", 448, 871], ["p30", "Playful", 608, 749], ["p31", "Deep Reds", 750, 1000], ["p32", "Gold", 750, 1000], ["p33", "Ombr\u00e9", 760, 603], ["p34", "French", 606, 1000], ["p35", "French", 750, 1000], ["p36", "Playful", 750, 1000], ["p37", "Florals", 750, 1000], ["p38", "Gold", 750, 1000], ["p39", "Playful", 563, 1000]];
+/* Use the same titles in the static portfolio and in its interactive viewer. */
+const PORTFOLIO = (() => {
+  const names = { Gold: ['Gilded Line', 'Aurum Edge', 'Gold Leaf', 'Chrome Rim', 'Liquid Gold'], Florals: ['Bloom', 'Petal Study', 'Garden Set', 'Pearl Flower'], 'Deep Reds': ['Garnet', 'Wine Cat-Eye', 'Ruby Gloss', 'Velvet Red'], 'Ombré': ['Blush Fade', 'Rose Gradient', 'Sunset Fade', 'Berry Tip'], French: ['Quiet French', 'Noir Tip', 'Minimal Nude', 'Clean Line'], Playful: ['Citrus Stripe', 'Colour Play', 'Sea Shell', 'Little Joys'] };
+  const featured = { p02: 'Hand-painted Florals', p24: 'Glossy Black French Tips', p31: 'Burgundy Cat-Eye', p32: 'Lavender & Gold Linework' };
+  const counts = {};
+  return ITEMS.map(([id, c, w, h], i) => {
+    const n = counts[c] || 0;
+    counts[c] = n + 1;
+    const options = names[c];
+    return { id, c, w, h, i, t: featured[id] || (options ? options[n % options.length] : `${c} nail art`) };
+  });
+})();
 const IMG={
  "p01": "/images/portfolio/p01.webp",
  "p02": "/images/portfolio/p02.webp",

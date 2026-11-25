@@ -20,7 +20,7 @@ const { GUIDE_PAGES } = require('./build/seo-pages.js');
 const ORIGIN = 'https://vansshikhasoni.com';
 const ROOT = __dirname;
 const SRC = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
-const { ITEMS, IMG, ST, TS } = new Function(fs.readFileSync(path.join(ROOT, 'js/assets.js'), 'utf8') + '\nreturn {ITEMS,IMG,ST,TS};')();
+const { PORTFOLIO: IT, IMG, ST } = new Function(fs.readFileSync(path.join(ROOT, 'js/assets.js'), 'utf8') + '\nreturn {PORTFOLIO,IMG,ST};')();
 /* studio photo list (same order and captions as STUDIO in js/app.js) */
 const STUDIO = [['shelf', 'Gel polish wall', 'Shade shelves'], ['chart', 'Colour chart', 'Gel polish display'], ['swatch', 'Shade swatch board', 'Nude and rose tones'], ['gloss', 'Gloss top coat', 'Finishing range'], ['matte', 'Matte top coat', 'Finishing range'], ['bloom', 'Blooming gel', 'Colourful Sky']]
   .map(([k, t, c]) => ({ k, t, c, src: ST[k][0], w: ST[k][1], h: ST[k][2] }));
@@ -33,17 +33,13 @@ const SERV = RAW.map(([c, slug, name, m, r, about, ideal, before, hl, care, ph],
 SERV.forEach(s => { if (!s.ph && EXAMPLE[s.slug]) { s.ph = EXAMPLE[s.slug]; s.ex = true; } });
 CATS.forEach(c => { c.items = SERV.filter(s => s.c == c.i); });
 
-/* ===== portfolio items (same construction as js/app.js) ===== */
-const NAMES = { Gold: ['Gilded Line', 'Aurum Edge', 'Gold Leaf', 'Chrome Rim', 'Liquid Gold'], Florals: ['Bloom', 'Petal Study', 'Garden Set', 'Pearl Flower'], 'Deep Reds': ['Garnet', 'Wine Cat-Eye', 'Ruby Gloss', 'Velvet Red'], 'Ombré': ['Blush Fade', 'Rose Gradient', 'Sunset Fade', 'Berry Tip'], French: ['Quiet French', 'Noir Tip', 'Minimal Nude', 'Clean Line'], Playful: ['Citrus Stripe', 'Colour Play', 'Sea Shell', 'Little Joys'] };
-const cnt = {};
-const IT = ITEMS.map(([id, c, w, h], i) => { cnt[c] = (cnt[c] || 0); const t = NAMES[c][cnt[c]++ % NAMES[c].length]; return { id, c, w, h, t, i }; });
-const DIM = Object.fromEntries(ITEMS.map(([id, c, w, h]) => [id, [w, h]]));
+const DIM = Object.fromEntries(IT.map(({ id, w, h }) => [id, [w, h]]));
 
 /* ===== helpers (mirrors js/app.js) ===== */
 const esc = s => String(s).replace(/[&<>"]/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[m]));
 const inr = n => '₹' + n.toLocaleString('en-IN');
 const waLink = msg => 'https://wa.me/917838913373?text=' + encodeURIComponent(msg);
-const waMsg = (s, o, d, tm) => 'Hello VANSSHIKHA SONI Nail Atelier!\n\nI would like to enquire about booking:\n\nService: ' + s.name + (o ? '\nPrice Option: ' + o : '') + (d ? '\nPreferred Date: ' + d : '') + (tm ? '\nPreferred Time: ' + tm : '') + '\n\nPlease confirm availability and final pricing.';
+const waMsg = s => `Hello Vansshikha Soni Nail Atelier! I’d like to enquire about an appointment for ${s.name}. Please confirm availability and final pricing.`;
 const pic = (s, alt, eager) => s.ph
   ? '<img ' + (eager ? 'fetchpriority="high" decoding="async" ' : '') + 'src="' + IMG[s.ph] + '"' + (DIM[s.ph] ? ' width="' + DIM[s.ph][0] + '" height="' + DIM[s.ph][1] + '"' : '') + ' alt="' + (alt ? esc(s.name) + (s.ex ? ': example finish from the atelier portfolio' : ', from the atelier portfolio') : '') + '" ' + (eager ? '' : 'loading="lazy" fetchpriority="low"') + '>'
   : '<div class="ph" role="img" aria-label="' + esc(s.name) + '"><span class="gold-text">VS</span><small>' + CATS[s.c].name + '</small></div>';
@@ -68,6 +64,8 @@ const ASSETS = slice('<!-- @shell:assets:start -->', '<!-- @shell:assets:end -->
 const NAV_HOME = slice('<!-- @shell:nav:start -->', '<!-- @shell:nav:end -->');
 const FOOT_HOME = slice('<!-- @shell:footer:start -->', '<!-- @shell:footer:end -->');
 const TAIL = slice('<!-- @shell:tail:start -->', '<!-- @shell:tail:end -->');
+const SCRIPTS = slice('<!-- @shell:scripts:start -->', '<!-- @shell:scripts:end -->');
+const APPOINTMENT = slice('<!-- @component:appointment:start -->', '<!-- @component:appointment:end -->');
 
 /* the shared nav links to real URLs everywhere, so every link has its own crawlable page */
 const NAV_SUB = NAV_HOME;
@@ -83,8 +81,7 @@ function head(o) {
   return `<!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#080709" media="(prefers-color-scheme: dark)">
-<meta name="theme-color" content="#260B16">
+<meta name="theme-color" content="#190d13">
 <meta name="color-scheme" content="dark">
 <title>${o.title}</title>
 <meta name="description" content="${desc}">
@@ -117,11 +114,7 @@ ${o.footer}
 
 ${TAIL}
 
-<script src="/vendor/gsap.min.js"></script>
-<script src="/vendor/ScrollTrigger.min.js"></script>
-<script src="/js/service-data.js"></script>
-<script src="/js/assets.js"></script>
-<script src="/js/app.js?v=floating-swatch"></script>
+${SCRIPTS}
 </body></html>
 `;
 }
@@ -140,7 +133,7 @@ function writePage(relPath, o) {
 function servicePage(s) {
   const c = CATS[s.c], ct = CONTENT[s.slug] || {}, flip = s.i % 2 ? ' flip' : '';
   const rel = [...c.items.filter(x => x !== s), ...SERV.slice(s.i + 1), ...SERV].filter((x, i, a) => x !== s && a.indexOf(x) === i).slice(0, 3);
-  const rings = '<svg viewBox="0 0 400 400" aria-hidden="true">' + [40, 80, 120, 160, 195].map(r => `<circle cx="200" cy="200" r="${r}"/>`).join('') + '</svg>';
+  const bookingHref = `/booking?service=${s.slug}#book`;
   const intro = ct.intro || s.about;
   const procedure = (ct.procedure || []).map(x => `<li>${esc(x)}</li>`).join('');
   const care = s.care ? esc(s.care) : GENERAL_AFTERCARE;
@@ -148,7 +141,7 @@ function servicePage(s) {
   const faqHtml = faqs.map((f, i) => `<div class="faq-item rvx"><h3><button type="button" class="faq-q" aria-expanded="false" aria-controls="sfa${i + 1}" id="sfq${i + 1}">${esc(f.q)}<span class="faq-ico" aria-hidden="true">+</span></button></h3><div class="faq-a" id="sfa${i + 1}" role="region" aria-labelledby="sfq${i + 1}"><p>${f.a}</p></div></div>`).join('\n');
 
   const main = `<main id="views">
-<article class="sd" style="--tint:${c.tint}"><section class="sdh"><div class="sbg" aria-hidden="true">${rings}</div><div class="wrap sdg${flip}"><div class="sdt"><div class="crumb" role="navigation" aria-label="Breadcrumb"><a href="/services">All Services</a> / <a href="/services/category/${c.slug}">${c.name}</a></div><div class="eyebrow">${c.name}</div><h1>${esc(s.name)}</h1><p class="lead">${esc(s.about)}</p><div class="pr2"><span>M<b>${inr(s.m)}</b></span><span>R<b>${inr(s.r)}</b></span></div><div class="acts" style="max-width:420px"><a class="btn ghost mag" href="/services">← All Services</a></div></div><figure class="sdi tilt"><span class="no2">${String(s.i + 1).padStart(2, '0')} / 23</span><div class="fr">${pic(s, true, true)}</div>${s.ph ? `<figcaption>${s.ex ? 'Example from the atelier portfolio' : 'From the atelier portfolio'}</figcaption>` : ''}</figure></div></section>
+<article class="sd"><section class="sdh"><div class="wrap sdg${flip}"><div class="sdt"><div class="crumb" role="navigation" aria-label="Breadcrumb"><a href="/services">All Services</a> / <a href="/services/category/${c.slug}">${c.name}</a></div><div class="eyebrow">${c.name}</div><h1>${esc(s.name)}</h1><p class="lead">${esc(s.about)}</p><div class="pr2"><span>M<b>${inr(s.m)}</b></span><span>R<b>${inr(s.r)}</b></span></div><div class="acts"><a class="btn" href="${bookingHref}">Request this service ↗</a><a class="btn ghost" href="/services">← All Services</a></div></div><figure class="sdi"><div class="fr">${pic(s, true, true)}</div><figcaption>${s.ph ? (s.ex ? 'Example from the atelier portfolio' : 'From the atelier portfolio') : 'Vansshikha Soni Nail Atelier'} <span>${String(s.i + 1).padStart(2, '0')} / 23</span></figcaption></figure></div></section>
  <section class="sdc"><div class="wrap sdl${flip}"><div class="sdm">
   <section class="rvx"><h2>About this <em>service</em></h2><p>${esc(intro)}</p></section>
   <section class="rvx"><h2>What the service <em>involves</em></h2><p>${esc(s.before)}</p></section>
@@ -162,7 +155,7 @@ function servicePage(s) {
   <div class="head center"><div class="eyebrow">Questions</div><h2 class="rvx" id="faq-title">Frequently <em>Asked</em></h2><p class="rvx">Everything you need to know before booking ${esc(s.name)}.</p></div>
   <div class="faq-list" id="faq-list">${faqHtml}</div>
  </div></section>
- <section class="sbk" id="sbk" data-svc="${s.slug}"><div class="wrap"><div class="pnl2 rvx"><div><div class="eyebrow">Book on WhatsApp</div><h2>Enquire about <em>${esc(s.name)}</em></h2><p>This opens WhatsApp with a ready message. It is an enquiry only; your slot and final price are confirmed by the studio.</p></div><div class="bf"><fieldset><legend>Price option (optional)</legend><div class="opts"><button type="button" class="opt" aria-pressed="false" data-o="M">M<small>${inr(s.m)}</small></button><button type="button" class="opt" aria-pressed="false" data-o="R">R<small>${inr(s.r)}</small></button></div></fieldset><div class="two"><div><label class="lb2" for="bd">Preferred date (optional)</label><input type="date" id="bd"></div><div><label class="lb2" for="bt">Preferred time (optional)</label><input type="time" id="bt"></div></div><a class="btn mag" id="bwa" target="_blank" rel="noopener">Book on WhatsApp</a></div></div></div></section>
+ <section class="sbk" id="sbk" aria-labelledby="service-book-title"><div class="wrap"><div class="service-reserve"><div><div class="eyebrow">The reservation desk</div><h2 id="service-book-title">Book <em>${esc(s.name)}</em></h2><p>Your service will be pre-selected. Choose a preferred date and send the request to the atelier.</p></div><div class="service-reserve__actions"><a class="btn" href="${bookingHref}">Request an appointment ↗</a><a class="editorial-link" href="${waLink(waMsg(s))}" target="_blank" rel="noopener">Ask on WhatsApp ↗</a></div></div></div></section>
  <section class="rel"><div class="wrap"><h2 class="rvx">Related <em>services</em></h2><div class="sg">${rel.map((x, i) => card(x, i)).join('')}</div><div class="back2"><a class="btn ghost mag" href="/services">← Back to All Services</a></div></div></section></article>
 </main>`;
 
@@ -214,13 +207,10 @@ ${relSection('Explore <em>the menu</em>', [{ h: '/nail-prices', t: 'Price List' 
 
 /* ===== /gallery ===== */
 function galleryPage() {
-  const cats = [...new Set(IT.map(i => i.c))];
-  const unit = cats.map(c => `<span>${c}</span><span>✦</span>`).join('');
-  const tiles = IT.map(it => `<button class="tile tilt" data-i="${it.i}" data-c="${it.c}" aria-label="Open ${it.t}"><img src="${IMG[it.id]}" width="${it.w}" height="${it.h}" alt="${it.t}, ${it.c} nail art" loading="lazy" fetchpriority="low"><span class="no">${String(it.i + 1).padStart(2, '0')}</span><span class="cap"><b>${it.t}</b>${it.c}</span></button>`).join('');
+  const tiles = IT.map(it => `<button class="tile" data-i="${it.i}" data-c="${it.c}" aria-label="Open ${esc(it.t)}"><img src="${IMG[it.id]}" width="${it.w}" height="${it.h}" alt="${esc(it.t)}" loading="lazy" decoding="async"><span class="cap"><b>${esc(it.t)}</b>${it.c}</span></button>`).join('');
   const main = `<main id="views">
 <section class="sph"><div class="wrap"><div class="eyebrow">Portfolio</div><h1>Real work, <em>real hands</em></h1><p>Every image is genuine atelier work by Vansshikha Soni. Tap a look to enlarge it.</p></div></section>
-<section id="portfolio" style="background:linear-gradient(var(--ink),var(--wine) 120%);padding-bottom:90px"><div class="wrap">
-<div class="mq" aria-hidden="true"><div id="mq">${unit}${unit}${unit}${unit}</div></div>
+<section id="portfolio" class="portfolio-page"><div class="wrap">
 <div class="chips" id="chips" role="group" aria-label="Filter portfolio"></div>
 <div class="mason" id="mason">${tiles}</div>
 <p class="note" style="margin-top:2.4rem">All photography is the atelier's own work.</p>
@@ -307,7 +297,7 @@ ${relSection('More from <em>the atelier</em>', [{ h: '/story', t: 'Our Story' },
 
 /* ===== /studio ===== */
 function studioPage() {
-  const tiles = STUDIO.map((s, i) => `<button type="button" class="sit s${i + 1} rvx" role="listitem" data-i="${i}" style="transition-delay:${i * 90}ms" aria-label="Open photo: ${s.t}"><img src="${s.src}" width="${s.w}" height="${s.h}" alt="${s.t} in the studio" loading="lazy" fetchpriority="low"><span class="gcap"><b>${s.t}</b>${s.c}</span></button>`).join('');
+  const tiles = STUDIO.map((s, i) => `<button type="button" class="sit s${i + 1}" data-i="${i}" aria-label="Open photo: ${s.t}"><img src="${s.src}" width="${s.w}" height="${s.h}" alt="${s.t} in the studio" loading="lazy" decoding="async"><span class="gcap"><b>${s.t}</b>${s.c}</span></button>`).join('');
   const main = `<main id="views">
 <section class="sph"><div class="wrap"><div class="eyebrow">Our Studio</div><h1>${STUDIO_PAGE.h1}</h1><p>${STUDIO_PAGE.lead}</p></div></section>
 <section class="ourstory"><div class="wrap os">
@@ -411,7 +401,7 @@ function categoryPage(c) {
   const path = '/services/category/' + c.slug;
   const others = CATS.filter(x => x !== c).map(x => ({ h: '/services/category/' + x.slug, t: tc(x.name) }));
   const main = `<main id="views">
-<section class="sph" style="background:radial-gradient(ellipse at 70% 0,${c.tint},var(--ink) 70%)"><div class="wrap">
+<section class="sph"><div class="wrap">
 ${crumb(crumbs)}
 <div class="eyebrow">Service Category</div><h1>${name} <em>Services</em></h1><p>${CAT_INTRO[c.slug]}</p>
 <p class="note" style="margin-top:1rem">Official menu rates: ${range}.</p>
@@ -466,13 +456,8 @@ function contactPage() {
 /* ===== /booking ===== */
 function bookingPage() {
   const main = `<main id="views">
-<section class="sph"><div class="wrap"><div class="eyebrow">Appointment Request</div><h1>${PAGES.booking.h1}</h1><p>Choose a service and a preferred date, then send the request on WhatsApp. It is a request only; Vansshikha confirms availability personally.</p></div></section>
-<section class="book" id="book"><div class="wrap bk"><div><div class="eyebrow">How it works</div><h2 class="rvx">Three steps to <em>your set</em></h2><p class="rvx" style="margin:1.2rem 0;color:rgba(246,238,230,.75)">Pick a service, choose a preferred date and share your details. We reply on WhatsApp to confirm your slot and final pricing.</p><svg viewBox="0 0 300 120" width="100%" style="max-width:300px;opacity:.7" aria-hidden="true"><path d="M0 100C60 100 60 20 120 20S180 100 240 100 300 40 300 40" fill="none" stroke="#D7B77A" stroke-width="1" class="dv2"/></svg></div>
-<div class="panel"><div class="steps" id="steps"><i></i><i></i><i></i><i></i></div><div class="lookchip" id="lookchip"><img alt=""><div><div class="eyebrow" style="font-size:.6rem">Selected look</div><span id="lookname"></span></div><button type="button" id="lookx" aria-label="Remove selected look">REMOVE</button></div>
-<div class="stp on" data-s="0"><h3>Choose a service</h3><div class="fld" style="margin-top:1.4rem"><select id="ssel" aria-label="Service" style="width:100%;background:#120a0e;color:var(--ivory);border:0;border-bottom:1px solid rgba(215,183,122,.5);padding:.9rem 0;font:inherit;font-size:1.1rem;outline:0"></select></div><p class="err" id="e0" role="alert"></p><div class="nav2"><span></span><button class="btn" data-next>Next →</button></div></div>
-<div class="stp" data-s="1"><h3>Preferred date</h3><div class="cal" id="cal"></div><div class="times" id="times"></div><p class="err" id="e1" role="alert"></p><div class="nav2"><button class="btn ghost" data-prev>← Back</button><button class="btn" data-next>Next →</button></div></div>
-<div class="stp" data-s="2"><h3>Your details</h3><div class="fld"><input id="nm" placeholder=" " autocomplete="name"><label for="nm">Your name</label></div><div class="fld"><textarea id="nt" rows="3" placeholder=" "></textarea><label for="nt">Notes or design inspiration (optional)</label></div><p class="err" id="e2" role="alert"></p><div class="nav2"><button class="btn ghost" data-prev>← Back</button><button class="btn" data-next>Review →</button></div></div>
-<div class="stp" data-s="3"><h3>Request ready</h3><ul class="sum" id="sum"></ul><p class="warn">Not confirmed yet. Nothing is booked until Vansshikha replies to confirm a slot.</p><div class="nav2"><button class="btn ghost" data-prev>← Edit</button><a class="btn mag" id="wa" target="_blank" rel="noopener">Send on WhatsApp</a></div></div></div></div></section>
+<section class="sph booking-hero"><div class="wrap"><div class="eyebrow">By appointment</div><h1>Your visit to <em>the atelier.</em></h1><p>From an everyday manicure to a custom set, it starts with a few details about what you’d like.</p><div class="acts"><a class="btn" href="#book">Start your request ↓</a></div></div></section>
+${APPOINTMENT}
 <section class="seo-faq" id="faq" aria-labelledby="faq-title"><div class="wrap">
 <div class="head center"><div class="eyebrow rvx">Questions</div><h2 class="rvx" id="faq-title">Booking <em>essentials</em></h2></div>
 <div class="faq-list" id="faq-list">

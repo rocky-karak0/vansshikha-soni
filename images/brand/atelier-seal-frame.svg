@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="220" viewBox="0 0 720 220" fill="none">
+  <defs>
+    <linearGradient id="foil" x1="34" y1="110" x2="686" y2="110" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#b38253" stop-opacity="0"/>
+      <stop offset=".28" stop-color="#d2a16b"/>
+      <stop offset=".5" stop-color="#f5dca9"/>
+      <stop offset=".72" stop-color="#d2a16b"/>
+      <stop offset="1" stop-color="#b38253" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <g stroke="url(#foil)" stroke-linecap="round">
+    <circle cx="360" cy="110" r="94" opacity=".65"/>
+    <circle cx="360" cy="110" r="103" opacity=".54" stroke-dasharray="1 6"/>
+    <path d="M36 110h205m238 0h205" opacity=".65"/>
+    <path d="M36 99c81 0 120-59 208-44m440 44c-81 0-120-59-208-44M36 121c81 0 120 59 208 44m440-44c-81 0-120 59-208 44" opacity=".52"/>
+    <path d="M100 91c62-6 88-52 143-52m377 52c-62-6-88-52-143-52M100 129c62 6 88 52 143 52m377-52c-62 6-88 52-143 52" opacity=".28"/>
+    <path d="M195 90q0 20 20 20-20 0-20 20 0-20-20-20 20 0 20-20Zm330 0q0 20 20 20-20 0-20 20 0-20-20-20 20 0 20-20Z"/>
+    <path d="M241 71v12m-6-6h12m232 60v12m-6-6h12" opacity=".7"/>
+  </g>
+  <g fill="#f5dca9"><circle cx="241" cy="143" r="1.5"/><circle cx="479" cy="77" r="1.5"/></g>
+</svg>
